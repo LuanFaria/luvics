@@ -1,188 +1,242 @@
+```html
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Luvics Pratinho</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Luvics Pratinho</title>
 
-  <link rel="icon" href="https://raw.githubusercontent.com/LuanFaria/luvics/f8f98f609442dd4d1157d33f74956095637a16b9/pratinho/imagens/fivicon.png">
+<link rel="icon" href="https://raw.githubusercontent.com/LuanFaria/luvics/f8f98f609442dd4d1157d33f74956095637a16b9/pratinho/imagens/fivicon.png">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
 
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+<style>
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+}
 
-  <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
+body{
+font-family:'Poppins',sans-serif;
+color:#43352c;
+background-image:url('https://raw.githubusercontent.com/LuanFaria/luvics/9daf37c2d72a42da23690c964027f0b364af28bf/pratinho/imagens/Fundo%201.png');
+background-repeat:repeat;
+background-size:1200px;
+background-position:center top;
+background-color:#fff9f2;
+}
 
-    body {
-      font-family: 'Poppins', sans-serif;
-      color: #333;
+.topo{
+max-width:1000px;
+margin:0 auto;
+padding:10px 20px 0;
+position:relative;
+}
 
-      /* 🔥 FUNDO AGORA VAI APARECER */
-      background: url('https://raw.githubusercontent.com/LuanFaria/luvics/9daf37c2d72a42da23690c964027f0b364af28bf/pratinho/imagens/Fundo%201.png');
-      background-size: cover;
-      background-position: center;
-      background-attachment: fixed;
-    }
+.topo img{
+width:100%;
+height:320px;
+object-fit:cover;
+object-position:center;
+display:block;
+border-radius:0 0 35px 35px;
+filter:contrast(1.04) saturate(1.05);
+box-shadow:0 12px 30px rgba(0,0,0,.08);
+}
 
-    /* 🔥 TOPO COMO FAIXA */
-    .topo {
-      position: relative;
-      height: 180px; /* controla altura da faixa */
-      overflow: hidden;
-    }
+.btn-topo{
+position:absolute;
+bottom:40px;
+left:50%;
+transform:translateX(-50%);
+background:linear-gradient(180deg,#ffcb55,#f6a313);
+padding:18px 34px;
+color:white;
+font-weight:700;
+text-decoration:none;
+border-radius:40px;
+box-shadow:0 7px 0 #d98b07;
+animation:pulse 2s infinite;
+}
 
-    .topo img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      object-position: center;
-    }
+.container{
+max-width:950px;
+margin:auto;
+padding:25px;
+}
 
-    /* BOTÃO NO MEIO DA FAIXA */
-    .btn-topo {
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      
-      background: linear-gradient(45deg, #ff7a00, #ffb347);
-      color: white;
-      padding: 14px 26px;
-      border-radius: 12px;
-      text-decoration: none;
-      font-size: 16px;
-      font-weight: bold;
+h1{
+text-align:center;
+font-size:42px;
+color:#cb7414;
+margin-top:25px;
+}
 
-      box-shadow: 0 10px 25px rgba(0,0,0,0.2);
-      transition: 0.3s;
-    }
+.sub{
+text-align:center;
+font-size:20px;
+margin-top:12px;
+opacity:.85;
+}
 
-    .btn-topo:hover {
-      transform: translate(-50%, -50%) scale(1.05);
-    }
+.center{text-align:center;}
 
-    .container {
-      max-width: 1000px;
-      margin: auto;
-      padding: 20px;
-    }
+.ebook img{
+max-width:330px;
+margin-top:35px;
+animation:float 4s ease-in-out infinite;
+}
 
-    h1 {
-      text-align: center;
-      color: #ff7a00;
-      margin-top: 20px;
-    }
+.card{
+background:rgba(255,255,255,.93);
+backdrop-filter:blur(5px);
+padding:30px;
+border-radius:22px;
+margin-top:30px;
+box-shadow:0 8px 28px rgba(0,0,0,.06);
+border:2px solid #f5e5d2;
+animation:fadeUp .8s ease;
+}
 
-    .sub {
-      text-align: center;
-      margin-top: 10px;
-      opacity: 0.8;
-    }
+.card h2{
+color:#6c5038;
+margin-bottom:18px;
+}
 
-    .center {
-      text-align: center;
-    }
+ul{
+padding-left:22px;
+line-height:2;
+font-size:18px;
+}
 
-    .ebook img {
-      max-width: 300px;
-      margin-top: 30px;
-    }
+.price{
+font-size:58px;
+font-weight:700;
+color:#f09b00;
+margin:10px 0;
+}
 
-    .card {
-      background: rgba(255,255,255,0.95);
-      padding: 25px;
-      border-radius: 16px;
-      margin-top: 25px;
-      box-shadow: 0 8px 25px rgba(0,0,0,0.08);
-    }
+.old-price{
+text-decoration:line-through;
+color:#888;
+font-size:22px;
+}
 
-    ul {
-      padding-left: 20px;
-      line-height: 1.8;
-    }
+.btn{
+display:inline-block;
+background:linear-gradient(180deg,#ffcb55,#f6a313);
+color:white;
+padding:18px 30px;
+border-radius:40px;
+text-decoration:none;
+font-weight:700;
+margin-top:20px;
+box-shadow:0 7px 0 #d98b07;
+transition:.3s;
+}
 
-    .price {
-      font-size: 38px;
-      color: #ff7a00;
-      font-weight: bold;
-    }
+.btn:hover{
+transform:scale(1.04);
+}
 
-    .old-price {
-      text-decoration: line-through;
-      color: #888;
-    }
+.sticky-btn{
+position:fixed;
+bottom:20px;
+left:50%;
+transform:translateX(-50%);
+background:#ff8400;
+color:white;
+padding:16px 28px;
+text-decoration:none;
+font-weight:700;
+border-radius:50px;
+box-shadow:0 10px 25px rgba(0,0,0,.2);
+z-index:999;
+}
 
-    .btn {
-      display: inline-block;
-      background: linear-gradient(45deg, #ff7a00, #ffb347);
-      color: white;
-      padding: 14px 24px;
-      border-radius: 10px;
-      text-decoration: none;
-      font-weight: bold;
-      margin-top: 20px;
-    }
+@keyframes float{
+0%,100%{transform:translateY(0)}
+50%{transform:translateY(-10px)}
+}
 
-    .sticky-btn {
-      position: fixed;
-      bottom: 20px;
-      left: 50%;
-      transform: translateX(-50%);
-      background: #ff7a00;
-      color: white;
-      padding: 14px 24px;
-      border-radius: 30px;
-      font-weight: bold;
-      text-decoration: none;
-      box-shadow: 0 10px 25px rgba(0,0,0,0.2);
-      z-index: 999;
-    }
+@keyframes fadeUp{
+from{opacity:0;transform:translateY(25px)}
+to{opacity:1;transform:translateY(0)}
+}
 
-  </style>
+@keyframes pulse{
+0%,100%{transform:translateX(-50%) scale(1)}
+50%{transform:translateX(-50%) scale(1.05)}
+}
+
+@media(max-width:768px){
+.topo img{
+height:230px;
+}
+
+h1{
+font-size:32px;
+}
+
+.btn-topo{
+font-size:15px;
+padding:14px 22px;
+bottom:25px;
+}
+
+.price{
+font-size:44px;
+}
+}
+</style>
 </head>
-
 <body>
 
-<!-- 🔥 TOPO FAIXA -->
 <div class="topo">
-  <img src="https://raw.githubusercontent.com/LuanFaria/luvics/f24b9d86f535483cab877530ebc645dad3a13844/pratinho/imagens/capa%20topo.png">
-  <a href="#comprar" class="btn-topo">VER RECEITAS</a>
+<img src="https://raw.githubusercontent.com/LuanFaria/luvics/f24b9d86f535483cab877530ebc645dad3a13844/pratinho/imagens/capa%20topo.png">
+<a href="#comprar" class="btn-topo">VER RECEITAS AGORA</a>
 </div>
 
 <div class="container">
 
-  <h1>Seu bebê não quer comer? 😥</h1>
-  <p class="sub">Receitas simples que fazem seu bebê comer melhor</p>
+<h1>Seu bebê não quer comer? 😥</h1>
+<p class="sub">Receitas simples que fazem seu bebê comer melhor todos os dias</p>
 
-  <div class="center ebook">
-    <img src="https://raw.githubusercontent.com/LuanFaria/luvics/09e23495ff4ddb6e314b5376667f56f524917a9c/pratinho/imagens/ebook3d.png">
-  </div>
+<div class="center ebook">
+<img src="https://raw.githubusercontent.com/LuanFaria/luvics/09e23495ff4ddb6e314b5376667f56f524917a9c/pratinho/imagens/ebook3d.png">
+</div>
 
-  <div class="card">
-    <h2>Você passa por isso?</h2>
-    <ul>
-      <li>😣 Seu bebê recusa comida</li>
-      <li>😣 Falta ideia do que preparar</li>
-      <li>😣 Medo de errar</li>
-      <li>😣 Rotina corrida</li>
-    </ul>
-  </div>
+<div class="card">
+<h2>Você passa por isso?</h2>
+<ul>
+<li>😣 Seu bebê recusa comida</li>
+<li>😣 Falta ideia do que preparar</li>
+<li>😣 Medo de errar</li>
+<li>😣 Rotina corrida</li>
+</ul>
+</div>
 
-  <div class="card center">
-    <p class="old-price">De R$29,90</p>
-    <p class="price">R$14,90</p>
+<div class="card">
+<h2>O que você vai receber:</h2>
+<ul>
+<li>✔ +50 receitas práticas</li>
+<li>✔ Prontas em até 15 minutos</li>
+<li>✔ Alimentação saudável</li>
+<li>✔ Guia simples e direto</li>
+</ul>
+</div>
 
-    <a id="comprar" href="#" class="btn">QUERO MEU GUIA</a>
-
-    <p style="margin-top:10px;">✅ Garantia de 7 dias</p>
-  </div>
+<div class="card center" id="comprar">
+<p class="old-price">De R$29,90</p>
+<p class="price">R$14,90</p>
+<a href="#" class="btn">QUERO MEU GUIA AGORA</a>
+<p style="margin-top:15px">✅ Garantia de 7 dias</p>
+</div>
 
 </div>
 
-<a href="#comprar" class="sticky-btn">Comprar</a>
+<a href="#comprar" class="sticky-btn">Comprar Agora</a>
 
 </body>
 </html>
+```
