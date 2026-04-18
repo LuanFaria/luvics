@@ -1,17 +1,39 @@
 <!DOCTYPE html>
-<html lang='pt-br'>
+<html lang="pt-br">
 <head>
-<meta charset='UTF-8'>
-<meta name='viewport' content='width=device-width,initial-scale=1.0'>
-<link href='https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;800&display=swap' rel='stylesheet'>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Luvics Pratinho</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;800&display=swap" rel="stylesheet">
+
 <style>
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+}
+
 body{
 font-family:Poppins,sans-serif;
+color:#5b4330;
+
 background:
 linear-gradient(rgba(255,250,245,.82),rgba(255,250,245,.82)),
 url('https://raw.githubusercontent.com/LuanFaria/luvics/954115a6204a5317e48d01ef0241c329ab72fc31/pratinho/imagens/Fundo%202.png');
+
+background-size:auto,cover;
+background-position:center,center top;
 }
-.container{max-width:560px;margin:auto;padding:14px}
+
+.container{
+max-width:560px;
+margin:auto;
+padding:14px;
+}
+
+/* TOPO */
 .urgency{
 background:linear-gradient(90deg,#ff8c00,#ffb300);
 color:white;
@@ -23,38 +45,45 @@ font-size:15px;
 box-shadow:0 8px 20px rgba(0,0,0,.08);
 animation:pulse 2s infinite;
 }
-.hero{
-background:#fff;
+
+/* CARDS */
+
+.hero,
+.pain-card,
+.panel{
+background:white;
 border-radius:22px;
 padding:22px;
 margin-top:14px;
 border:1px solid #f1dec7;
+box-shadow:0 8px 22px rgba(0,0,0,.05);
 }
-.badge{
-display:inline-block;
-background:#fff1d8;
-padding:8px 14px;
-border-radius:30px;
-font-weight:800;
-color:#cb7414;
+
+h1{
+font-size:32px;
+line-height:1.08;
+color:#c96913;
+margin:12px 0;
 }
-h1{font-size:32px;line-height:1.08;color:#c96913;margin:12px 0}
-.sub{font-size:17px;color:#6a5241}
-.pain-card{
-margin-top:16px;
-background:linear-gradient(180deg,#fff7ef,#ffffff);
-border:2px solid #ffdcb7;
-border-radius:24px;
-padding:22px;
-box-shadow:0 10px 30px rgba(0,0,0,.05);
+
+.sub{
+font-size:17px;
 }
+
+/* DOR */
+
 .pain-title{
 font-size:28px;
 font-weight:900;
 color:#b85f16;
 margin-bottom:15px;
 }
-.pain-list{list-style:none;padding:0}
+
+.pain-list{
+list-style:none;
+padding:0;
+}
+
 .pain-list li{
 background:white;
 padding:14px;
@@ -64,70 +93,329 @@ font-weight:700;
 border-left:6px solid #ffb347;
 box-shadow:0 4px 12px rgba(0,0,0,.04);
 }
+
 .bridge{
-margin-top:14px;
+text-align:center;
 font-weight:800;
-font-size:18px;
-text-align:center;
-color:#6d4d33;
+margin-top:14px;
 }
+
+/* PRODUTO */
+
 .product{
-margin-top:18px;
-background:white;
-border-radius:22px;
-padding:22px;
 text-align:center;
 }
-.product img{width:180px;transition:.35s}
-.product img:hover{transform:translateY(-8px) scale(1.04)}
-.btn{
+
+.product img{
+width:190px;
+transition:.35s;
+}
+
+.product img:hover{
+transform:translateY(-8px) scale(1.04);
+}
+
+/* BOTÃO */
+
+.btn,
+.sticky-btn{
+
 display:inline-block;
-margin-top:16px;
-background:linear-gradient(180deg,#ffcc54,#f6a313);
-padding:14px 22px;
+
+background:linear-gradient(
+180deg,
+#ffcc54,
+#f6a313
+);
+
 color:white;
 text-decoration:none;
 font-weight:800;
 border-radius:30px;
+
 }
+
+.btn{
+padding:14px 22px;
+margin-top:16px;
+box-shadow:0 5px 0 #d68b0e;
+}
+
+/* BONUS */
+
+.combo{
+
+background:linear-gradient(
+180deg,
+#fff7dc,
+#fff1ca
+);
+
+border:2px dashed #e7b74d;
+border-radius:20px;
+padding:18px;
+text-align:center;
+
+}
+
+.combo-badge{
+background:#43b66c;
+color:white;
+display:inline-block;
+padding:8px 14px;
+border-radius:30px;
+font-weight:800;
+margin-bottom:12px;
+}
+
+.free{
+color:#28a745;
+font-size:32px;
+font-weight:900;
+}
+
+/* PREÇO */
+
+.price-card{
+background:#fff4e8;
+border:2px solid #ffd89f;
+border-radius:20px;
+padding:20px;
+text-align:center;
+}
+
+.old{
+text-decoration:line-through;
+font-size:18px;
+}
+
+.price{
+font-size:52px;
+color:#ef9a00;
+font-weight:900;
+}
+
+/* FIXO */
+
+.sticky-btn{
+position:fixed;
+bottom:12px;
+left:50%;
+transform:translateX(-50%);
+padding:13px 22px;
+font-size:15px;
+z-index:999;
+background:#f6a313;
+}
+
+/* ANIMAÇÕES */
+
 @keyframes pulse{
-50%{transform:scale(1.02)}
+50%{
+transform:scale(1.02);
 }
+}
+
+@media(min-width:900px){
+
+.container{
+max-width:980px;
+}
+
+h1{
+font-size:52px;
+}
+
+.pain-title{
+font-size:40px;
+}
+
+.pain-list li{
+font-size:28px;
+}
+
+.price{
+font-size:72px;
+}
+
+}
+
 </style>
 </head>
+
 <body>
 
-<div class='urgency'>
-🔥 70% OFF SOMENTE AGORA • De R$49,90 por R$14,90 + 2 bônus GRÁTIS
+<div class="urgency">
+🔥 70% OFF SOMENTE AGORA • De R$49,90 por R$14,90 + 2 bônus grátis
 </div>
 
-<div class='container'>
+<div class="container">
 
-<div class='hero'>
-<span class='badge'>Oferta por tempo limitado</span>
-<h1>Seu bebê recusa comida e você não sabe mais o que fazer?</h1>
-<p class='sub'>Existe um motivo para isso — e uma forma simples de resolver.</p>
+<!-- HEADLINE -->
+
+<div class="hero">
+
+<h1>
+Seu bebê recusa comida e você não sabe mais o que fazer?
+</h1>
+
+<p class="sub">
+Existe uma forma simples de resolver.
+</p>
+
 </div>
 
-<div class='pain-card'>
-<div class='pain-title'>Você vive alguma dessas situações?</div>
-<ul class='pain-list'>
-<li>😣 Medo de dar alimentos errados</li>
-<li>😣 Seu bebê recusa comida</li>
-<li>😣 Você fica sem ideia do que preparar</li>
-<li>😣 A hora da alimentação vira estresse</li>
+<!-- DOR -->
+
+<div class="pain-card">
+
+<div class="pain-title">
+Você vive alguma dessas situações?
+</div>
+
+<ul class="pain-list">
+
+<li>
+😣 Medo de dar alimentos errados
+</li>
+
+<li>
+😣 Seu bebê recusa comida
+</li>
+
+<li>
+😣 Você fica sem ideia do que preparar
+</li>
+
+<li>
+😣 A alimentação virou estresse
+</li>
+
 </ul>
-<div class='bridge'>A boa notícia: isso pode mudar com orientações simples.</div>
-</div>
 
-<div class='product'>
-<img src='https://raw.githubusercontent.com/LuanFaria/luvics/09e23495ff4ddb6e314b5376667f56f524917a9c/pratinho/imagens/ebook3d.png'>
-<h2 style='margin-top:14px'>Conheça o guia Primeiros Sabores</h2>
-<p>+50 receitas + 2 bônus incluídos</p>
-<a href='#comprar' class='btn'>QUERO VER O COMBO</a>
+<div class="bridge">
+A boa notícia: isso pode mudar.
 </div>
 
 </div>
+
+<!-- PRODUTO -->
+
+<div class="panel product">
+
+<img src="https://raw.githubusercontent.com/LuanFaria/luvics/09e23495ff4ddb6e314b5376667f56f524917a9c/pratinho/imagens/ebook3d.png">
+
+<h2 style="margin-top:14px;">
+Primeiros Sabores
+</h2>
+
+<p>
++50 receitas para bebês
+</p>
+
+<a href="#comprar" class="btn">
+QUERO VER O COMBO
+</a>
+
+</div>
+
+<!-- BONUS -->
+
+<div class="panel">
+
+<h2>
+🎁 COMBO BÔNUS (GRÁTIS HOJE)
+</h2>
+
+<div class="combo">
+
+<div class="combo-badge">
+BÔNUS DE R$29,90
+</div>
+
+<img
+src="https://raw.githubusercontent.com/LuanFaria/luvics/52b4a8e6a62033d54065c9da2583981d2a384f2d/pratinho/imagens/bonus.png"
+style="
+max-width:420px;
+width:100%;
+display:block;
+margin:18px auto;
+">
+
+<p>
+
+<strong>Bônus 1:</strong><br>
+
+Meu Filho Não Quer Comer?
+Estratégias Simples que Funcionam
+
+</p>
+
+<p style="margin-top:14px;">
+
+<strong>Bônus 2:</strong><br>
+
+Lista de Alimentos Saudáveis
+
+</p>
+
+<p style="margin-top:18px;">
+
+De <s>R$29,90</s>
+
+por
+
+<span class="free">
+R$0
+</span>
+
+</p>
+
+</div>
+
+</div>
+
+<!-- PREÇO -->
+
+<div class="panel">
+
+<div class="price-card" id="comprar">
+
+<div>
+Receitas:
+<span class="old">
+R$49,90
+</span>
+</div>
+
+<div class="price">
+R$14,90
+</div>
+
+<div style="
+font-weight:700;
+margin-top:8px;
+">
++ 2 bônus incluídos
+</div>
+
+<a href="#" class="btn">
+QUERO MEU COMBO AGORA
+</a>
+
+<p style="margin-top:10px;">
+✅ Garantia de 7 dias
+</p>
+
+</div>
+
+</div>
+
+</div>
+
+<a href="#comprar" class="sticky-btn">
+Comprar Combo
+</a>
 
 </body>
 </html>
