@@ -1,4 +1,3 @@
-```html
 <!DOCTYPE html>
 <html lang='pt-br'>
 <head>
@@ -21,7 +20,15 @@ background-position:center,center top;
 .topo img{width:100%;height:170px;object-fit:cover;border-radius:0 0 24px 24px}
 .hero,.panel{background:rgba(255,255,255,.90);border:1px solid #eddcc7;border-radius:20px;padding:18px;margin-top:14px}
 .baby-box{text-align:center;background:#fff;border:1px solid #f1e3cf;border-radius:18px;padding:14px}
-.baby-box img{width:180px;max-width:100%}
+.baby-box img,.ebook img{
+width:180px;
+max-width:100%;
+transition:transform .35s ease,filter .35s ease;
+}
+.baby-box img:hover,.ebook img:hover{
+transform:translateY(-8px) scale(1.04);
+filter:drop-shadow(0 16px 22px rgba(0,0,0,.12));
+}
 h1{font-size:30px;line-height:1.08;color:#c96913;margin:10px 0}
 .small{font-size:16px}
 .btn,.sticky-btn{
@@ -37,51 +44,22 @@ box-shadow:0 5px 0 #d68b0e;
 .panel h2{font-size:26px;margin-bottom:10px}
 ul{list-style:none;padding:0}
 li{font-size:18px;margin:10px 0;font-weight:700}
-.price-card{
-background:#fff4e8;
-border:2px solid #ffd89f;
-border-radius:20px;
-padding:20px;
-text-align:center;
-}
+.price-card{background:#fff4e8;border:2px solid #ffd89f;border-radius:20px;padding:20px;text-align:center}
 .old{text-decoration:line-through;font-size:18px}
 .price{font-size:48px;color:#ef9a00;font-weight:900}
-.combo{
-background:linear-gradient(180deg,#fff7dc,#fff1ca);
-border:2px dashed #e7b74d;
-border-radius:20px;
-padding:18px;
-margin-top:15px;
-text-align:center;
-}
-.combo-badge{
-background:#43b66c;
-color:#fff;
-display:inline-block;
-padding:8px 14px;
-border-radius:30px;
-font-weight:800;
-margin-bottom:12px;
-}
-.combo img{
-width:100%;
-max-width:320px;
-margin:10px auto;
-display:block;
-}
-.bonus-title{
-font-size:22px;
-font-weight:900;
-color:#cb7414;
-margin-bottom:8px;
-}
+.combo{background:linear-gradient(180deg,#fff7dc,#fff1ca);border:2px dashed #e7b74d;border-radius:20px;padding:18px;margin-top:15px;text-align:center}
+.combo-badge{background:#43b66c;color:#fff;display:inline-block;padding:8px 14px;border-radius:30px;font-weight:800;margin-bottom:12px}
+.bonus-title{font-size:22px;font-weight:900;color:#cb7414;margin-bottom:8px}
 .free{color:#28a745;font-size:32px;font-weight:900}
 .sticky-btn{position:fixed;bottom:12px;left:50%;transform:translateX(-50%);padding:13px 22px;font-size:15px;z-index:999}
 @media(min-width:900px){
 .container{max-width:980px}
 .topo img{height:260px}
 h1{font-size:52px}
+.panel h2{font-size:40px}
+li{font-size:28px}
 .price{font-size:72px}
+.baby-box img,.ebook img{width:300px}
 }
 </style>
 </head>
@@ -105,7 +83,17 @@ h1{font-size:52px}
 </section>
 
 <div class='panel'>
-<h2>Você vai receber:</h2>
+<h2>Você passa por isso?</h2>
+<ul>
+<li>😣 Medo de dar alimentos errados</li>
+<li>😣 Seu bebê recusa comida</li>
+<li>😣 Falta ideia do que preparar</li>
+<li>😣 Pouco tempo no dia a dia</li>
+</ul>
+</div>
+
+<div class='panel'>
+<h2>O que você vai receber:</h2>
 <ul>
 <li>✅ +50 receitas para bebês</li>
 <li>✅ Até 15 minutos</li>
@@ -120,15 +108,18 @@ h1{font-size:52px}
 <div class='combo-badge'>BÔNUS DE R$29,90</div>
 <div class='bonus-title'>Comprando hoje você recebe também:</div>
 
-<img src='https://raw.githubusercontent.com/LuanFaria/luvics/aa5a9a29bf1298810c4cac4ba5ada6c183a023e8/pratinho/imagens/combo%20bonus%20(1).png'>
+<img src='https://raw.githubusercontent.com/LuanFaria/luvics/52b4a8e6a62033d54065c9da2583981d2a384f2d/pratinho/imagens/bonus.png'
+style='max-width:420px;width:100%;display:block;margin:18px auto;'>
 
 <p><strong>Bônus 1:</strong><br>
-Eu Filho Não Quer Comer? Estratégias Simples que Funcionam</p>
+Meu Filho Não Quer Comer? Estratégias Simples que Funcionam</p>
 
-<p style='margin-top:12px'><strong>Bônus 2:</strong><br>
-Lista de Alimentos Saudáveis</p>
+<p style='margin-top:12px'>
+<strong>Bônus 2:</strong><br>
+Lista de Alimentos Saudáveis
+</p>
 
-<p style='margin-top:15px'>De <s>R$29,90</s> por <span class='free'>R$0</span></p>
+<p style='margin-top:18px'>De <s>R$29,90</s> por <span class='free'>R$0</span></p>
 </div>
 </div>
 
@@ -148,4 +139,4 @@ Lista de Alimentos Saudáveis</p>
 
 </body>
 </html>
-```
+
