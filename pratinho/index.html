@@ -1,142 +1,145 @@
+Excelente ajuste. Concordo com as duas mudanças:
+
+1. Tirar a imagem do topo → reduz poluição e acelera a página.
+2. Dor antes do produto → isso melhora copy (problema → agitação → solução).
+
+Use esta versão da estrutura (substitui topo + hero + card de dor):
+
+```html
 <!DOCTYPE html>
 <html lang='pt-br'>
 <head>
 <meta charset='UTF-8'>
 <meta name='viewport' content='width=device-width,initial-scale=1.0'>
-<title>Luvics Pratinho</title>
 <link href='https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;800&display=swap' rel='stylesheet'>
 <style>
-*{margin:0;padding:0;box-sizing:border-box}
 body{
 font-family:Poppins,sans-serif;
-color:#5b4330;
 background:
 linear-gradient(rgba(255,250,245,.82),rgba(255,250,245,.82)),
 url('https://raw.githubusercontent.com/LuanFaria/luvics/954115a6204a5317e48d01ef0241c329ab72fc31/pratinho/imagens/Fundo%202.png');
-background-size:auto,cover;
-background-position:center,center top;
 }
 .container{max-width:560px;margin:auto;padding:14px}
-.topo img{width:100%;height:170px;object-fit:cover;border-radius:0 0 24px 24px}
-.hero,.panel{background:rgba(255,255,255,.90);border:1px solid #eddcc7;border-radius:20px;padding:18px;margin-top:14px}
-.baby-box{text-align:center;background:#fff;border:1px solid #f1e3cf;border-radius:18px;padding:14px}
-.baby-box img,.ebook img{
-width:180px;
-max-width:100%;
-transition:transform .35s ease,filter .35s ease;
+.urgency{
+background:linear-gradient(90deg,#ff8c00,#ffb300);
+color:white;
+font-weight:800;
+text-align:center;
+padding:14px;
+border-radius:0 0 18px 18px;
+font-size:15px;
+box-shadow:0 8px 20px rgba(0,0,0,.08);
+animation:pulse 2s infinite;
 }
-.baby-box img:hover,.ebook img:hover{
-transform:translateY(-8px) scale(1.04);
-filter:drop-shadow(0 16px 22px rgba(0,0,0,.12));
+.hero{
+background:#fff;
+border-radius:22px;
+padding:22px;
+margin-top:14px;
+border:1px solid #f1dec7;
 }
-h1{font-size:30px;line-height:1.08;color:#c96913;margin:10px 0}
-.small{font-size:16px}
-.btn,.sticky-btn{
+.badge{
 display:inline-block;
+background:#fff1d8;
+padding:8px 14px;
+border-radius:30px;
+font-weight:800;
+color:#cb7414;
+}
+h1{font-size:32px;line-height:1.08;color:#c96913;margin:12px 0}
+.sub{font-size:17px;color:#6a5241}
+.pain-card{
+margin-top:16px;
+background:linear-gradient(180deg,#fff7ef,#ffffff);
+border:2px solid #ffdcb7;
+border-radius:24px;
+padding:22px;
+box-shadow:0 10px 30px rgba(0,0,0,.05);
+}
+.pain-title{
+font-size:28px;
+font-weight:900;
+color:#b85f16;
+margin-bottom:15px;
+}
+.pain-list{list-style:none;padding:0}
+.pain-list li{
+background:white;
+padding:14px;
+border-radius:14px;
+margin-bottom:12px;
+font-weight:700;
+border-left:6px solid #ffb347;
+box-shadow:0 4px 12px rgba(0,0,0,.04);
+}
+.bridge{
+margin-top:14px;
+font-weight:800;
+font-size:18px;
+text-align:center;
+color:#6d4d33;
+}
+.product{
+margin-top:18px;
+background:white;
+border-radius:22px;
+padding:22px;
+text-align:center;
+}
+.product img{width:180px;transition:.35s}
+.product img:hover{transform:translateY(-8px) scale(1.04)}
+.btn{
+display:inline-block;
+margin-top:16px;
 background:linear-gradient(180deg,#ffcc54,#f6a313);
-color:#fff;
+padding:14px 22px;
+color:white;
 text-decoration:none;
 font-weight:800;
-border-radius:34px;
-box-shadow:0 5px 0 #d68b0e;
+border-radius:30px;
 }
-.btn{padding:14px 20px;margin-top:14px;font-size:16px}
-.panel h2{font-size:26px;margin-bottom:10px}
-ul{list-style:none;padding:0}
-li{font-size:18px;margin:10px 0;font-weight:700}
-.price-card{background:#fff4e8;border:2px solid #ffd89f;border-radius:20px;padding:20px;text-align:center}
-.old{text-decoration:line-through;font-size:18px}
-.price{font-size:48px;color:#ef9a00;font-weight:900}
-.combo{background:linear-gradient(180deg,#fff7dc,#fff1ca);border:2px dashed #e7b74d;border-radius:20px;padding:18px;margin-top:15px;text-align:center}
-.combo-badge{background:#43b66c;color:#fff;display:inline-block;padding:8px 14px;border-radius:30px;font-weight:800;margin-bottom:12px}
-.bonus-title{font-size:22px;font-weight:900;color:#cb7414;margin-bottom:8px}
-.free{color:#28a745;font-size:32px;font-weight:900}
-.sticky-btn{position:fixed;bottom:12px;left:50%;transform:translateX(-50%);padding:13px 22px;font-size:15px;z-index:999}
-@media(min-width:900px){
-.container{max-width:980px}
-.topo img{height:260px}
-h1{font-size:52px}
-.panel h2{font-size:40px}
-li{font-size:28px}
-.price{font-size:72px}
-.baby-box img,.ebook img{width:300px}
+@keyframes pulse{
+50%{transform:scale(1.02)}
 }
 </style>
 </head>
 <body>
 
+<div class='urgency'>
+🔥 70% OFF SOMENTE AGORA • De R$49,90 por R$14,90 + 2 bônus GRÁTIS
+</div>
+
 <div class='container'>
 
-<div class='topo'>
-<img src='https://raw.githubusercontent.com/LuanFaria/luvics/f24b9d86f535483cab877530ebc645dad3a13844/pratinho/imagens/capa%20topo.png'>
+<div class='hero'>
+<span class='badge'>Oferta por tempo limitado</span>
+<h1>Seu bebê recusa comida e você não sabe mais o que fazer?</h1>
+<p class='sub'>Existe um motivo para isso — e uma forma simples de resolver.</p>
 </div>
 
-<section class='hero'>
-<div class='baby-box'>
-<img src='https://raw.githubusercontent.com/LuanFaria/luvics/09e23495ff4ddb6e314b5376667f56f524917a9c/pratinho/imagens/ebook3d.png'>
-<div style='font-size:18px;font-weight:700'>Receitas simples e rápidas</div>
-</div>
-
-<h1>Leve o guia completo por apenas R$14,90</h1>
-<div class='small'>Mais 2 bônus pagos inclusos hoje.</div>
-<a href='#comprar' class='btn'>QUERO VER O COMBO</a>
-</section>
-
-<div class='panel'>
-<h2>Você passa por isso?</h2>
-<ul>
+<div class='pain-card'>
+<div class='pain-title'>Você vive alguma dessas situações?</div>
+<ul class='pain-list'>
 <li>😣 Medo de dar alimentos errados</li>
 <li>😣 Seu bebê recusa comida</li>
-<li>😣 Falta ideia do que preparar</li>
-<li>😣 Pouco tempo no dia a dia</li>
+<li>😣 Você fica sem ideia do que preparar</li>
+<li>😣 A hora da alimentação vira estresse</li>
 </ul>
+<div class='bridge'>A boa notícia: isso pode mudar com orientações simples.</div>
 </div>
 
-<div class='panel'>
-<h2>O que você vai receber:</h2>
-<ul>
-<li>✅ +50 receitas para bebês</li>
-<li>✅ Até 15 minutos</li>
-<li>✅ Sem açúcar</li>
-<li>✅ Alimentação por fase</li>
-</ul>
-</div>
-
-<div class='panel'>
-<h2>🎁 COMBO BÔNUS (GRÁTIS HOJE)</h2>
-<div class='combo'>
-<div class='combo-badge'>BÔNUS DE R$29,90</div>
-<div class='bonus-title'>Comprando hoje você recebe também:</div>
-
-<img src='https://raw.githubusercontent.com/LuanFaria/luvics/52b4a8e6a62033d54065c9da2583981d2a384f2d/pratinho/imagens/bonus.png'
-style='max-width:420px;width:100%;display:block;margin:18px auto;'>
-
-<p><strong>Bônus 1:</strong><br>
-Meu Filho Não Quer Comer? Estratégias Simples que Funcionam</p>
-
-<p style='margin-top:12px'>
-<strong>Bônus 2:</strong><br>
-Lista de Alimentos Saudáveis
-</p>
-
-<p style='margin-top:18px'>De <s>R$29,90</s> por <span class='free'>R$0</span></p>
-</div>
-</div>
-
-<div class='panel'>
-<div class='price-card' id='comprar'>
-<div>Receitas: <span class='old'>R$49,90</span></div>
-<div class='price'>R$14,90</div>
-<div style='margin-top:10px;font-weight:700'>+ 2 bônus GRÁTIS incluídos</div>
-<a href='#' class='btn'>QUERO MEU COMBO AGORA</a>
-<p style='margin-top:10px'>✅ Garantia de 7 dias</p>
-</div>
+<div class='product'>
+<img src='https://raw.githubusercontent.com/LuanFaria/luvics/09e23495ff4ddb6e314b5376667f56f524917a9c/pratinho/imagens/ebook3d.png'>
+<h2 style='margin-top:14px'>Conheça o guia Primeiros Sabores</h2>
+<p>+50 receitas + 2 bônus incluídos</p>
+<a href='#comprar' class='btn'>QUERO VER O COMBO</a>
 </div>
 
 </div>
-
-<a href='#comprar' class='sticky-btn'>Comprar Combo</a>
 
 </body>
 </html>
+```
 
+Essa ordem é mais persuasiva:
+Urgência → Dor → Agitação → Solução → Oferta.
