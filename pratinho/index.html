@@ -20,8 +20,23 @@
 
     body {
       font-family: 'Poppins', sans-serif;
-      background: #fffaf5;
       color: #333;
+
+      /* 🔥 FUNDO NOVO */
+      background-image: url('https://raw.githubusercontent.com/LuanFaria/luvics/9daf37c2d72a42da23690c964027f0b364af28bf/pratinho/imagens/Fundo%201.png');
+      background-size: cover;
+      background-position: center;
+      background-attachment: fixed;
+    }
+
+    /* OVERLAY PRA MELHOR LEITURA */
+    body::before {
+      content: "";
+      position: fixed;
+      width: 100%;
+      height: 100%;
+      background: rgba(255, 250, 245, 0.92);
+      z-index: -1;
     }
 
     /* TOPO */
@@ -32,15 +47,6 @@
     .topo img {
       width: 100%;
       display: block;
-    }
-
-    .overlay {
-      position: absolute;
-      width: 100%;
-      height: 100%;
-      top: 0;
-      left: 0;
-      background: rgba(0,0,0,0.1);
     }
 
     .btn-topo {
@@ -85,22 +91,6 @@
       opacity: 0.8;
     }
 
-    .btn {
-      display: inline-block;
-      background: linear-gradient(45deg, #ff7a00, #ffb347);
-      color: white;
-      padding: 15px 25px;
-      border-radius: 12px;
-      text-decoration: none;
-      font-weight: bold;
-      margin-top: 20px;
-      transition: 0.3s;
-    }
-
-    .btn:hover {
-      transform: scale(1.05);
-    }
-
     .center {
       text-align: center;
     }
@@ -137,6 +127,22 @@
     .old-price {
       text-decoration: line-through;
       color: #888;
+    }
+
+    .btn {
+      display: inline-block;
+      background: linear-gradient(45deg, #ff7a00, #ffb347);
+      color: white;
+      padding: 15px 25px;
+      border-radius: 12px;
+      text-decoration: none;
+      font-weight: bold;
+      margin-top: 20px;
+      transition: 0.3s;
+    }
+
+    .btn:hover {
+      transform: scale(1.05);
     }
 
     /* BOTÃO FIXO */
@@ -183,19 +189,17 @@
 
 <body>
 
-<!-- TOPO -->
+<!-- 🔥 NOVO TOPO -->
 <div class="topo">
-  <img src="https://raw.githubusercontent.com/LuanFaria/luvics/f8f98f609442dd4d1157d33f74956095637a16b9/pratinho/imagens/capa%20topo.png">
-  <div class="overlay"></div>
+  <img src="https://raw.githubusercontent.com/LuanFaria/luvics/f24b9d86f535483cab877530ebc645dad3a13844/pratinho/imagens/capa%20topo.png">
 
   <a href="#comprar" class="btn-topo">VER RECEITAS AGORA</a>
 </div>
 
 <div class="container">
 
-  <!-- HEADLINE -->
   <h1>Seu bebê não quer comer? 😥</h1>
-  <p class="sub">Descubra receitas simples que fazem seu bebê comer melhor todos os dias</p>
+  <p class="sub">Receitas simples que fazem seu bebê comer melhor todos os dias</p>
 
   <!-- EBOOK -->
   <div class="center ebook">
@@ -207,27 +211,20 @@
     <h2>Você passa por isso?</h2>
     <ul>
       <li>😣 Seu bebê recusa comida</li>
-      <li>😣 Você não sabe o que preparar</li>
-      <li>😣 Medo de fazer errado</li>
-      <li>😣 Falta tempo no dia a dia</li>
+      <li>😣 Falta ideia do que preparar</li>
+      <li>😣 Medo de errar</li>
+      <li>😣 Rotina corrida</li>
     </ul>
-  </div>
-
-  <!-- SOLUÇÃO -->
-  <div class="card">
-    <h2>📘 Primeiros Sabores</h2>
-    <p>Um guia completo com receitas práticas e rápidas para facilitar a alimentação do seu bebê.</p>
   </div>
 
   <!-- BENEFÍCIOS -->
   <div class="card">
     <h2>O que você vai receber:</h2>
     <ul>
-      <li>✔️ +50 receitas para bebês</li>
+      <li>✔️ +50 receitas práticas</li>
       <li>✔️ Prontas em até 15 minutos</li>
-      <li>✔️ Sem açúcar e sem industrializados</li>
-      <li>✔️ Texturas ideais por idade</li>
-      <li>✔️ Fácil de preparar</li>
+      <li>✔️ Alimentação saudável</li>
+      <li>✔️ Guia simples e direto</li>
     </ul>
   </div>
 
@@ -235,7 +232,6 @@
   <div class="card center">
     <p class="old-price">De R$29,90</p>
     <p class="price">R$14,90</p>
-    <p>🔥 Oferta por tempo limitado</p>
 
     <a id="comprar" href="#" class="btn">QUERO MEU GUIA AGORA</a>
 
@@ -244,7 +240,6 @@
 
 </div>
 
-<!-- BOTÃO FIXO -->
 <a href="#comprar" class="sticky-btn">Comprar Agora</a>
 
 </body>
