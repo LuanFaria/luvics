@@ -25,6 +25,7 @@
                         brand: {
                             50: '#fffaf5',
                             100: '#f1dec7',
+                            200: '#e7b74d',
                             500: '#f6a313',
                             600: '#ef9a00',
                             700: '#c96913',
@@ -40,22 +41,14 @@
     <style>
         [x-cloak] { display: none !important; }
         html { scroll-behavior: smooth; }
-        body {
-            background-color: #fffaf5;
-            background-image: 
-                linear-gradient(rgba(255, 250, 245, 0.85), rgba(255, 250, 245, 0.85)),
-                url('https://raw.githubusercontent.com/LuanFaria/luvics/954115a6204a5317e48d01ef0241c329ab72fc31/pratinho/imagens/Fundo%202.png');
-            background-attachment: fixed;
-            background-size: cover;
-            background-position: center;
-        }
+        body { background-color: #fffaf5; }
         .card {
             background: white;
             border: 1px solid #f1dec7;
             border-radius: 28px;
             padding: 24px;
             margin-bottom: 24px;
-            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.03);
         }
         .btn-gradient {
             background: linear-gradient(to bottom, #f6a313, #ef9a00);
@@ -115,12 +108,12 @@
         </div>
 
         <!-- VSL -->
-        <div class="card text-center">
-            <div class="text-2xl font-display font-black text-brand-800 mb-6">Assista antes de decidir (2 min)</div>
+        <div class="card text-center overflow-hidden">
+            <div class="text-2xl font-display font-black text-brand-800 mb-6 font-bold">Assista antes de decidir (2 min)</div>
             <div class="relative aspect-video rounded-3xl overflow-hidden shadow-2xl bg-black">
                 <iframe class="absolute inset-0 w-full h-full" src="https://www.youtube.com/embed/dQw4w9WgXcQ" frameborder="0" allowfullscreen></iframe>
             </div>
-            <a href="#comprar" class="btn-gradient w-full block mt-6 text-white font-black py-4 px-8 rounded-full uppercase tracking-wide">
+            <a href="#comprar" class="btn-gradient w-full block mt-6 text-white font-black py-4 px-8 rounded-full uppercase tracking-wide text-center">
                 QUERO O COMBO AGORA
             </a>
         </div>
@@ -128,7 +121,7 @@
         <!-- Produto -->
         <div class="card text-center">
             <img src="https://raw.githubusercontent.com/LuanFaria/luvics/09e23495ff4ddb6e314b5376667f56f524917a9c/pratinho/imagens/ebook3d.png" class="w-52 mx-auto drop-shadow-2xl" alt="Ebook">
-            <h2 class="text-3xl font-display font-black text-brand-800 mt-6">Primeiros Sabores</h2>
+            <h2 class="text-3xl font-display font-black text-brand-800 mt-6 tracking-tight">Primeiros Sabores</h2>
             <p class="text-brand-900/60 font-medium uppercase tracking-widest text-xs mt-1">+50 métodos e receitas práticas</p>
         </div>
 
@@ -141,8 +134,8 @@
             <div class="bg-brand-50 border-2 border-dashed border-brand-200 rounded-[32px] p-8 text-center relative">
                 <img src="https://raw.githubusercontent.com/LuanFaria/luvics/52b4a8e6a62033d54065c9da2583981d2a384f2d/pratinho/imagens/bonus.png" class="max-w-xs w-full mx-auto" alt="Bônus">
                 <div class="text-left mt-6 space-y-3">
-                    <p class="font-semibold text-brand-900 flex gap-2"><i data-lucide="check" class="w-5 h-5 text-brand-500"></i> Ebook: "Meu Filho Não Quer Comer?"</p>
-                    <p class="font-semibold text-brand-900 flex gap-2"><i data-lucide="check" class="w-5 h-5 text-brand-500"></i> Checklist: Alimentos Saudáveis</p>
+                    <p class="font-semibold text-brand-900 flex gap-2"><i data-lucide="check" class="w-5 h-5 text-brand-500 shrink-0"></i> Ebook: "Meu Filho Não Quer Comer?"</p>
+                    <p class="font-semibold text-brand-900 flex gap-2"><i data-lucide="check" class="w-5 h-5 text-brand-500 shrink-0"></i> Checklist: Alimentos Saudáveis</p>
                 </div>
                 <div class="mt-8 pt-6 border-t border-brand-100">
                     <span class="text-4xl text-green-600 font-black font-display underline underline-offset-8">GRÁTIS</span>
@@ -151,19 +144,31 @@
         </div>
 
         <!-- Oferta Principal -->
-        <div class="card border-4 border-brand-500 shadow-2xl" id="comprar">
+        <div class="card border-4 border-brand-500 shadow-2xl relative overflow-visible" id="comprar" x-data="{ imgError: false }">
             <div class="text-center">
-                <div class="bg-brand-500 text-white px-6 py-2 rounded-full text-xs font-black uppercase tracking-widest inline-block mb-8">Oferta de Lançamento</div>
+                <div class="bg-brand-500 text-white px-6 py-2 rounded-full text-xs font-black uppercase tracking-widest inline-block mb-8">Oferta Especial</div>
                 <div class="text-xl italic">De <s class="text-red-500">R$49,90</s> por apenas</div>
                 <div class="text-7xl text-brand-600 font-black font-display leading-tight my-4">R$14,90</div>
                 
-                <a href="#" class="btn-gradient w-full block text-lg text-white font-black py-5 px-8 rounded-full uppercase tracking-wide">
+                <a href="#" class="btn-gradient w-full block text-lg text-white font-black py-5 px-8 rounded-full uppercase tracking-wide text-center">
                     QUERO MEU COMBO AGORA
                 </a>
 
                 <div class="mt-8 bg-green-50 p-6 rounded-2xl border border-green-100 flex flex-col items-center gap-4">
-                    <img src="https://raw.githubusercontent.com/LuanFaria/luvics/0ce6f63412b182f767a4edda7ec97e8df6a7e937/pratinho/imagens/selo.png" class="w-20 h-20" alt="Garantia">
-                    <div class="flex items-center gap-2 text-green-700 font-black text-sm uppercase">
+                    <!-- Selo de Garantia no Card -->
+                    <div class="relative w-20 h-20">
+                        <img 
+                            src="https://raw.githubusercontent.com/LuanFaria/luvics/0ce6f63412b182f767a4edda7ec97e8df6a7e937/pratinho/imagens/selo.png" 
+                            class="w-full h-full object-contain drop-shadow-md" 
+                            alt="Garantia"
+                            @error="imgError = true"
+                            x-show="!imgError"
+                        >
+                        <div x-show="imgError" class="bg-brand-500 text-white w-full h-full rounded-full border-4 border-white shadow-lg flex items-center justify-center">
+                            <i data-lucide="shield-check" class="w-10 h-10"></i>
+                        </div>
+                    </div>
+                    <div class="flex items-center gap-2 text-green-700 font-black text-sm uppercase tracking-wide">
                         <i data-lucide="shield-check" class="w-5 h-5"></i> Pagamento 100% Seguro
                     </div>
                 </div>
@@ -174,36 +179,67 @@
         <div class="card" x-data="{ open: null }">
             <h2 class="text-2xl font-display font-black text-brand-800 mb-6 text-center">Dúvidas Frequentes</h2>
             <div class="border border-brand-100 rounded-2xl overflow-hidden">
+                <!-- Pergunta 1 -->
                 <div class="border-b border-brand-100 last:border-0">
-                    <button @click="open = (open === 1 ? null : 1)" class="w-full flex justify-between p-4 font-bold text-brand-900 text-left">
+                    <button @click="open = (open === 1 ? null : 1)" class="w-full flex justify-between p-4 font-bold text-brand-900 text-left items-center">
                         Como recebo o acesso? <i data-lucide="chevron-down" class="w-5 h-5 transition-transform" :class="open === 1 ? 'rotate-180' : ''"></i>
                     </button>
-                    <div x-show="open === 1" x-cloak class="px-4 pb-4 text-sm opacity-70">Acesso imediato no seu e-mail após a confirmação.</div>
+                    <div x-show="open === 1" x-cloak class="px-4 pb-4 text-sm opacity-75">O acesso é imediato! Você receberá o link para download direto no seu e-mail após a confirmação.</div>
                 </div>
+                <!-- Pergunta 2 -->
                 <div class="border-b border-brand-100 last:border-0">
-                    <button @click="open = (open === 2 ? null : 2)" class="w-full flex justify-between p-4 font-bold text-brand-900 text-left">
+                    <button @click="open = (open === 2 ? null : 2)" class="w-full flex justify-between p-4 font-bold text-brand-900 text-left items-center">
                         O material é digital? <i data-lucide="chevron-down" class="w-5 h-5 transition-transform" :class="open === 2 ? 'rotate-180' : ''"></i>
                     </button>
-                    <div x-show="open === 2" x-cloak class="px-4 pb-4 text-sm opacity-70">Sim, PDF de alta qualidade para celular ou impressão.</div>
+                    <div x-show="open === 2" x-cloak class="px-4 pb-4 text-sm opacity-75">Sim, o material está em formato PDF de alta qualidade, pronto para ler no celular ou imprimir.</div>
+                </div>
+                <!-- Pergunta 3 -->
+                <div class="border-b border-brand-100 last:border-0">
+                    <button @click="open = (open === 3 ? null : 3)" class="w-full flex justify-between p-4 font-bold text-brand-900 text-left items-center">
+                        Para qual idade servem as receitas? <i data-lucide="chevron-down" class="w-5 h-5 transition-transform" :class="open === 3 ? 'rotate-180' : ''"></i>
+                    </button>
+                    <div x-show="open === 3" x-cloak class="px-4 pb-4 text-sm opacity-75">As receitas são ideais para a fase de Introdução Alimentar (6 meses) até os 2 anos.</div>
+                </div>
+                <!-- Pergunta 4 -->
+                <div class="border-b border-brand-100 last:border-0">
+                    <button @click="open = (open === 4 ? null : 4)" class="w-full flex justify-between p-4 font-bold text-brand-900 text-left items-center">
+                        Quanto tempo dura o acesso? <i data-lucide="chevron-down" class="w-5 h-5 transition-transform" :class="open === 4 ? 'rotate-180' : ''"></i>
+                    </button>
+                    <div x-show="open === 4" x-cloak class="px-4 pb-4 text-sm opacity-75">O acesso é vitalício. Uma vez baixado, o material será seu para sempre!</div>
                 </div>
             </div>
         </div>
 
         <!-- Garantia -->
-        <div class="card text-center">
-            <div class="flex justify-center mb-6">
-                <img src="https://raw.githubusercontent.com/LuanFaria/luvics/0ce6f63412b182f767a4edda7ec97e8df6a7e937/pratinho/imagens/selo.png" class="w-28 animate-pulse-soft" alt="Garantia">
+        <div class="card text-center relative mt-16 overflow-visible" x-data="{ imgError: false }">
+            <div class="absolute -top-12 left-1/2 -translate-x-1/2 z-20">
+                <div class="relative w-24 h-24">
+                    <img 
+                        src="https://raw.githubusercontent.com/LuanFaria/luvics/0ce6f63412b182f767a4edda7ec97e8df6a7e937/pratinho/imagens/selo.png" 
+                        class="w-full h-full object-contain drop-shadow-xl animate-pulse-soft" 
+                        alt="Selo de Garantia"
+                        @error="imgError = true"
+                        x-show="!imgError"
+                    >
+                    <div x-show="imgError" class="bg-brand-500 text-white w-full h-full rounded-full border-4 border-white shadow-xl flex items-center justify-center">
+                        <i data-lucide="shield-check" class="w-12 h-12"></i>
+                    </div>
+                </div>
             </div>
-            <h2 class="font-display font-black text-2xl text-brand-800">RISCO ZERO</h2>
-            <p class="text-sm font-medium opacity-80 mt-2 px-6">Se não gostar em até 7 dias, devolvemos seu dinheiro.</p>
+            <div class="pt-12">
+                <h2 class="font-display font-black text-2xl text-brand-800">RISCO ZERO</h2>
+                <p class="text-sm font-medium text-brand-900/80 px-6 mt-2 leading-relaxed">
+                    Se você não amar o material em até 7 dias, basta nos enviar um e-mail e devolvemos seu dinheiro. Sem burocracia.
+                </p>
+            </div>
         </div>
 
         <!-- Footer -->
-        <footer class="mt-12 text-center pb-24 text-[10px] font-black uppercase text-brand-900/30">
+        <footer class="mt-12 text-center pb-24 text-[10px] font-black uppercase text-brand-900/30 tracking-[0.2em]">
             Luvics Pratinho<br><br>
-            <div class="flex justify-center gap-4">
-                <a href="#" class="underline">Privacidade</a>
-                <a href="#" class="underline">Termos</a>
+            <div class="flex justify-center gap-6">
+                <a href="#" class="hover:text-brand-500 underline">Privacidade</a>
+                <a href="#" class="hover:text-brand-500 underline">Termos de Uso</a>
             </div>
         </footer>
 
@@ -218,7 +254,7 @@
          x-transition:leave-start="translate-y-0 opacity-100"
          x-transition:leave-end="translate-y-full opacity-0"
          class="fixed bottom-6 left-0 right-0 px-4 z-[100]" x-cloak>
-        <a href="#comprar" class="max-w-[400px] mx-auto btn-gradient flex items-center justify-center gap-3 text-white font-black py-4 px-8 rounded-full shadow-2xl">
+        <a href="#comprar" class="max-w-[400px] mx-auto btn-gradient flex items-center justify-center gap-3 text-white font-black py-4 px-8 rounded-full shadow-2xl text-center">
             <i data-lucide="shopping-cart" class="w-5 h-5"></i>
             COMPRAR COMBO AGORA
         </a>
