@@ -42,6 +42,7 @@
         [x-cloak] { display: none !important; }
         html { scroll-behavior: smooth; }
         body { background-color: #fffaf5; font-family: 'Poppins', sans-serif; color: #5b4330; }
+        
         .card {
             background: white;
             border: 1px solid #f1dec7;
@@ -51,23 +52,27 @@
             box-shadow: 0 4px 10px rgba(0, 0, 0, 0.02);
             position: relative;
         }
+
         .btn-gradient {
             background: linear-gradient(to bottom, #f6a313, #ef9a00);
             box-shadow: 0 5px 0 #d68b0e;
             transition: all 0.2s;
             text-align: center;
         }
+
         .btn-gradient:active {
             transform: translateY(3px);
             box-shadow: 0 2px 0 #d68b0e;
         }
         
+        /* Animação do Fogo */
         @keyframes flicker {
             0%, 100% { opacity: 1; transform: scale(1); filter: drop-shadow(0 0 2px #fff); }
             50% { opacity: 0.8; transform: scale(1.1); filter: drop-shadow(0 0 8px #ffeb3b); }
         }
         .animate-flicker { animation: flicker 0.8s infinite alternate ease-in-out; }
         
+        /* Animação de Pulsação do Botão */
         @keyframes pulse-cta {
             0% { transform: scale(1); box-shadow: 0 5px 0 #d68b0e, 0 0 0 0 rgba(246, 163, 19, 0.4); }
             70% { transform: scale(1.05); box-shadow: 0 5px 0 #d68b0e, 0 0 0 15px rgba(246, 163, 19, 0); }
@@ -80,9 +85,33 @@
             50% { transform: scale(1.05); }
         }
         .animate-pulse-soft { animation: pulse-soft 3s infinite ease-in-out; }
+
+        /* Estilos para a animação de entrada dos cards */
+        .reveal {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: all 0.6s ease-out;
+        }
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
     </style>
 </head>
-<body x-data="{ showSticky: false }" @scroll.window="showSticky = (window.pageYOffset > 500)">
+<body x-data="{ 
+    showSticky: false,
+    init() {
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('active');
+                }
+            });
+        }, { threshold: 0.1 });
+        
+        document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+    }
+}" @scroll.window="showSticky = (window.pageYOffset > 500)">
 
     <!-- Top Banner -->
     <div class="bg-gradient-to-r from-orange-600 to-brand-500 text-white font-black text-center py-3 px-4 sticky top-0 z-50 shadow-lg border-b border-orange-400 rounded-b-2xl">
@@ -97,36 +126,39 @@
     <main class="max-w-[620px] mx-auto px-4 pt-6">
 
         <!-- Hero -->
-        <div class="card text-center md:text-left">
-            <h1 class="text-3xl font-display font-black leading-tight text-brand-700 mb-4">
+        <div class="card reveal active">
+            <h1 class="text-3xl font-display font-black leading-tight text-brand-700 mb-4 text-center md:text-left">
                 Seu bebê recusa comida e você não sabe mais o que fazer?
             </h1>
-            <p class="text-lg font-medium text-brand-800/80 italic">
+            <p class="text-lg font-medium text-brand-800/80 italic text-center md:text-left">
                 Existe uma forma simples de resolver isso de uma vez por todas.
             </p>
         </div>
 
-        <!-- Dores -->
-        <div class="card">
+        <!-- Dores com Animação e Texto Exato -->
+        <div class="card reveal">
             <h2 class="text-xl font-bold text-brand-800 mb-5 flex items-center gap-2">
                 <i data-lucide="users" class="w-5 h-5 text-brand-500"></i>
                 Você vive alguma dessas situações?
             </h2>
             <div class="space-y-4">
-                <div class="flex items-center gap-3 bg-brand-50/50 p-4 border-l-4 border-brand-500 rounded-r-xl font-bold shadow-sm">
-                    <span class="text-xl">😣</span> Medo de oferecer alimentos errados
+                <div class="flex items-center gap-3 bg-brand-50/50 p-4 border-l-4 border-brand-500 rounded-r-xl font-bold shadow-sm reveal" style="transition-delay: 100ms">
+                    <span class="text-xl">😣</span> Medo constante de oferecer os alimentos errados
                 </div>
-                <div class="flex items-center gap-3 bg-brand-50/50 p-4 border-l-4 border-brand-500 rounded-r-xl font-bold shadow-sm">
-                    <span class="text-xl">😣</span> Seu bebê recusa comida
+                <div class="flex items-center gap-3 bg-brand-50/50 p-4 border-l-4 border-brand-500 rounded-r-xl font-bold shadow-sm reveal" style="transition-delay: 200ms">
+                    <span class="text-xl">😣</span> Seu bebê fecha o rostinho ou joga a comida no chão
                 </div>
-                <div class="flex items-center gap-3 bg-brand-50/50 p-4 border-l-4 border-brand-500 rounded-r-xl font-bold shadow-sm">
-                    <span class="text-xl">😣</span> Falta ideia do que preparar
+                <div class="flex items-center gap-3 bg-brand-50/50 p-4 border-l-4 border-brand-500 rounded-r-xl font-bold shadow-sm reveal" style="transition-delay: 300ms">
+                    <span class="text-xl">😣</span> Falta de criatividade e tempo para preparar algo novo
+                </div>
+                <div class="flex items-center gap-3 bg-brand-50/50 p-4 border-l-4 border-brand-500 rounded-r-xl font-bold shadow-sm reveal" style="transition-delay: 400ms">
+                    <span class="text-xl">😣</span> A hora da refeição virou um momento de puro estresse
                 </div>
             </div>
         </div>
 
         <!-- VSL -->
-        <div class="card text-center overflow-hidden">
+        <div class="card text-center overflow-hidden reveal">
             <div class="text-2xl font-display font-black text-brand-800 mb-6 font-bold">Assista antes de decidir (2 min)</div>
             <div class="relative aspect-video rounded-3xl overflow-hidden shadow-2xl bg-black">
                 <iframe class="absolute inset-0 w-full h-full" src="https://www.youtube.com/embed/dQw4w9WgXcQ" frameborder="0" allowfullscreen></iframe>
@@ -137,7 +169,7 @@
         </div>
 
         <!-- Bônus -->
-        <div class="card bg-gradient-to-b from-brand-50 to-white text-center">
+        <div class="card bg-gradient-to-b from-brand-50 to-white text-center reveal">
             <h2 class="text-xl font-bold text-brand-800 mb-6 justify-center flex items-center gap-2">
                 🎁 Bônus inclusos SOMENTE HOJE
             </h2>
@@ -156,11 +188,11 @@
             </div>
         </div>
 
-        <!-- DEPOIMENTOS -->
-        <div class="card">
+        <!-- Depoimentos -->
+        <div class="card reveal">
             <h2 class="text-2xl font-display font-black text-brand-800 mb-8 text-center">O que as mamães estão dizendo...</h2>
             <div class="space-y-6">
-                <div class="bg-brand-50/30 p-6 rounded-[24px] border border-brand-100 flex flex-col md:flex-row gap-4 items-center">
+                <div class="bg-brand-50/30 p-6 rounded-[24px] border border-brand-100 flex flex-col md:flex-row gap-4 items-center reveal">
                     <img src="https://picsum.photos/seed/ana_mom/100/100" class="w-16 h-16 rounded-full border-4 border-white shadow-md" alt="Ana" referrerPolicy="no-referrer" />
                     <div class="text-center md:text-left">
                         <div class="font-bold text-brand-900 text-lg">Ana Silveira</div>
@@ -168,21 +200,21 @@
                         <p class="text-sm font-medium italic text-brand-900/80 leading-relaxed">"Minha vida mudou depois dessas receitas! O Pedro não comia nada, agora ele devora o pratinho sozinho."</p>
                     </div>
                 </div>
-                <div class="bg-brand-50/30 p-6 rounded-[24px] border border-brand-100 flex flex-col md:flex-row gap-4 items-center">
+                <div class="bg-brand-50/30 p-6 rounded-[24px] border border-brand-100 flex flex-col md:flex-row gap-4 items-center reveal">
                     <img src="https://picsum.photos/seed/julia_mom/100/100" class="w-16 h-16 rounded-full border-4 border-white shadow-md" alt="Juliana" referrerPolicy="no-referrer" />
                     <div class="text-center md:text-left">
                         <div class="font-bold text-brand-900 text-lg">Juliana Mendes</div>
                         <div class="text-[10px] text-orange-600 font-black uppercase tracking-widest mb-2">Mãe da Alice (1 ano)</div>
-                        <p class="text-sm font-medium italic text-brand-900/80 leading-relaxed">"Os bônus sobre comportamento são incríveis. Recomendo para quem está perdida."</p>
+                        <p class="text-sm font-medium italic text-brand-900/80 leading-relaxed">"Os bônus sobre comportamento são incríveis. Recomendo para quem está perdida na introdução alimentar!"</p>
                     </div>
                 </div>
             </div>
         </div>
 
         <!-- Oferta Principal -->
-        <div class="card border-4 border-brand-500 shadow-2xl relative overflow-visible" id="comprar">
+        <div class="card border-4 border-brand-500 shadow-2xl relative overflow-visible reveal" id="comprar" x-data="{ errorOffer: false }">
             <div class="text-center">
-                <div class="bg-brand-500 text-white px-6 py-2 rounded-full text-[10px] font-black uppercase tracking-widest inline-block mb-8">Oferta de Lançamento</div>
+                <div class="bg-brand-500 text-white px-6 py-2 rounded-full text-xs font-black uppercase tracking-widest inline-block mb-8">Oferta de Lançamento</div>
                 <div class="text-xl italic">De <s class="text-red-500">R$49,90</s> por apenas</div>
                 <div class="text-7xl text-brand-600 font-black font-display my-4 leading-none">R$14,90</div>
                 
@@ -191,13 +223,10 @@
                 </a>
 
                 <div class="mt-10 bg-green-50 p-6 rounded-2xl border border-green-100 flex flex-col items-center gap-4 text-center">
-                    <!-- LOGICA DE SELO BLINDADA -->
                     <div class="relative w-24 h-24 flex items-center justify-center">
-                        <!-- Camada de segurança (sempre visível) -->
                         <div class="absolute bg-brand-500 text-white w-20 h-20 rounded-full border-4 border-white shadow-lg flex items-center justify-center">
                             <i data-lucide="shield-check" class="w-12 h-12"></i>
                         </div>
-                        <!-- Imagem original (fica em cima se carregar) -->
                         <img 
                             src="https://raw.githubusercontent.com/LuanFaria/luvics/0ce6f63412b182f767a4edda7ec97e8df6a7e937/pratinho/imagens/selo.png" 
                             class="w-full h-full object-contain drop-shadow-md z-10 relative opacity-0 transition-opacity duration-300" 
@@ -214,11 +243,11 @@
         </div>
 
         <!-- FAQ -->
-        <div class="card" x-data="{ open: null }">
+        <div class="card reveal" x-data="{ open: null }">
             <h2 class="text-2xl font-display font-black text-brand-800 mb-6 text-center">Dúvidas Frequentes</h2>
             <div class="border border-brand-100 rounded-2xl overflow-hidden">
                 <template x-for="(faq, i) in [
-                    {q: 'Como recebo o acesso?', a: 'O acesso é imediato via e-mail após a confirmação.'},
+                    {q: 'Como recebo o acesso?', a: 'O acesso é imediato via e-mail após a confirmação do pagamento.'},
                     {q: 'O material é digital?', a: 'Sim, formato PDF de alta qualidade para celular ou impressão.'},
                     {q: 'Para qual idade serve?', a: 'As receitas e métodos servem para bebês de 6 meses até os 2 anos.'},
                     {q: 'O acesso é vitalício?', a: 'Sim! Uma vez adquirido, o material é seu para sempre.'}
@@ -235,14 +264,12 @@
         </div>
 
         <!-- Garantia Risco Zero -->
-        <div class="card text-center relative mt-16 overflow-visible">
+        <div class="card text-center relative mt-16 overflow-visible reveal" x-data="{ errorGarantia: false }">
             <div class="absolute -top-12 left-1/2 -translate-x-1/2 z-20">
                 <div class="relative w-24 h-24 animate-pulse-soft flex items-center justify-center">
-                    <!-- Camada de segurança (sempre visível) -->
                     <div class="absolute bg-brand-500 text-white w-20 h-20 rounded-full border-4 border-white shadow-xl flex items-center justify-center">
                         <i data-lucide="shield-check" class="w-12 h-12"></i>
                     </div>
-                    <!-- Imagem original -->
                     <img 
                         src="https://raw.githubusercontent.com/LuanFaria/luvics/0ce6f63412b182f767a4edda7ec97e8df6a7e937/pratinho/imagens/selo.png" 
                         class="w-full h-full object-contain drop-shadow-xl z-10 relative opacity-0 transition-opacity duration-300" 
@@ -261,7 +288,7 @@
         </div>
 
         <!-- Footer -->
-        <footer class="mt-12 text-center pb-24 text-[10px] font-black uppercase text-brand-900/30 tracking-[0.2em]">
+        <footer class="mt-12 text-center pb-24 text-[10px] font-black uppercase text-brand-900/30 tracking-[0.2em] reveal">
             Luvics Pratinho<br><br>
             <div class="flex justify-center gap-6">
                 <a href="#" class="underline">Privacidade</a>
