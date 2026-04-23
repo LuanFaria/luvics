@@ -192,8 +192,8 @@
                 <img src="https://raw.githubusercontent.com/LuanFaria/luvics/52b4a8e6a62033d54065c9da2583981d2a384f2d/pratinho/imagens/bonus.png" class="max-w-xs w-full mx-auto drop-shadow-2xl" alt="Bônus" referrerpolicy="no-referrer">
                 
                 <div class="text-left mt-6 space-y-3">
-                    <p class="font-bold text-brand-900 flex gap-2"><i data-lucide="check" class="w-5 h-5 text-brand-500 shrink-0"></i> Bônus 1: Meu Filho Não Quer Comer?</p>
-                    <p class="font-bold text-brand-900 flex gap-2"><i data-lucide="check" class="w-5 h-5 text-brand-500 shrink-0"></i> Bônus 2: Lista de Alimentos Saudáveis</p>
+                    <p class="font-bold text-brand-900 flex gap-2"><i data-lucide="check" class="w-5 h-5 text-brand-500 shrink-0"></i> Bônus 1: Meu Filho Não Quer Comer? O que fazer?</p>
+                    <p class="font-bold text-brand-900 flex gap-2"><i data-lucide="check" class="w-5 h-5 text-brand-500 shrink-0"></i> Bônus 2: Lista de Alimentos Saudáveis e seus beneficios (por idade)</p>
                 </div>
                 
                 <div class="mt-8 pt-6 border-t border-brand-100">
@@ -212,7 +212,7 @@
                     <div class="text-center md:text-left">
                         <div class="font-bold text-brand-900 text-lg">Ana Silveira</div>
                         <div class="text-[10px] text-orange-600 font-black uppercase tracking-widest mb-2">Mãe do Pedro (10 meses)</div>
-                        <p class="text-sm font-medium italic text-brand-900/80 leading-relaxed">"Minha vida mudou depois dessas receitas! O Pedro não comia nada, agora ele devora o pratinho sozinho."</p>
+                        <p class="text-sm font-medium italic text-brand-900/80 leading-relaxed">"Minha vida mudou depois dessas receitas! O Pedro não comia nada, chorava no cadeirão... agora ele devora o pratinho sozinho e eu fico em paz."</p>
                     </div>
                 </div>
                 <div class="bg-brand-50/30 p-6 rounded-[24px] border border-brand-100 flex flex-col md:flex-row gap-4 items-center reveal">
@@ -220,7 +220,7 @@
                     <div class="text-center md:text-left">
                         <div class="font-bold text-brand-900 text-lg">Juliana Mendes</div>
                         <div class="text-[10px] text-orange-600 font-black uppercase tracking-widest mb-2">Mãe da Alice (1 ano)</div>
-                        <p class="text-sm font-medium italic text-brand-900/80 leading-relaxed">"Os bônus sobre comportamento são incríveis. Valeu cada centavo!"</p>
+                        <p class="text-sm font-medium italic text-brand-900/80 leading-relaxed">"Os bônus sobre comportamento alimentar são incríveis. Valeu cada centavo, super recomendo para quem está perdida na introdução alimentar!"</p>
                     </div>
                 </div>
             </div>
@@ -234,15 +234,15 @@
                 <div class="space-y-3 mb-8 text-left max-w-sm mx-auto p-5 bg-brand-50 rounded-2xl border border-brand-100">
                     <div class="flex items-center gap-3 font-bold text-brand-900 text-sm">
                         <i data-lucide="check-circle-2" class="w-5 h-5 text-green-600 shrink-0"></i>
-                        Receitinhas Saudáveis (+101 receitas)
+                        + de 101 Receitinhas Saudáveis
                     </div>
                     <div class="flex items-center gap-3 font-bold text-brand-900 text-sm">
                         <i data-lucide="check-circle-2" class="w-5 h-5 text-green-600 shrink-0"></i>
-                        Bônus 1: Guia Comportamental
+                        Bônus 1: Meu Filho Não Quer Comer? O que fazer?
                     </div>
                     <div class="flex items-center gap-3 font-bold text-brand-900 text-sm">
                         <i data-lucide="check-circle-2" class="w-5 h-5 text-green-600 shrink-0"></i>
-                        Bônus 2: Lista de Compras
+                        Bônus 2: Lista de Alimentos Saudáveis e seus beneficios
                     </div>
                 </div>
 
@@ -278,10 +278,10 @@
             <h2 class="text-2xl font-display font-black text-brand-800 mb-6 text-center">Dúvidas Frequentes</h2>
             <div class="border border-brand-100 rounded-2xl overflow-hidden">
                 <template x-for="(faq, i) in [
-                    {q: 'Como recebo o acesso?', a: 'O acesso é imediato via e-mail após a confirmação do pagamento.'},
-                    {q: 'O material é digital?', a: 'Sim, formato PDF de alta qualidade para celular ou impressão.'},
-                    {q: 'Para qual idade serve?', a: 'As receitas e métodos servem para bebês de 6 meses até os 2 anos.'},
-                    {q: 'O acesso é vitalício?', a: 'Sim! Uma vez adquirido, o material é seu para sempre.'}
+                    {q: 'Como recebo o acesso?', a: 'O acesso é imediato! Assim que o seu pagamento for confirmado, você receberá os produtos diretamente da plataforma da Kiwify.'},
+                    {q: 'O material é digital?', a: 'Sim, o material está em formato PDF de altíssima qualidade, pronto para ser lido no celular, tablet ou computador. Você também pode imprimir se preferir ter o livrinho físico na cozinha!'},
+                    {q: 'Para qual idade são as receitas?', a: 'As receitas são focadas na Introdução Alimentar (a partir dos 6 meses) até os 2 anos de idade, garantindo uma base nutricional sólida.'},
+                    {q: 'Por quanto tempo terei acesso?', a: 'O acesso é VITALÍCIO. O material é seu para sempre, pode baixar quantas vezes quiser!'}
                 ]" :key="i">
                     <div class="border-b border-brand-100 last:border-0">
                         <button @click="open = (open === i ? null : i)" class="w-full flex justify-between p-4 font-bold text-brand-900 text-left items-center text-sm">
