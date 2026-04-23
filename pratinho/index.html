@@ -86,11 +86,11 @@
         }
         .animate-pulse-soft { animation: pulse-soft 3s infinite ease-in-out; }
 
-        /* Estilos para a animação de entrada dos cards */
+        /* Animação de Entrada suave */
         .reveal {
             opacity: 0;
             transform: translateY(20px);
-            transition: all 0.6s ease-out;
+            transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
         }
         .reveal.active {
             opacity: 1;
@@ -135,23 +135,23 @@
             </p>
         </div>
 
-        <!-- Dores com Animação e Texto Exato -->
+        <!-- Dores com Animação -->
         <div class="card reveal">
             <h2 class="text-xl font-bold text-brand-800 mb-5 flex items-center gap-2">
                 <i data-lucide="users" class="w-5 h-5 text-brand-500"></i>
                 Você vive alguma dessas situações?
             </h2>
             <div class="space-y-4">
-                <div class="flex items-center gap-3 bg-brand-50/50 p-4 border-l-4 border-brand-500 rounded-r-xl font-bold shadow-sm reveal" style="transition-delay: 100ms">
+                <div class="flex items-center gap-3 bg-brand-50/50 p-4 border-l-4 border-brand-500 rounded-r-xl font-bold shadow-sm reveal">
                     <span class="text-xl">😣</span> Medo constante de oferecer os alimentos errados
                 </div>
-                <div class="flex items-center gap-3 bg-brand-50/50 p-4 border-l-4 border-brand-500 rounded-r-xl font-bold shadow-sm reveal" style="transition-delay: 200ms">
+                <div class="flex items-center gap-3 bg-brand-50/50 p-4 border-l-4 border-brand-500 rounded-r-xl font-bold shadow-sm reveal">
                     <span class="text-xl">😣</span> Seu bebê fecha o rostinho ou joga a comida no chão
                 </div>
-                <div class="flex items-center gap-3 bg-brand-50/50 p-4 border-l-4 border-brand-500 rounded-r-xl font-bold shadow-sm reveal" style="transition-delay: 300ms">
+                <div class="flex items-center gap-3 bg-brand-50/50 p-4 border-l-4 border-brand-500 rounded-r-xl font-bold shadow-sm reveal">
                     <span class="text-xl">😣</span> Falta de criatividade e tempo para preparar algo novo
                 </div>
-                <div class="flex items-center gap-3 bg-brand-50/50 p-4 border-l-4 border-brand-500 rounded-r-xl font-bold shadow-sm reveal" style="transition-delay: 400ms">
+                <div class="flex items-center gap-3 bg-brand-50/50 p-4 border-l-4 border-brand-500 rounded-r-xl font-bold shadow-sm reveal">
                     <span class="text-xl">😣</span> A hora da refeição virou um momento de puro estresse
                 </div>
             </div>
@@ -166,6 +166,21 @@
             <a href="#comprar" class="btn-gradient w-full block mt-6 text-white font-black py-4 px-8 rounded-full uppercase tracking-wide">
                 QUERO O COMBO AGORA
             </a>
+        </div>
+
+        <!-- PRODUTO PRINCIPAL - ATUALIZADO -->
+        <div class="card text-center reveal">
+            <div class="relative inline-block group">
+                <img 
+                    src="https://raw.githubusercontent.com/LuanFaria/luvics/09e23495ff4ddb6e314b5376667f56f524917a9c/pratinho/imagens/ebook3d.png" 
+                    class="w-56 mx-auto relative z-10 transition-transform duration-500 group-hover:rotate-3" 
+                    alt="Receitinhas Saudáveis"
+                    referrerpolicy="no-referrer"
+                >
+                <div class="absolute -bottom-4 left-1/2 -translate-x-1/2 w-40 h-8 bg-black/10 blur-xl rounded-full translate-y-2"></div>
+            </div>
+            <h2 class="text-3xl font-display font-black text-brand-800 mt-6 tracking-tight">Receitinhas Saudáveis</h2>
+            <p class="text-brand-900/60 font-medium uppercase tracking-widest text-xs mt-1 italic">+ de 101 métodos e receitas práticas</p>
         </div>
 
         <!-- Bônus -->
@@ -205,16 +220,32 @@
                     <div class="text-center md:text-left">
                         <div class="font-bold text-brand-900 text-lg">Juliana Mendes</div>
                         <div class="text-[10px] text-orange-600 font-black uppercase tracking-widest mb-2">Mãe da Alice (1 ano)</div>
-                        <p class="text-sm font-medium italic text-brand-900/80 leading-relaxed">"Os bônus sobre comportamento são incríveis. Recomendo para quem está perdida na introdução alimentar!"</p>
+                        <p class="text-sm font-medium italic text-brand-900/80 leading-relaxed">"Os bônus sobre comportamento são incríveis. Valeu cada centavo!"</p>
                     </div>
                 </div>
             </div>
         </div>
 
-        <!-- Oferta Principal -->
-        <div class="card border-4 border-brand-500 shadow-2xl relative overflow-visible reveal" id="comprar" x-data="{ errorOffer: false }">
+        <!-- Oferta Principal - ATUALIZADA -->
+        <div class="card border-4 border-brand-500 shadow-2xl relative overflow-visible reveal" id="comprar">
             <div class="text-center">
                 <div class="bg-brand-500 text-white px-6 py-2 rounded-full text-xs font-black uppercase tracking-widest inline-block mb-8">Oferta de Lançamento</div>
+                
+                <div class="space-y-3 mb-8 text-left max-w-sm mx-auto p-5 bg-brand-50 rounded-2xl border border-brand-100">
+                    <div class="flex items-center gap-3 font-bold text-brand-900 text-sm">
+                        <i data-lucide="check-circle-2" class="w-5 h-5 text-green-600 shrink-0"></i>
+                        Receitinhas Saudáveis (+101 receitas)
+                    </div>
+                    <div class="flex items-center gap-3 font-bold text-brand-900 text-sm">
+                        <i data-lucide="check-circle-2" class="w-5 h-5 text-green-600 shrink-0"></i>
+                        Bônus 1: Guia Comportamental
+                    </div>
+                    <div class="flex items-center gap-3 font-bold text-brand-900 text-sm">
+                        <i data-lucide="check-circle-2" class="w-5 h-5 text-green-600 shrink-0"></i>
+                        Bônus 2: Lista de Compras
+                    </div>
+                </div>
+
                 <div class="text-xl italic">De <s class="text-red-500">R$49,90</s> por apenas</div>
                 <div class="text-7xl text-brand-600 font-black font-display my-4 leading-none">R$14,90</div>
                 
@@ -264,7 +295,7 @@
         </div>
 
         <!-- Garantia Risco Zero -->
-        <div class="card text-center relative mt-16 overflow-visible reveal" x-data="{ errorGarantia: false }">
+        <div class="card text-center relative mt-16 overflow-visible reveal">
             <div class="absolute -top-12 left-1/2 -translate-x-1/2 z-20">
                 <div class="relative w-24 h-24 animate-pulse-soft flex items-center justify-center">
                     <div class="absolute bg-brand-500 text-white w-20 h-20 rounded-full border-4 border-white shadow-xl flex items-center justify-center">
