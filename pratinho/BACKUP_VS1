@@ -1,1 +1,293 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Luvics Pratinho - Combo Exclusivo</title>
+    
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;800;900&family=Outfit:wght@400;700;900&display=swap" rel="stylesheet">
+    
+    <!-- Scripts -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
 
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Poppins', 'sans-serif'],
+                        display: ['Outfit', 'sans-serif'],
+                    },
+                    colors: {
+                        brand: {
+                            50: '#fffaf5',
+                            100: '#f1dec7',
+                            200: '#e7b74d',
+                            500: '#f6a313',
+                            600: '#ef9a00',
+                            700: '#c96913',
+                            800: '#b85f16',
+                            900: '#5b4330',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        [x-cloak] { display: none !important; }
+        html { scroll-behavior: smooth; }
+        body { background-color: #fffaf5; font-family: 'Poppins', sans-serif; color: #5b4330; }
+        .card {
+            background: white;
+            border: 1px solid #f1dec7;
+            border-radius: 28px;
+            padding: 24px;
+            margin-bottom: 24px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.02);
+            position: relative;
+        }
+        .btn-gradient {
+            background: linear-gradient(to bottom, #f6a313, #ef9a00);
+            box-shadow: 0 5px 0 #d68b0e;
+            transition: all 0.2s;
+            text-align: center;
+        }
+        .btn-gradient:active {
+            transform: translateY(3px);
+            box-shadow: 0 2px 0 #d68b0e;
+        }
+        
+        @keyframes flicker {
+            0%, 100% { opacity: 1; transform: scale(1); filter: drop-shadow(0 0 2px #fff); }
+            50% { opacity: 0.8; transform: scale(1.1); filter: drop-shadow(0 0 8px #ffeb3b); }
+        }
+        .animate-flicker { animation: flicker 0.8s infinite alternate ease-in-out; }
+        
+        @keyframes pulse-cta {
+            0% { transform: scale(1); box-shadow: 0 5px 0 #d68b0e, 0 0 0 0 rgba(246, 163, 19, 0.4); }
+            70% { transform: scale(1.05); box-shadow: 0 5px 0 #d68b0e, 0 0 0 15px rgba(246, 163, 19, 0); }
+            100% { transform: scale(1); box-shadow: 0 5px 0 #d68b0e, 0 0 0 0 rgba(246, 163, 19, 0); }
+        }
+        .animate-pulse-cta { animation: pulse-cta 2s infinite ease-in-out; }
+
+        @keyframes pulse-soft {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+        .animate-pulse-soft { animation: pulse-soft 3s infinite ease-in-out; }
+    </style>
+</head>
+<body x-data="{ showSticky: false }" @scroll.window="showSticky = (window.pageYOffset > 500)">
+
+    <!-- Top Banner -->
+    <div class="bg-gradient-to-r from-orange-600 to-brand-500 text-white font-black text-center py-3 px-4 sticky top-0 z-50 shadow-lg border-b border-orange-400 rounded-b-2xl">
+        <div class="max-w-lg mx-auto flex items-center justify-center gap-2 text-[10px] md:text-sm">
+            <div class="animate-flicker">
+                <i data-lucide="flame" class="w-6 h-6 fill-yellow-300 text-orange-200"></i>
+            </div>
+            <span>HOJE: 3 eBooks pelo preço de 1 • <s class="opacity-70">R$79,80</s> por R$14,90</span>
+        </div>
+    </div>
+
+    <main class="max-w-[620px] mx-auto px-4 pt-6">
+
+        <!-- Hero -->
+        <div class="card text-center md:text-left">
+            <h1 class="text-3xl font-display font-black leading-tight text-brand-700 mb-4">
+                Seu bebê recusa comida e você não sabe mais o que fazer?
+            </h1>
+            <p class="text-lg font-medium text-brand-800/80 italic">
+                Existe uma forma simples de resolver isso de uma vez por todas.
+            </p>
+        </div>
+
+        <!-- Dores -->
+        <div class="card">
+            <h2 class="text-xl font-bold text-brand-800 mb-5 flex items-center gap-2">
+                <i data-lucide="users" class="w-5 h-5 text-brand-500"></i>
+                Você vive alguma dessas situações?
+            </h2>
+            <div class="space-y-4">
+                <div class="flex items-center gap-3 bg-brand-50/50 p-4 border-l-4 border-brand-500 rounded-r-xl font-bold shadow-sm">
+                    <span class="text-xl">😣</span> Medo de oferecer alimentos errados
+                </div>
+                <div class="flex items-center gap-3 bg-brand-50/50 p-4 border-l-4 border-brand-500 rounded-r-xl font-bold shadow-sm">
+                    <span class="text-xl">😣</span> Seu bebê recusa comida
+                </div>
+                <div class="flex items-center gap-3 bg-brand-50/50 p-4 border-l-4 border-brand-500 rounded-r-xl font-bold shadow-sm">
+                    <span class="text-xl">😣</span> Falta ideia do que preparar
+                </div>
+            </div>
+        </div>
+
+        <!-- VSL -->
+        <div class="card text-center overflow-hidden">
+            <div class="text-2xl font-display font-black text-brand-800 mb-6 font-bold">Assista antes de decidir (2 min)</div>
+            <div class="relative aspect-video rounded-3xl overflow-hidden shadow-2xl bg-black">
+                <iframe class="absolute inset-0 w-full h-full" src="https://www.youtube.com/embed/dQw4w9WgXcQ" frameborder="0" allowfullscreen></iframe>
+            </div>
+            <a href="#comprar" class="btn-gradient w-full block mt-6 text-white font-black py-4 px-8 rounded-full uppercase tracking-wide">
+                QUERO O COMBO AGORA
+            </a>
+        </div>
+
+        <!-- Bônus -->
+        <div class="card bg-gradient-to-b from-brand-50 to-white text-center">
+            <h2 class="text-xl font-bold text-brand-800 mb-6 justify-center flex items-center gap-2">
+                🎁 Bônus inclusos SOMENTE HOJE
+            </h2>
+            <div class="bg-brand-50 border-2 border-dashed border-brand-200 rounded-[28px] p-8 text-center relative">
+                <img src="https://raw.githubusercontent.com/LuanFaria/luvics/52b4a8e6a62033d54065c9da2583981d2a384f2d/pratinho/imagens/bonus.png" class="max-w-xs w-full mx-auto drop-shadow-2xl" alt="Bônus" referrerpolicy="no-referrer">
+                
+                <div class="text-left mt-6 space-y-3">
+                    <p class="font-bold text-brand-900 flex gap-2"><i data-lucide="check" class="w-5 h-5 text-brand-500 shrink-0"></i> Bônus 1: Meu Filho Não Quer Comer?</p>
+                    <p class="font-bold text-brand-900 flex gap-2"><i data-lucide="check" class="w-5 h-5 text-brand-500 shrink-0"></i> Bônus 2: Lista de Alimentos Saudáveis</p>
+                </div>
+                
+                <div class="mt-8 pt-6 border-t border-brand-100">
+                    <span class="text-brand-900/60 block mb-1">De <s class="text-red-500">R$29,90</s> cada por</span>
+                    <span class="text-4xl text-green-600 font-black font-display underline decoration-4 underline-offset-8 block">GRÁTIS</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- DEPOIMENTOS -->
+        <div class="card">
+            <h2 class="text-2xl font-display font-black text-brand-800 mb-8 text-center">O que as mamães estão dizendo...</h2>
+            <div class="space-y-6">
+                <div class="bg-brand-50/30 p-6 rounded-[24px] border border-brand-100 flex flex-col md:flex-row gap-4 items-center">
+                    <img src="https://picsum.photos/seed/ana_mom/100/100" class="w-16 h-16 rounded-full border-4 border-white shadow-md" alt="Ana" referrerPolicy="no-referrer" />
+                    <div class="text-center md:text-left">
+                        <div class="font-bold text-brand-900 text-lg">Ana Silveira</div>
+                        <div class="text-[10px] text-orange-600 font-black uppercase tracking-widest mb-2">Mãe do Pedro (10 meses)</div>
+                        <p class="text-sm font-medium italic text-brand-900/80 leading-relaxed">"Minha vida mudou depois dessas receitas! O Pedro não comia nada, agora ele devora o pratinho sozinho."</p>
+                    </div>
+                </div>
+                <div class="bg-brand-50/30 p-6 rounded-[24px] border border-brand-100 flex flex-col md:flex-row gap-4 items-center">
+                    <img src="https://picsum.photos/seed/julia_mom/100/100" class="w-16 h-16 rounded-full border-4 border-white shadow-md" alt="Juliana" referrerPolicy="no-referrer" />
+                    <div class="text-center md:text-left">
+                        <div class="font-bold text-brand-900 text-lg">Juliana Mendes</div>
+                        <div class="text-[10px] text-orange-600 font-black uppercase tracking-widest mb-2">Mãe da Alice (1 ano)</div>
+                        <p class="text-sm font-medium italic text-brand-900/80 leading-relaxed">"Os bônus sobre comportamento são incríveis. Recomendo para quem está perdida."</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Oferta Principal -->
+        <div class="card border-4 border-brand-500 shadow-2xl relative overflow-visible" id="comprar">
+            <div class="text-center">
+                <div class="bg-brand-500 text-white px-6 py-2 rounded-full text-[10px] font-black uppercase tracking-widest inline-block mb-8">Oferta de Lançamento</div>
+                <div class="text-xl italic">De <s class="text-red-500">R$49,90</s> por apenas</div>
+                <div class="text-7xl text-brand-600 font-black font-display my-4 leading-none">R$14,90</div>
+                
+                <a href="#" class="btn-gradient w-full block text-lg text-white font-black py-5 px-8 rounded-full uppercase tracking-wide mt-6 animate-pulse-cta text-center">
+                    QUERO MEU COMBO AGORA
+                </a>
+
+                <div class="mt-10 bg-green-50 p-6 rounded-2xl border border-green-100 flex flex-col items-center gap-4 text-center">
+                    <!-- LOGICA DE SELO BLINDADA -->
+                    <div class="relative w-24 h-24 flex items-center justify-center">
+                        <!-- Camada de segurança (sempre visível) -->
+                        <div class="absolute bg-brand-500 text-white w-20 h-20 rounded-full border-4 border-white shadow-lg flex items-center justify-center">
+                            <i data-lucide="shield-check" class="w-12 h-12"></i>
+                        </div>
+                        <!-- Imagem original (fica em cima se carregar) -->
+                        <img 
+                            src="https://raw.githubusercontent.com/LuanFaria/luvics/0ce6f63412b182f767a4edda7ec97e8df6a7e937/pratinho/imagens/selo.png" 
+                            class="w-full h-full object-contain drop-shadow-md z-10 relative opacity-0 transition-opacity duration-300" 
+                            alt="Garantia"
+                            referrerpolicy="no-referrer"
+                            onload="this.style.opacity='1'"
+                        >
+                    </div>
+                    <div class="flex items-center gap-2 text-green-700 font-black text-xs uppercase tracking-wide">
+                        <i data-lucide="shield-check" class="w-5 h-5"></i> Pagamento 100% Seguro
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- FAQ -->
+        <div class="card" x-data="{ open: null }">
+            <h2 class="text-2xl font-display font-black text-brand-800 mb-6 text-center">Dúvidas Frequentes</h2>
+            <div class="border border-brand-100 rounded-2xl overflow-hidden">
+                <template x-for="(faq, i) in [
+                    {q: 'Como recebo o acesso?', a: 'O acesso é imediato via e-mail após a confirmação.'},
+                    {q: 'O material é digital?', a: 'Sim, formato PDF de alta qualidade para celular ou impressão.'},
+                    {q: 'Para qual idade serve?', a: 'As receitas e métodos servem para bebês de 6 meses até os 2 anos.'},
+                    {q: 'O acesso é vitalício?', a: 'Sim! Uma vez adquirido, o material é seu para sempre.'}
+                ]" :key="i">
+                    <div class="border-b border-brand-100 last:border-0">
+                        <button @click="open = (open === i ? null : i)" class="w-full flex justify-between p-4 font-bold text-brand-900 text-left items-center text-sm">
+                            <span x-text="faq.q"></span>
+                            <i data-lucide="chevron-down" class="w-4 h-4 transition-transform" :class="open === i ? 'rotate-180' : ''"></i>
+                        </button>
+                        <div x-show="open === i" x-cloak x-transition class="px-4 pb-4 text-xs opacity-75 text-left" x-text="faq.a"></div>
+                    </div>
+                </template>
+            </div>
+        </div>
+
+        <!-- Garantia Risco Zero -->
+        <div class="card text-center relative mt-16 overflow-visible">
+            <div class="absolute -top-12 left-1/2 -translate-x-1/2 z-20">
+                <div class="relative w-24 h-24 animate-pulse-soft flex items-center justify-center">
+                    <!-- Camada de segurança (sempre visível) -->
+                    <div class="absolute bg-brand-500 text-white w-20 h-20 rounded-full border-4 border-white shadow-xl flex items-center justify-center">
+                        <i data-lucide="shield-check" class="w-12 h-12"></i>
+                    </div>
+                    <!-- Imagem original -->
+                    <img 
+                        src="https://raw.githubusercontent.com/LuanFaria/luvics/0ce6f63412b182f767a4edda7ec97e8df6a7e937/pratinho/imagens/selo.png" 
+                        class="w-full h-full object-contain drop-shadow-xl z-10 relative opacity-0 transition-opacity duration-300" 
+                        alt="Garantia"
+                        referrerpolicy="no-referrer"
+                        onload="this.style.opacity='1'"
+                    >
+                </div>
+            </div>
+            <div class="pt-12">
+                <h2 class="font-display font-black text-2xl text-brand-800 uppercase">Risco Zero</h2>
+                <p class="text-sm font-medium text-brand-900/80 px-6 mt-2 leading-relaxed">
+                    Se você não amar o material em até 7 dias, devolvemos seu dinheiro sem burocracia.
+                </p>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <footer class="mt-12 text-center pb-24 text-[10px] font-black uppercase text-brand-900/30 tracking-[0.2em]">
+            Luvics Pratinho<br><br>
+            <div class="flex justify-center gap-6">
+                <a href="#" class="underline">Privacidade</a>
+                <a href="#" class="underline">Termos</a>
+            </div>
+        </footer>
+
+    </main>
+
+    <!-- Floating Button pulsando -->
+    <div x-show="showSticky" 
+         x-transition:enter="transition ease-out duration-300"
+         x-transition:enter-start="translate-y-full opacity-0"
+         x-transition:enter-end="translate-y-0 opacity-100"
+         x-transition:leave="transition ease-in duration-300"
+         x-transition:leave-start="translate-y-0 opacity-100"
+         x-transition:leave-end="translate-y-full opacity-0"
+         class="fixed bottom-6 left-0 right-0 px-4 z-[100]" x-cloak>
+        <a href="#comprar" class="max-w-[400px] mx-auto btn-gradient animate-pulse-cta flex items-center justify-center gap-3 text-white font-black py-4 px-8 rounded-full shadow-2xl text-center">
+            <i data-lucide="shopping-cart" class="w-5 h-5"></i>
+            COMPRAR COMBO AGORA
+        </a>
+    </div>
+
+    <script>
+        lucide.createIcons();
+    </script>
+</body>
+</html>
