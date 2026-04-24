@@ -1,218 +1,384 @@
-<!DOCTYPE html>
-<html lang="pt-br">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Luvics Pratinho - Combo Exclusivo</title>
-    
-    <!-- Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;800;900&family=Outfit:wght@400;700;900&display=swap" rel="stylesheet">
-    
-    <!-- Tailwind CSS (V4 behavior via CDN) -->
-    <script src="https://cdn.tailwindcss.com"></script>
-    
-    <!-- Icons & Logic -->
-    <script src="https://unpkg.com/lucide@latest"></script>
-    <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
+import { useState, useEffect } from 'react';
+import { 
+  Flame, 
+  Users, 
+  Check, 
+  CheckCircle2, 
+  ShieldCheck, 
+  ChevronDown, 
+  ShoppingCart 
+} from 'lucide-react';
+import { motion, AnimatePresence } from 'motion/react';
 
-    <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    fontFamily: {
-                        sans: ['Poppins', 'sans-serif'],
-                        display: ['Outfit', 'sans-serif'],
-                    },
-                    colors: {
-                        brand: {
-                            50: '#fffaf5',
-                            100: '#f1dec7',
-                            200: '#e7b74d',
-                            500: '#f6a313',
-                            600: '#ef9a00',
-                            700: '#c96913',
-                            800: '#b85f16',
-                            900: '#5b4330',
-                        }
-                    }
-                }
-            }
-        }
-    </script>
+// Componente para animação de entrada suave ao scroll
+const Reveal = ({ children }: { children: React.ReactNode }) => (
+  <motion.div
+    initial={{ opacity: 0, y: 20 }}
+    whileInView={{ opacity: 1, y: 0 }}
+    viewport={{ once: true, margin: "-100px" }}
+    transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
+  >
+    {children}
+  </motion.div>
+);
 
-    <style>
-        [x-cloak] { display: none !important; }
-        html { scroll-behavior: smooth; }
-        body { background-color: #fffaf5; font-family: 'Poppins', sans-serif; color: #5b4330; -webkit-font-smoothing: antialiased; }
-        
-        .card {
-            background: white;
-            border: 2px solid #f1dec7;
-            border-radius: 32px;
-            padding: 32px;
-            margin-bottom: 24px;
-            box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1);
-            position: relative;
-        }
+// Componente para os itens do FAQ
+const FAQItem = ({ question, answer }: { question: string; answer: string }) => {
+  const [isOpen, setIsOpen] = useState(false);
 
-        .btn-gradient {
-            background: linear-gradient(to bottom, #f6a313, #ef9a00);
-            box-shadow: 0 6px 0 #d68b0e;
-            transition: all 0.2s;
-            text-align: center;
-        }
-
-        .btn-gradient:active {
-            transform: translateY(3px);
-            box-shadow: 0 3px 0 #d68b0e;
-        }
-        
-        /* Flicker e Pulsar */
-        @keyframes flicker {
-            0%, 100% { opacity: 1; transform: scale(1); filter: drop-shadow(0 0 2px #fff); }
-            50% { opacity: 0.8; transform: scale(1.1); filter: drop-shadow(0 0 8px #ffeb3b); }
-        }
-        .animate-flicker { animation: flicker 0.8s infinite alternate ease-in-out; }
-        
-        @keyframes pulse-cta {
-            0% { transform: scale(1); box-shadow: 0 6px 0 #d68b0e, 0 0 0 0 rgba(246, 163, 19, 0.4); }
-            70% { transform: scale(1.05); box-shadow: 0 6px 0 #d68b0e, 0 0 0 15px rgba(246, 163, 19, 0); }
-            100% { transform: scale(1); box-shadow: 0 6px 0 #d68b0e, 0 0 0 0 rgba(246, 163, 19, 0); }
-        }
-        .animate-pulse-cta { animation: pulse-cta 2s infinite ease-in-out; }
-
-        /* Revelação Suave */
-        .reveal { opacity: 0; transform: translateY(20px); transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1); }
-        .reveal.active { opacity: 1; transform: translateY(0); }
-    </style>
-</head>
-<body x-data="{ 
-    showSticky: false,
-    init() {
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) entry.target.classList.add('active');
-            });
-        }, { threshold: 0.1 });
-        document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
-        lucide.createIcons();
-    }
-}" @scroll.window="showSticky = (window.pageYOffset > 500)">
-
-    <!-- Top Banner -->
-    <div class="bg-gradient-to-r from-orange-600 to-brand-500 text-white font-black text-center py-3 px-4 sticky top-0 z-50 shadow-lg border-b border-orange-400 rounded-b-2xl">
-        <div class="max-w-lg mx-auto flex items-center justify-center gap-2 text-[10px] md:text-sm">
-            <div class="animate-flicker"><i data-lucide="flame" class="w-6 h-6 fill-yellow-300"></i></div>
-            <span>HOJE: +101 receitas + bônus por apenas <s class="opacity-70">R$49,90</s> R$14,90</span>
-        </div>
+  return (
+    <div className="border-b border-brand-100 last:border-0" id="faq-item">
+      <button 
+        onClick={() => setIsOpen(!isOpen)} 
+        className="w-full flex justify-between p-4 font-bold text-brand-900 text-left items-center text-sm"
+      >
+        <span>{question}</span>
+        <ChevronDown className={`w-4 h-4 transition-transform ${isOpen ? 'rotate-180' : ''}`} />
+      </button>
+      <AnimatePresence>
+        {isOpen && (
+          <motion.div 
+            initial={{ height: 0, opacity: 0 }}
+            animate={{ height: 'auto', opacity: 1 }}
+            exit={{ height: 0, opacity: 0 }}
+            className="overflow-hidden"
+          >
+            <div className="px-4 pb-4 text-xs opacity-75 text-left">
+              {answer}
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </div>
+  );
+};
 
-    <main class="max-w-[620px] mx-auto px-4 pt-6">
+export default function App() {
+  const [showSticky, setShowSticky] = useState(false);
 
-        <!-- Hero Card (Conforme Imagem) -->
-        <div class="card text-center reveal">
-            <h1 class="text-3xl md:text-4xl font-display font-black leading-tight text-brand-700 mb-6 flex flex-wrap items-center justify-center gap-2">
-                Pare de sofrer na hora da alimentação do seu bebê 🍽️
+  useEffect(() => {
+    const handleScroll = () => {
+      setShowSticky(window.scrollY > 500);
+    };
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
+  const faqs = [
+    { question: 'Como recebo o acesso?', answer: 'O acesso é imediato! Assim que o seu pagamento for confirmado, você receberá os produtos diretamente da plataforma da Kiwify.' },
+    { question: 'O material é digital?', answer: 'Sim, o material está em formato PDF de altíssima qualidade, pronto para ser lido no celular, tablet ou computador. Você também pode imprimir se preferir ter o livrinho físico na cozinha!' },
+    { question: 'Para qual idade são as receitas?', answer: 'As receitas são focadas na Introdução Alimentar (a partir dos 6 meses) até os 2 anos de idade, garantindo uma base nutricional sólida.' },
+    { question: 'Por quanto tempo terei acesso?', answer: 'O acesso é VITALÍCIO. O material é seu para sempre, pode baixar quantas vezes quiser!' }
+  ];
+
+  return (
+    <div className="min-h-screen pb-20 bg-brand-50">
+      {/* Top Banner */}
+      <div className="bg-linear-to-r from-orange-600 to-brand-500 text-white font-black text-center py-3 px-4 sticky top-0 z-50 shadow-lg border-b border-orange-400 rounded-b-2xl">
+        <div className="max-w-lg mx-auto flex items-center justify-center gap-2 text-[10px] md:text-sm">
+          <div className="animate-flicker">
+            <Flame className="w-6 h-6 fill-yellow-300 text-orange-200" />
+          </div>
+          <span>HOJE: +101 receitas + bônus por apenas <s className="opacity-70">R$49,90</s> R$14,90</span>
+        </div>
+      </div>
+
+      <main className="max-w-[620px] mx-auto px-4 pt-6">
+        
+        {/* Section 1: Hero Card (Identical to your design) */}
+        <Reveal>
+          <div className="card text-center" id="hero-section">
+            <h1 className="text-3xl md:text-4xl font-display font-black leading-tight text-brand-700 mb-6 flex flex-wrap items-center justify-center gap-2">
+              Pare de sofrer na hora da alimentação do seu bebê 🍽️
             </h1>
-            <p class="text-lg md:text-xl font-medium text-brand-800 leading-relaxed mb-4">
-                Tenha acesso a +101 receitas saudáveis, rápidas e práticas que fazem seu bebê comer melhor todos os dias
+            <p className="text-lg md:text-xl font-medium text-brand-800 leading-relaxed mb-4">
+              Tenha acesso a +101 receitas saudáveis, rápidas e práticas que fazem seu bebê comer melhor todos os dias
             </p>
-            <p class="text-sm md:text-base text-brand-700/60 italic mb-8">
-                Sem açúcar • Sem ultraprocessados • Ideal de 6 meses a 2 anos
+            <p className="text-sm md:text-base text-brand-700/60 italic mb-8">
+              Sem açúcar • Sem ultraprocessados • Ideal de 6 meses a 2 anos
             </p>
-            <a href="#comprar" class="btn-gradient w-full block text-white font-black py-5 px-8 rounded-3xl text-sm md:text-xl uppercase tracking-wide">
-                QUERO ACESSO IMEDIATO
+            
+            <a href="#comprar" className="btn-gradient w-full block text-white font-black py-4 px-8 rounded-3xl text-sm md:text-lg uppercase tracking-wide">
+              QUERO ACESSO IMEDIATO
             </a>
-        </div>
+          </div>
+        </Reveal>
 
-        <!-- Grid de Benefícios -->
-        <div class="grid grid-cols-2 gap-4 mb-6 reveal">
-            <div class="flex items-center gap-3 bg-white p-4 rounded-2xl border border-brand-100 shadow-sm overflow-hidden">
-                <span class="text-2xl">🥑</span>
-                <span class="font-bold text-sm leading-tight truncate">101+ Receitas Práticas</span>
+        {/* Section 2: Benefits Grid */}
+        <Reveal>
+          <div className="grid grid-cols-2 gap-4 mb-6" id="benefits-grid">
+            <div className="flex items-center gap-3 bg-white p-4 rounded-2xl border border-brand-100 shadow-sm whitespace-nowrap overflow-hidden">
+              <span className="text-2xl">🥑</span>
+              <span className="font-bold text-sm leading-tight truncate">101+ Receitas Práticas</span>
             </div>
-            <div class="flex items-center gap-3 bg-white p-4 rounded-2xl border border-brand-100 shadow-sm overflow-hidden">
-                <span class="text-2xl">🤱</span>
-                <span class="font-bold text-sm leading-tight truncate">Guia de Nutrição</span>
+            <div className="flex items-center gap-3 bg-white p-4 rounded-2xl border border-brand-100 shadow-sm whitespace-nowrap overflow-hidden">
+              <span className="text-2xl">🤱</span>
+              <span className="font-bold text-sm leading-tight truncate">Guia de Nutrição</span>
             </div>
-            <div class="flex items-center gap-3 bg-white p-4 rounded-2xl border border-brand-100 shadow-sm overflow-hidden">
-                <span class="text-2xl">✅</span>
-                <span class="font-bold text-sm leading-tight truncate">dicas de alimentos saudáveis</span>
+            <div className="flex items-center gap-3 bg-white p-4 rounded-2xl border border-brand-100 shadow-sm whitespace-nowrap overflow-hidden">
+              <span className="text-2xl">✅</span>
+              <span className="font-bold text-sm leading-tight truncate">dicas de alimentos saudáveis</span>
             </div>
-            <div class="flex items-center gap-3 bg-white p-4 rounded-2xl border border-brand-100 shadow-sm overflow-hidden">
-                <span class="text-2xl">⏰</span>
-                <span class="font-bold text-sm leading-tight truncate">Preparo 15 min</span>
+            <div className="flex items-center gap-3 bg-white p-4 rounded-2xl border border-brand-100 shadow-sm whitespace-nowrap overflow-hidden">
+              <span className="text-2xl">⏰</span>
+              <span className="font-bold text-sm leading-tight truncate">Preparo 15 min</span>
             </div>
-        </div>
+          </div>
+        </Reveal>
 
-        <!-- VSL -->
-        <div class="card text-center overflow-hidden reveal">
-            <div class="text-2xl font-display font-black text-brand-800 mb-6">Assista antes de decidir (2 min)</div>
-            <div class="relative aspect-video rounded-3xl overflow-hidden shadow-2xl bg-black">
-                <iframe class="absolute inset-0 w-full h-full" src="https://www.youtube.com/embed/dQw4w9WgXcQ" frameborder="0" allowfullscreen></iframe>
+        {/* Section 3: Dores (Challenges) */}
+        <Reveal>
+          <div className="card" id="challenges-section">
+            <h2 className="text-xl font-bold text-brand-800 mb-5 flex items-center gap-2">
+              <Users className="w-5 h-5 text-brand-500" />
+              Você vive alguma dessas situações?
+            </h2>
+            <div className="space-y-4">
+              {[
+                "😣 Medo constante de oferecer os alimentos errados",
+                "😣 Seu bebê fecha o rostinho ou joga a comida no chão",
+                "😣 Falta de criatividade e tempo para preparar algo novo",
+                "😣 A hora da refeição virou um momento de puro estresse"
+              ].map((text, idx) => (
+                <motion.div 
+                  key={idx}
+                  initial={{ opacity: 0, x: -10 }}
+                  whileInView={{ opacity: 1, x: 0 }}
+                  transition={{ delay: idx * 0.1 }}
+                  className="flex items-center gap-3 bg-brand-50/50 p-4 border-l-4 border-brand-500 rounded-r-xl font-bold shadow-sm transition-colors hover:bg-brand-50"
+                >
+                  <span className="text-xl">{text.split(' ')[0]}</span> {text.split(' ').slice(1).join(' ')}
+                </motion.div>
+              ))}
             </div>
-            <a href="#comprar" class="btn-gradient w-full block mt-6 text-white font-black py-4 px-8 rounded-full uppercase tracking-wide">
-                QUERO O COMBO AGORA
+          </div>
+        </Reveal>
+
+        {/* Section 4: VSL Video */}
+        <Reveal>
+          <div className="card text-center overflow-hidden" id="vsl-section">
+            <div className="text-2xl font-display font-black text-brand-800 mb-6">Assista antes de decidir (2 min)</div>
+            <div className="relative aspect-video rounded-3xl overflow-hidden shadow-2xl bg-black">
+              <iframe 
+                className="absolute inset-0 w-full h-full" 
+                src="https://www.youtube.com/embed/dQw4w9WgXcQ" 
+                title="VSL"
+                frameBorder="0" 
+                allowFullScreen
+              ></iframe>
+            </div>
+            <a href="#comprar" className="btn-gradient w-full block mt-6 text-white font-black py-5 px-8 rounded-3xl text-xl shadow-[0_6px_0_#d68b0e] uppercase tracking-wide">
+              QUERO O COMBO AGORA
             </a>
-        </div>
+          </div>
+        </Reveal>
 
-        <!-- Bônus -->
-        <div class="card bg-gradient-to-b from-brand-50 to-white text-center reveal">
-            <h2 class="text-xl font-bold text-brand-800 mb-6 flex items-center justify-center gap-2">🎁 Bônus Exclusivos</h2>
-            <div class="bg-brand-50 border-2 border-dashed border-brand-200 rounded-[28px] p-8">
-                <img src="https://raw.githubusercontent.com/LuanFaria/luvics/52b4a8e6a62033d54065c9da2583981d2a384f2d/pratinho/imagens/bonus.png" class="max-w-xs w-full mx-auto" alt="Bônus" referrerpolicy="no-referrer">
-                <div class="text-left mt-6 space-y-3">
-                    <p class="font-bold text-brand-900 flex gap-2"><i data-lucide="check" class="w-5 h-5 text-brand-500"></i> Bônus 1: O que fazer se ele não comer?</p>
-                    <p class="font-bold text-brand-900 flex gap-2"><i data-lucide="check" class="w-5 h-5 text-brand-500"></i> Bônus 2: Guia Nutricional por Idade</p>
-                </div>
+        {/* Section 5: Main Product */}
+        <Reveal>
+          <div className="card text-center" id="main-product-section">
+            <motion.div 
+              whileHover={{ rotate: 3 }}
+              transition={{ duration: 0.5 }}
+              className="relative inline-block"
+            >
+              <img 
+                src="https://raw.githubusercontent.com/LuanFaria/luvics/09e23495ff4ddb6e314b5376667f56f524917a9c/pratinho/imagens/ebook3d.png" 
+                className="w-56 mx-auto relative z-10" 
+                alt="Receitinhas Saudáveis"
+                referrerPolicy="no-referrer"
+              />
+              <div className="absolute -bottom-4 left-1/2 -translate-x-1/2 w-40 h-8 bg-black/10 blur-xl rounded-full translate-y-2"></div>
+            </motion.div>
+            <h2 className="text-3xl font-display font-black text-brand-800 mt-6 tracking-tight">Receitinhas Saudáveis</h2>
+            <p className="text-brand-900/60 font-medium uppercase tracking-widest text-xs mt-1 italic">+ de 101 métodos e receitas práticas</p>
+          </div>
+        </Reveal>
+
+        {/* Section 6: Bonuses */}
+        <Reveal>
+          <div className="card bg-linear-to-b from-brand-50 to-white text-center" id="bonuses-section">
+            <h2 className="text-xl font-bold text-brand-800 mb-6 justify-center flex items-center gap-2">
+              🎁 Bônus inclusos SOMENTE HOJE
+            </h2>
+            <div className="bg-brand-50 border-2 border-dashed border-brand-200 rounded-[28px] p-8 text-center relative">
+              <img 
+                src="https://raw.githubusercontent.com/LuanFaria/luvics/52b4a8e6a62033d54065c9da2583981d2a384f2d/pratinho/imagens/bonus.png" 
+                className="max-w-xs w-full mx-auto drop-shadow-2xl" 
+                alt="Bônus" 
+                referrerPolicy="no-referrer"
+              />
+              
+              <div className="text-left mt-6 space-y-3">
+                <p className="font-bold text-brand-900 flex gap-2">
+                  <Check className="w-5 h-5 text-brand-500 shrink-0" /> 
+                  Bônus 1: Meu Filho Não Quer Comer? O que fazer?
+                </p>
+                <p className="font-bold text-brand-900 flex gap-2">
+                  <Check className="w-5 h-5 text-brand-500 shrink-0" /> 
+                  Bônus 2: Lista de Alimentos Saudáveis e seus beneficios (por idade)
+                </p>
+              </div>
+              
+              <div className="mt-8 pt-6 border-t border-brand-100">
+                <span className="text-brand-900/60 block mb-1">De <s className="text-red-500">R$29,90</s> cada por</span>
+                <span className="text-4xl text-green-600 font-black font-display underline decoration-4 underline-offset-8 block">GRÁTIS</span>
+              </div>
             </div>
-        </div>
+          </div>
+        </Reveal>
 
-        <!-- Oferta Principal -->
-        <div class="card border-4 border-brand-500 shadow-2xl text-center reveal" id="comprar">
-            <div class="bg-brand-500 text-white px-6 py-2 rounded-full text-[10px] font-black uppercase tracking-widest inline-block mb-8">Oferta Especial</div>
-            <div class="text-xl italic text-gray-400">De <s class="text-red-500">R$49,90</s> por apenas</div>
-            <div class="text-8xl text-brand-700 font-black font-display my-4 leading-none tracking-tighter">R$14,90</div>
-            <a href="#" class="btn-gradient w-full block text-xl text-white font-black py-5 px-8 rounded-3xl uppercase tracking-wide mt-6 animate-pulse-cta">
-                QUERO MEU COMBO AGORA
-            </a>
-            <div class="mt-8 flex items-center justify-center gap-2 text-green-700 font-black text-xs uppercase">
-                <i data-lucide="shield-check" class="w-5 h-5"></i> Pagamento 100% Seguro
-            </div>
-        </div>
-
-        <!-- FAQ -->
-        <div class="card reveal" x-data="{ open: null }">
-            <h2 class="text-2xl font-display font-black text-brand-800 mb-6 text-center">Dúvidas Frequentes</h2>
-            <div class="border border-brand-100 rounded-2xl overflow-hidden">
-                <template x-for="(faq, i) in [
-                    {q: 'Como recebo o acesso?', a: 'O acesso é imediato via e-mail pela plataforma Kiwify.'},
-                    {q: 'O material é digital?', a: 'Sim, formato PDF de alta qualidade para celular ou impressão.'},
-                    {q: 'Para qual idade?', a: 'Focado de 6 meses a 2 anos.'}
-                ]" :key="i">
-                    <div class="border-b border-brand-100 last:border-0">
-                        <button @click="open = (open === i ? null : i)" class="w-full flex justify-between p-4 font-bold text-brand-900 text-left items-center text-sm">
-                            <span x-text="faq.q"></span>
-                            <i data-lucide="chevron-down" class="w-4 h-4 transition-transform" :class="open === i ? 'rotate-180' : ''"></i>
-                        </button>
-                        <div x-show="open === i" x-cloak class="px-4 pb-4 text-xs opacity-75" x-text="faq.a"></div>
+        {/* Section 7: Testimonials */}
+        <Reveal>
+          <div className="card" id="testimonials-section">
+            <h2 className="text-2xl font-display font-black text-brand-800 mb-8 text-center">O que as mamães estão dizendo...</h2>
+            <div className="space-y-6">
+              {[
+                {
+                  name: "Ana Silveira",
+                  role: "Mãe do Pedro (10 meses)",
+                  text: "Minha vida mudou depois dessas receitas! O Pedro não comia nada, chorava no cadeirão... agora ele devora o pratinho sozinho e eu fico em paz.",
+                  img: "https://picsum.photos/seed/ana_mom/100/100"
+                },
+                {
+                  name: "Juliana Mendes",
+                  role: "Mãe da Alice (1 ano)",
+                  text: "Os bônus sobre comportamento alimentar são incríveis. Valeu cada centavo, super recomendo para quem está perdida na introdução alimentar!",
+                  img: "https://picsum.photos/seed/julia_mom/100/100"
+                }
+              ].map((item, idx) => (
+                <Reveal key={idx}>
+                  <div className="bg-brand-50/30 p-6 rounded-[24px] border border-brand-100 flex flex-col md:flex-row gap-4 items-center">
+                    <img src={item.img} className="w-16 h-16 rounded-full border-4 border-white shadow-md" alt={item.name} referrerPolicy="no-referrer" />
+                    <div className="text-center md:text-left">
+                      <div className="font-bold text-brand-900 text-lg">{item.name}</div>
+                      <div className="text-[10px] text-orange-600 font-black uppercase tracking-widest mb-2">{item.role}</div>
+                      <p className="text-sm font-medium italic text-brand-900/80 leading-relaxed">"{item.text}"</p>
                     </div>
-                </template>
+                  </div>
+                </Reveal>
+              ))}
             </div>
-        </div>
+          </div>
+        </Reveal>
 
-        <!-- Footer -->
-        <footer class="mt-12 text-center pb-24 text-[10px] font-black uppercase text-brand-900/30 tracking-[0.2em]">
-            Luvics Pratinho 2024
-        </footer>
+        {/* Section 8: Main Offer (Checkout Link Placeholder) */}
+        <Reveal>
+          <div className="card border-4 border-brand-500 shadow-2xl relative overflow-visible" id="comprar">
+            <div className="text-center">
+              <div className="bg-brand-500 text-white px-6 py-2 rounded-full text-[10px] font-black uppercase tracking-widest inline-block mb-8">Oferta de Lançamento</div>
+              
+              <div className="space-y-3 mb-8 text-left max-w-sm mx-auto p-5 bg-brand-50 rounded-2xl border border-brand-100">
+                {[
+                  "+ de 101 Receitinhas Saudáveis",
+                  "Bônus 1: Meu Filho Não Quer Comer? O que fazer?",
+                  "Bônus 2: Lista de Alimentos Saudáveis e seus benefícios"
+                ].map((item, idx) => (
+                  <div key={idx} className="flex items-center gap-3 font-bold text-brand-900 text-sm">
+                    <CheckCircle2 className="w-5 h-5 text-green-600 shrink-0" />
+                    {item}
+                  </div>
+                ))}
+              </div>
 
-    </main>
+              <div className="text-xl italic text-gray-500">De <s className="text-red-500">R$49,90</s> por apenas</div>
+              <div className="text-7xl md:text-8xl text-brand-700 font-black font-display my-4 leading-none tracking-tighter" id="price-tag">R$14,90</div>
+              
+              <a href="#" className="btn-gradient w-full block text-xl text-white font-black py-5 px-8 rounded-3xl uppercase tracking-wide mt-6 animate-pulse-cta">
+                QUERO MEU COMBO AGORA
+              </a>
 
-    <!-- Floating Button -->
-    <div x-show="showSticky" x-transition class="fixed bottom-6 left-0 right-0 px-4 z-[100]" x-cloak>
-        <a href="#comprar" class="max-w-[400px] mx-auto btn-gradient animate-pulse-cta flex items-center justify-center gap-3 text-white font-black py-4 px-8 rounded-full shadow-2xl">
-            <i data-lucide="shopping-cart" class="w-5 h-5"></i> COMPRAR AGORA
-        </a>
+              <div className="mt-10 bg-green-50 p-6 rounded-2xl border border-green-100 flex flex-col items-center gap-4 text-center">
+                <div className="relative w-24 h-24 flex items-center justify-center">
+                  <div className="absolute bg-brand-500 text-white w-20 h-20 rounded-full border-4 border-white shadow-lg flex items-center justify-center">
+                    <ShieldCheck className="w-12 h-12" />
+                  </div>
+                  <img 
+                    src="https://raw.githubusercontent.com/LuanFaria/luvics/0ce6f63412b182f767a4edda7ec97e8df6a7e937/pratinho/imagens/selo.png" 
+                    className="w-full h-full object-contain drop-shadow-md z-10 relative opacity-0 transition-opacity duration-300" 
+                    alt="Garantia"
+                    referrerPolicy="no-referrer"
+                    onLoad={(e) => (e.currentTarget.style.opacity = '1')}
+                  />
+                </div>
+                <div className="flex items-center gap-2 text-green-700 font-black text-xs uppercase tracking-wide">
+                  <ShieldCheck className="w-5 h-5" /> Pagamento 100% Seguro
+                </div>
+              </div>
+            </div>
+          </div>
+        </Reveal>
+
+        {/* Section 9: FAQ */}
+        <Reveal>
+          <div className="card" id="faq-section">
+            <h2 className="text-2xl font-display font-black text-brand-800 mb-6 text-center">Dúvidas Frequentes</h2>
+            <div className="border border-brand-100 rounded-2xl overflow-hidden">
+              {faqs.map((faq, i) => (
+                <FAQItem key={i} question={faq.question} answer={faq.answer} />
+              ))}
+            </div>
+          </div>
+        </Reveal>
+
+        {/* Section 10: Zero Risk Guarantee */}
+        <Reveal>
+          <div className="card text-center relative mt-16 overflow-visible" id="guarantee-section border-none">
+            <div className="absolute -top-12 left-1/2 -translate-x-1/2 z-20">
+              <motion.div 
+                animate={{ scale: [1, 1.05, 1] }} 
+                transition={{ duration: 3, repeat: Infinity }}
+                className="relative w-24 h-24 flex items-center justify-center"
+              >
+                <div className="absolute bg-brand-500 text-white w-20 h-20 rounded-full border-4 border-white shadow-xl flex items-center justify-center">
+                  <ShieldCheck className="w-12 h-12" />
+                </div>
+                <img 
+                  src="https://raw.githubusercontent.com/LuanFaria/luvics/0ce6f63412b182f767a4edda7ec97e8df6a7e937/pratinho/imagens/selo.png" 
+                  className="w-full h-full object-contain drop-shadow-xl z-10 relative opacity-0 transition-opacity duration-300" 
+                  alt="Garantia"
+                  referrerPolicy="no-referrer"
+                  onLoad={(e) => (e.currentTarget.style.opacity = '1')}
+                />
+              </motion.div>
+            </div>
+            <div className="pt-12">
+              <h2 className="font-display font-black text-2xl text-brand-800 uppercase">Risco Zero</h2>
+              <p className="text-sm font-medium text-brand-900/80 px-6 mt-2 leading-relaxed">
+                Se você não amar o material em até 7 dias, devolvemos seu dinheiro sem burocracia.
+              </p>
+            </div>
+          </div>
+        </Reveal>
+
+        {/* Footer */}
+        <Reveal>
+          <footer className="mt-12 text-center pb-24 text-[10px] font-black uppercase text-brand-900/30 tracking-[0.2em]" id="footer">
+            Luvics Pratinho<br /><br />
+            <div className="flex justify-center gap-6">
+              <a href="#" className="underline">Privacidade</a>
+              <a href="#" className="underline">Termos</a>
+            </div>
+          </footer>
+        </Reveal>
+
+      </main>
+
+      {/* Floating Sticky Button */}
+      <AnimatePresence>
+        {showSticky && (
+          <motion.div 
+            initial={{ y: 100, opacity: 0 }}
+            animate={{ y: 0, opacity: 1 }}
+            exit={{ y: 100, opacity: 0 }}
+            className="fixed bottom-6 left-0 right-0 px-4 z-[100]"
+          >
+            <a href="#comprar" className="max-w-[400px] mx-auto btn-gradient animate-pulse-cta flex items-center justify-center gap-3 text-white font-black py-4 px-8 rounded-full shadow-2xl text-center">
+              <ShoppingCart className="w-5 h-5" />
+              COMPRAR COMBO AGORA
+            </a>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </div>
-</body>
-</html>
+  );
+}
