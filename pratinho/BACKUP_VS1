@@ -132,6 +132,45 @@
 
     <main class="max-w-[620px] mx-auto px-4 pt-6">
 
+
+        <!-- VSL FULL WIDTH -->
+        <div class="w-screen relative left-1/2 right-1/2 -mx-[50vw] bg-black py-8 reveal">
+            
+            <div class="max-w-5xl mx-auto px-4 text-center">
+                
+                <!-- TEXTO SOM -->
+                <div 
+                    x-data="{ showText: true }" 
+                    x-init="setTimeout(() => showText = false, 6000)"
+                    x-show="showText"
+                    x-transition
+                    class="text-2xl font-display font-black text-white mb-6 min-h-[56px] animate-pulse-soft"
+                >
+                    🔊 Ative o som...
+                </div>
+        
+                <!-- VÍDEO -->
+                <div class="relative aspect-video rounded-2xl overflow-hidden shadow-2xl">
+                    <iframe 
+                        class="absolute inset-0 w-full h-full"
+                        src="https://www.youtube.com/embed/lFRHgeiXfyw?autoplay=1&mute=1&controls=1&playsinline=1"
+                        frameborder="0"
+                        allow="autoplay; encrypted-media; picture-in-picture"
+                        allowfullscreen>
+                    </iframe>
+                </div>
+        
+                <!-- CTA -->
+                <a href="#comprar" class="btn-gradient inline-block mt-6 text-white font-black py-4 px-8 rounded-3xl uppercase tracking-wide text-base">
+                    QUERO O COMBO AGORA
+                </a>
+        
+            </div>
+        </div>
+        
+
+
+        
         <!-- Hero Card - "Pare de sofrer..." -->
         <div class="card text-center reveal active">
             <h1 class="text-3xl md:text-4xl font-display font-black leading-tight text-brand-700 mb-6 flex flex-wrap items-center justify-center gap-2">
@@ -180,22 +219,6 @@
 
 
         
-        <!-- VSL -->
-        <div class="card text-center overflow-hidden reveal text-brand-900">
-            <div class="text-2xl font-display font-black text-brand-800 mb-6">
-                Assista antes de decidir (1 min)
-            </div>
-        
-            <div class="max-w-3xl mx-auto">
-                <div class="relative aspect-video rounded-3xl overflow-hidden shadow-2xl bg-black">
-                    <iframe class="absolute inset-0 w-full h-full" src="https://www.youtube.com/embed/lFRHgeiXfyw" frameborder="0" allowfullscreen></iframe>
-                </div>
-            </div>
-        
-            <a href="#comprar" class="btn-gradient inline-block mt-6 text-white font-black py-4 px-8 rounded-3xl uppercase tracking-wide text-base">
-                QUERO O COMBO AGORA
-            </a>
-        </div>
 
        
         <!-- PRODUTO PRINCIPAL   src="https://raw.githubusercontent.com/LuanFaria/luvics/ae3b0b867d5a1ce5dd54799bcffe5367c0c214e3/pratinho/imagens/v2capa%20(1).png"  -->
@@ -349,7 +372,7 @@
                     </div>
                 </div>
                 
-                <div class="text-xl italic text-gray-400">De <s class="text-red-500">R$49,90</s> por apenas</div>
+                <div class="text-xl italic text-gray-400">De <s class="text-red-500">R$59,90</s> por apenas</div>
                 <div class="text-5xl md:text-8xl text-brand-700 font-black font-display my-4 leading-none tracking-tighter">R$14,90</div>
                 
                 <a href="#" class="btn-gradient w-full block text-xl text-white font-black py-5 px-8 rounded-3xl uppercase tracking-wide mt-6 animate-pulse-cta">
