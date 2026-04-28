@@ -134,39 +134,63 @@
 
 
         <!-- VSL FULL WIDTH -->
-        <div class="w-screen relative left-1/2 right-1/2 -mx-[50vw] bg-black py-8 reveal">
-            
+        <div class="w-screen relative left-1/2 right-1/2 -mx-[50vw] bg-black py-8 reveal" x-data="vslPlayer()">
             <div class="max-w-5xl mx-auto px-4 text-center">
                 
-                <!-- TEXTO SOM -->
-                <div 
-                    x-data="{ showText: true }" 
-                    x-init="setTimeout(() => showText = false, 6000)"
-                    x-show="showText"
-                    x-transition
-                    class="text-2xl font-display font-black text-white mb-6 min-h-[56px] animate-pulse-soft"
+                <button 
+                    @click="unmuteVideo()" 
+                    x-show="isMuted"
+                    class="text-2xl font-display font-black text-white mb-6 min-h-[56px] animate-pulse-soft bg-red-600 px-6 py-2 rounded-full"
                 >
-                    🔊 Ative o som...
-                </div>
+                    🔊 CLIQUE PARA OUVIR
+                </button>
         
-                <!-- VÍDEO -->
                 <div class="relative aspect-video rounded-2xl overflow-hidden shadow-2xl">
-                    <iframe 
-                        class="absolute inset-0 w-full h-full"
-                        src="https://www.youtube.com/embed/lFRHgeiXfyw?autoplay=1&mute=1&controls=1&playsinline=1"
-                        frameborder="0"
-                        allow="autoplay; encrypted-media; picture-in-picture"
-                        allowfullscreen>
-                    </iframe>
+                    <div id="player" class="absolute inset-0 w-full h-full"></div>
                 </div>
         
-                <!-- CTA -->
                 <a href="#comprar" class="btn-gradient inline-block mt-6 text-white font-black py-4 px-8 rounded-3xl uppercase tracking-wide text-base">
                     QUERO O COMBO AGORA
                 </a>
-        
             </div>
         </div>
+        
+        <script>
+            function vslPlayer() {
+                return {
+                    isMuted: true,
+                    player: null,
+                    init() {
+                        // Carrega a API do YouTube
+                        const tag = document.createElement('script');
+                        tag.src = "https://www.youtube.com/iframe_api";
+                        const firstScriptTag = document.getElementsByTagName('script')[0];
+                        firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+        
+                        window.onYouTubeIframeAPIReady = () => {
+                            this.player = new YT.Player('player', {
+                                videoId: 'lFRHgeiXfyw',
+                                playerVars: {
+                                    'autoplay': 1,
+                                    'mute': 1,
+                                    'controls': 1,
+                                    'playsinline': 1,
+                                    'rel': 0
+                                },
+                                events: {
+                                    'onReady': (event) => event.target.playVideo()
+                                }
+                            });
+                        };
+                    },
+                    unmuteVideo() {
+                        this.player.unMute();
+                        this.player.setVolume(100);
+                        this.isMuted = false;
+                    }
+                }
+            }
+        </script>
         
 
 
