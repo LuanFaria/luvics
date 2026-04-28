@@ -134,30 +134,27 @@
 
 
         <!-- VSL FULL WIDTH -->
-        <div class="w-screen relative left-1/2 right-1/2 -mx-[50vw] bg-black py-10 reveal" x-data="vslPlayer()">
-            <div class="max-w-5xl mx-auto px-4 text-center">
+        <div class="w-screen relative left-1/2 right-1/2 -mx-[50vw] bg-black py-8 reveal" x-data="vslPlayer()">
+            <div class="max-w-4xl mx-auto px-4 text-center">
                 
-                <div class="relative aspect-video rounded-2xl overflow-hidden shadow-2xl bg-zinc-900 group">
-                    
-                    <div id="player" class="absolute inset-0 w-full h-full pointer-events-none"></div>
+                <div x-show="isMuted" class="mb-4 transition-all duration-500">
+                    <button 
+                        @click="unmuteVideo()"
+                        class="inline-flex items-center gap-2 bg-gradient-to-r from-brand-500 to-brand-700 hover:from-brand-600 hover:to-brand-800 text-white font-black py-2 px-6 rounded-full text-sm uppercase tracking-tight shadow-lg animate-pulse-soft"
+                    >
+                        <span>🔊 Ativar som do vídeo</span>
+                    </button>
+                </div>
         
+                <div class="relative aspect-video rounded-2xl overflow-hidden shadow-2xl bg-zinc-900">
                     <div 
                         x-show="isMuted" 
                         @click="unmuteVideo()"
-                        class="absolute inset-0 z-20 flex flex-col items-center justify-center bg-black/60 cursor-pointer backdrop-blur-sm transition-all duration-500"
-                    >
-                        <div class="bg-gradient-to-r from-orange-500 to-red-600 p-[2px] rounded-full animate-bounce">
-                            <div class="bg-black/80 hover:bg-black px-8 py-4 rounded-full flex items-center gap-3 transition-all">
-                                <span class="text-white font-black text-lg md:text-xl uppercase tracking-tighter">
-                                   🔊 Clique para ouvir
-                                </span>
-                            </div>
-                        </div>
-                        
-                        <p class="text-white/80 text-sm mt-4 font-medium animate-pulse">
-                            O vídeo já começou, ative o áudio!
-                        </p>
-                    </div>
+                        class="absolute inset-0 z-10 cursor-pointer"
+                        title="Clique para ouvir"
+                    ></div>
+        
+                    <div id="player" class="absolute inset-0 w-full h-full"></div>
                 </div>
         
                 <a href="#comprar" class="btn-gradient inline-block mt-8 text-white font-black py-4 px-10 rounded-3xl uppercase tracking-wide text-lg shadow-lg hover:scale-105 transition-transform">
@@ -172,7 +169,6 @@
                     isMuted: true,
                     player: null,
                     init() {
-                        // Carrega a API do YouTube se ainda não existir
                         if (!window.YT) {
                             const tag = document.createElement('script');
                             tag.src = "https://www.youtube.com/iframe_api";
@@ -186,7 +182,7 @@
                                 playerVars: {
                                     'autoplay': 1,
                                     'mute': 1,
-                                    'controls': 0, // Removi os controles para ficar mais limpo
+                                    'controls': 1, // Ativado para permitir pausa e controle do usuário
                                     'rel': 0,
                                     'modestbranding': 1,
                                     'playsinline': 1
@@ -202,24 +198,66 @@
                             this.player.unMute();
                             this.player.setVolume(100);
                             this.isMuted = false;
-                            // Opcional: Reiniciar o vídeo ao desmutar para a pessoa não perder o início
-                            // this.player.seekTo(0); 
                         }
                     }
                 }
             }
         </script>
-        
-        <style>
-            /* Animação suave de pulso para o botão */
-            @keyframes pulse-soft {
-                0%, 100% { transform: scale(1); opacity: 1; }
-                50% { transform: scale(1.05); opacity: 0.9; }
-            }
-            .animate-pulse-soft {
-                animation: pulse-soft 2s infinite ease-in-out;
-            }
-        </style>
+                
+                <script>
+                    function vslPlayer() {
+                        return {
+                            isMuted: true,
+                            player: null,
+                            init() {
+                                // Carrega a API do YouTube se ainda não existir
+                                if (!window.YT) {
+                                    const tag = document.createElement('script');
+                                    tag.src = "https://www.youtube.com/iframe_api";
+                                    const firstScriptTag = document.getElementsByTagName('script')[0];
+                                    firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+                                }
+                
+                                window.onYouTubeIframeAPIReady = () => {
+                                    this.player = new YT.Player('player', {
+                                        videoId: 'lFRHgeiXfyw',
+                                        playerVars: {
+                                            'autoplay': 1,
+                                            'mute': 1,
+                                            'controls': 0, // Removi os controles para ficar mais limpo
+                                            'rel': 0,
+                                            'modestbranding': 1,
+                                            'playsinline': 1
+                                        },
+                                        events: {
+                                            'onReady': (event) => event.target.playVideo()
+                                        }
+                                    });
+                                };
+                            },
+                            unmuteVideo() {
+                                if (this.player) {
+                                    this.player.unMute();
+                                    this.player.setVolume(100);
+                                    this.isMuted = false;
+                                    // Opcional: Reiniciar o vídeo ao desmutar para a pessoa não perder o início
+                                    // this.player.seekTo(0); 
+                                }
+                            }
+                        }
+                    }
+                </script>
+                
+                <style>
+                    /* Animação suave de pulso para o botão */
+                    @keyframes pulse-soft {
+                        0%, 100% { transform: scale(1); opacity: 1; }
+                        50% { transform: scale(1.05); opacity: 0.9; }
+                    }
+                    .animate-pulse-soft {
+                        animation: pulse-soft 2s infinite ease-in-out;
+                    }
+                </style>
         
 
 
