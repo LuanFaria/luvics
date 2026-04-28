@@ -138,16 +138,16 @@
             
             <div class="max-w-5xl mx-auto px-4 text-center">
                 
-                <div class="text-2xl font-display font-black text-white mb-6">
-                    Assista antes de decidir (1 min)
+                <div 
+                    x-data="{ showText: true }" 
+                    x-init="setTimeout(() => showText = false, 4000)"
+                    x-show="showText"
+                    x-transition
+                    class="text-2xl font-display font-black text-white mb-6 min-h-[56px]"
+                >
+                    🔊 Ative o som — veja isso antes de decidir
                 </div>
-
-                                <!-- AVISO DE SOM -->
-                <div class="absolute top-3 left-1/2 -translate-x-1/2 bg-black/70 text-white text-xs px-3 py-1 rounded-full z-10">
-                    🔊 Ative o som
-                </div>
-
-        
+                
                 <div class="relative aspect-video rounded-2xl overflow-hidden shadow-2xl">
                     <iframe 
                         class="absolute inset-0 w-full h-full"
