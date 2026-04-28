@@ -134,35 +134,38 @@
 
 
         <!-- VSL FULL WIDTH -->
-        <div 
-            x-data="{ started: false }" 
-            class="relative aspect-video rounded-2xl overflow-hidden shadow-2xl"
-        >
-        
-            <!-- BOTÃO FAKE DE PLAY -->
-            <div 
-                x-show="!started"
-                @click="started = true"
-                class="absolute inset-0 bg-black/40 flex items-center justify-center cursor-pointer z-20"
-            >
-                <div class="bg-white/90 rounded-full p-6 shadow-xl">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="w-10 h-10 text-black" fill="currentColor" viewBox="0 0 24 24">
-                        <path d="M8 5v14l11-7z"/>
-                    </svg>
+        <div class="w-screen relative left-1/2 right-1/2 -mx-[50vw] bg-black py-8 reveal">
+            
+            <div class="max-w-5xl mx-auto px-4 text-center">
+                
+                <!-- TEXTO SOM -->
+                <div 
+                    x-data="{ showText: true }" 
+                    x-init="setTimeout(() => showText = false, 6000)"
+                    x-show="showText"
+                    x-transition
+                    class="text-2xl font-display font-black text-white mb-6 min-h-[56px] animate-pulse-soft"
+                >
+                    🔊 Ative o som — veja isso antes de decidir
                 </div>
+        
+                <!-- VÍDEO -->
+                <div class="relative aspect-video rounded-2xl overflow-hidden shadow-2xl">
+                    <iframe 
+                        class="absolute inset-0 w-full h-full"
+                        src="https://www.youtube.com/embed/lFRHgeiXfyw?autoplay=1&mute=1&controls=1&playsinline=1"
+                        frameborder="0"
+                        allow="autoplay; encrypted-media; picture-in-picture"
+                        allowfullscreen>
+                    </iframe>
+                </div>
+        
+                <!-- CTA -->
+                <a href="#comprar" class="btn-gradient inline-block mt-6 text-white font-black py-4 px-8 rounded-3xl uppercase tracking-wide text-base">
+                    QUERO O COMBO AGORA
+                </a>
+        
             </div>
-        
-            <!-- VÍDEO -->
-            <iframe 
-                x-show="started"
-                x-transition
-                class="absolute inset-0 w-full h-full"
-                src="https://www.youtube.com/embed/lFRHgeiXfyw?autoplay=1&mute=0&controls=1&playsinline=1"
-                frameborder="0"
-                allow="autoplay; encrypted-media; picture-in-picture"
-                allowfullscreen>
-            </iframe>
-        
         </div>
         
 
