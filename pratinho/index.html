@@ -137,12 +137,12 @@
         <div class="w-screen relative left-1/2 right-1/2 -mx-[50vw] bg-black py-8 reveal" x-data="vslPlayer()">
             <div class="max-w-4xl mx-auto px-4 text-center">
                 
-                <div x-show="isMuted" class="mb-4 transition-all duration-500">
+                <div x-show="isMuted" class="mb-4">
                     <button 
                         @click="unmuteVideo()"
-                        class="inline-flex items-center gap-2 bg-gradient-to-r from-brand-500 to-brand-700 hover:from-brand-600 hover:to-brand-800 text-white font-black py-2 px-6 rounded-full text-sm uppercase tracking-tight shadow-lg animate-pulse-soft"
+                        class="inline-flex items-center gap-2 bg-brand-500 hover:bg-brand-600 text-white font-bold py-1.5 px-4 rounded-full text-xs uppercase tracking-tight shadow-md transition-all active:scale-95"
                     >
-                        <span>🔊 Ativar som do vídeo</span>
+                        <span>🔊 Ativar som</span>
                     </button>
                 </div>
         
@@ -150,8 +150,7 @@
                     <div 
                         x-show="isMuted" 
                         @click="unmuteVideo()"
-                        class="absolute inset-0 z-10 cursor-pointer"
-                        title="Clique para ouvir"
+                        class="absolute inset-0 z-20 cursor-pointer"
                     ></div>
         
                     <div id="player" class="absolute inset-0 w-full h-full"></div>
@@ -182,9 +181,11 @@
                                 playerVars: {
                                     'autoplay': 1,
                                     'mute': 1,
-                                    'controls': 1, // Ativado para permitir pausa e controle do usuário
-                                    'rel': 0,
-                                    'modestbranding': 1,
+                                    'controls': 1,
+                                    'rel': 0, // Não mostra vídeos relacionados do canal alheio
+                                    'showinfo': 0, // Tenta esconder info (parâmetro antigo mas ajuda)
+                                    'modestbranding': 1, // Remove o logo da barra de controle
+                                    'iv_load_policy': 3, // Remove anotações/cards de cima do vídeo
                                     'playsinline': 1
                                 },
                                 events: {
@@ -204,61 +205,6 @@
             }
         </script>
                 
-                <script>
-                    function vslPlayer() {
-                        return {
-                            isMuted: true,
-                            player: null,
-                            init() {
-                                // Carrega a API do YouTube se ainda não existir
-                                if (!window.YT) {
-                                    const tag = document.createElement('script');
-                                    tag.src = "https://www.youtube.com/iframe_api";
-                                    const firstScriptTag = document.getElementsByTagName('script')[0];
-                                    firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
-                                }
-                
-                                window.onYouTubeIframeAPIReady = () => {
-                                    this.player = new YT.Player('player', {
-                                        videoId: 'lFRHgeiXfyw',
-                                        playerVars: {
-                                            'autoplay': 1,
-                                            'mute': 1,
-                                            'controls': 0, // Removi os controles para ficar mais limpo
-                                            'rel': 0,
-                                            'modestbranding': 1,
-                                            'playsinline': 1
-                                        },
-                                        events: {
-                                            'onReady': (event) => event.target.playVideo()
-                                        }
-                                    });
-                                };
-                            },
-                            unmuteVideo() {
-                                if (this.player) {
-                                    this.player.unMute();
-                                    this.player.setVolume(100);
-                                    this.isMuted = false;
-                                    // Opcional: Reiniciar o vídeo ao desmutar para a pessoa não perder o início
-                                    // this.player.seekTo(0); 
-                                }
-                            }
-                        }
-                    }
-                </script>
-                
-                <style>
-                    /* Animação suave de pulso para o botão */
-                    @keyframes pulse-soft {
-                        0%, 100% { transform: scale(1); opacity: 1; }
-                        50% { transform: scale(1.05); opacity: 0.9; }
-                    }
-                    .animate-pulse-soft {
-                        animation: pulse-soft 2s infinite ease-in-out;
-                    }
-                </style>
-        
 
 
         
