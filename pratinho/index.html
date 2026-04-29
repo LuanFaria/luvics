@@ -4,6 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Luvics Pratinho - Combo Exclusivo</title>
+    <link rel="icon" type="image/png" href="https://raw.githubusercontent.com/LuanFaria/luvics/5c12cd6ee3c0d8892eae62f73cc22ea650b114ac/pratinho/imagens/fivicon.png">
+    <link rel="apple-touch-icon" href="https://raw.githubusercontent.com/LuanFaria/luvics/5c12cd6ee3c0d8892eae62f73cc22ea650b114ac/pratinho/imagens/fivicon.png">
+    
     
     <!-- Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;800;900&family=Outfit:wght@400;700;900&display=swap" rel="stylesheet">
@@ -514,20 +517,42 @@
                     QUERO MEU COMBO AGORA
                 </a>
 
-                <div class="mt-10 bg-green-50 p-6 rounded-2xl border border-green-100 flex flex-col items-center gap-4 text-center">
-                    <div class="relative w-24 h-24 flex items-center justify-center">
-                        <img 
-                            
-                            src="https://raw.githubusercontent.com/LuanFaria/luvics/515de49e754d6fe82db66bb0f0410bc0c7e6619b/pratinho/imagens/Medalha_de_Garantia_de_Satisfacao_100%25_PNG_Transparente_Sem_Fundo.png" 
-                            class="w-full h-full object-contain drop-shadow-md z-10 relative opacity-0 transition-opacity duration-300" 
-                            alt="Garantia"
-                            referrerpolicy="no-referrer"
-                            onload="this.style.opacity='1'"
-                        >
+                <div class="mt-10 bg-gradient-to-b from-green-50/50 to-white p-8 rounded-[32px] border-2 border-green-100 flex flex-col items-center shadow-sm relative overflow-hidden">
+                    
+                    <div class="absolute -right-4 -top-4 w-24 h-24 bg-green-100/30 rounded-full blur-2xl"></div>
+                
+                    <div class="flex flex-col md:flex-row items-center gap-6 relative z-10">
+                        <div class="relative w-28 h-28 shrink-0">
+                            <div class="absolute inset-0 bg-green-200 rounded-full blur-xl opacity-30 animate-pulse"></div>
+                            <img 
+                                src="https://raw.githubusercontent.com/LuanFaria/luvics/515de49e754d6fe82db66bb0f0410bc0c7e6619b/pratinho/imagens/Medalha_de_Garantia_de_Satisfacao_100%25_PNG_Transparente_Sem_Fundo.png" 
+                                class="w-full h-full object-contain drop-shadow-[0_10px_15px_rgba(22,101,52,0.2)] relative z-10" 
+                                alt="Garantia de 7 Dias"
+                                referrerpolicy="no-referrer"
+                            >
+                        </div>
+                
+                        <div class="text-center md:text-left">
+                            <h4 class="text-green-800 font-black text-lg leading-tight mb-1">
+                                Garantia Incondicional de 7 Dias
+                            </h4>
+                            <p class="text-green-700/80 text-xs font-medium leading-relaxed max-w-[280px]">
+                                Teste o material sem riscos. Se você não amar ou seu bebê não se adaptar, devolvemos 100% do seu dinheiro sem perguntas.
+                            </p>
+                        </div>
                     </div>
-                    <div class="flex items-center justify-center gap-2 text-green-700 font-black text-xs uppercase tracking-wide">
-                        <i data-lucide="shield-check" class="w-5 h-5"></i>
-                        <span>Pagamento 100% Seguro</span>
+                
+                    <div class="w-full h-px bg-green-200/50 my-6"></div>
+                
+                    <div class="flex flex-wrap justify-center gap-6">
+                        <div class="flex items-center gap-2 text-green-700 font-bold text-[10px] uppercase tracking-widest bg-white px-4 py-2 rounded-full border border-green-100 shadow-sm">
+                            <i data-lucide="shield-check" class="w-4 h-4"></i>
+                            <span>Pagamento Seguro</span>
+                        </div>
+                        <div class="flex items-center gap-2 text-green-700 font-bold text-[10px] uppercase tracking-widest bg-white px-4 py-2 rounded-full border border-green-100 shadow-sm">
+                            <i data-lucide="lock" class="w-4 h-4"></i>
+                            <span>Privacidade Protegida</span>
+                        </div>
                     </div>
                 </div>
             </div>
