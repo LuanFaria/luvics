@@ -134,41 +134,78 @@
 
 
         <!-- VSL FULL WIDTH -->
-        <div class="w-screen relative left-1/2 right-1/2 -mx-[50vw] bg-black py-8 reveal">
-            
-            <div class="max-w-5xl mx-auto px-4 text-center">
+        <div class="w-screen relative left-1/2 right-1/2 -mx-[50vw] bg-black py-8 reveal" x-data="vslPlayer()">
+            <div class="max-w-4xl mx-auto px-4 text-center">
                 
-                <!-- TEXTO SOM -->
-                <div 
-                    x-data="{ showText: true }" 
-                    x-init="setTimeout(() => showText = false, 6000)"
-                    x-show="showText"
-                    x-transition
-                    class="text-2xl font-display font-black text-white mb-6 min-h-[56px] animate-pulse-soft"
-                >
-                    🔊 Ative o som...
+                <div x-show="isMuted" class="mb-4">
+                    <button 
+                        @click="unmuteVideo()"
+                        class="inline-flex items-center gap-2 bg-brand-500 hover:bg-brand-600 text-white font-bold py-1.5 px-4 rounded-full text-xs uppercase tracking-tight shadow-md transition-all active:scale-95"
+                    >
+                        <span>🔊 Ativar som</span>
+                    </button>
                 </div>
         
-                <!-- VÍDEO -->
-                <div class="relative aspect-video rounded-2xl overflow-hidden shadow-2xl">
-                    <iframe 
-                        class="absolute inset-0 w-full h-full"
-                        src="https://www.youtube.com/embed/lFRHgeiXfyw?autoplay=1&mute=1&controls=1&playsinline=1"
-                        frameborder="0"
-                        allow="autoplay; encrypted-media; picture-in-picture"
-                        allowfullscreen>
-                    </iframe>
+                <div class="relative aspect-video rounded-2xl overflow-hidden shadow-2xl bg-zinc-900">
+                    <div 
+                        x-show="isMuted" 
+                        @click="unmuteVideo()"
+                        class="absolute inset-0 z-20 cursor-pointer"
+                    ></div>
+        
+                    <div id="player" class="absolute inset-0 w-full h-full"></div>
                 </div>
         
-                <!-- CTA -->
-                <a href="#comprar" class="btn-gradient inline-block mt-6 text-white font-black py-4 px-8 rounded-3xl uppercase tracking-wide text-base">
+                <a href="#comprar" class="btn-gradient inline-block mt-8 text-white font-black py-4 px-10 rounded-3xl uppercase tracking-wide text-lg shadow-lg hover:scale-105 transition-transform">
                     QUERO O COMBO AGORA
                 </a>
-        
             </div>
         </div>
         
-
+        <script>
+            function vslPlayer() {
+                return {
+                    isMuted: true,
+                    player: null,
+                    init() {
+                        if (!window.YT) {
+                            const tag = document.createElement('script');
+                            tag.src = "https://www.youtube.com/iframe_api";
+                            const firstScriptTag = document.getElementsByTagName('script')[0];
+                            firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+                        }
+ 
+                        window.onYouTubeIframeAPIReady = () => {
+                            this.player = new YT.Player('player', {
+                                videoId: 'xkSWDxLGat4',
+                                playerVars: {
+                                    'autoplay': 1,
+                                    'mute': 1,
+                                    'controls': 1,
+                                    'rel': 0, // Não mostra vídeos relacionados do canal alheio
+                                    'showinfo': 0, // Tenta esconder info (parâmetro antigo mas ajuda)
+                                    'modestbranding': 1, // Remove o logo da barra de controle
+                                    'iv_load_policy': 3, // Remove anotações/cards de cima do vídeo
+                                    'playsinline': 1
+                                },
+                                events: {
+                                    'onReady': (event) => event.target.playVideo()
+                                }
+                            });
+                        };
+                    },
+                    unmuteVideo() {
+                        if (this.player) {
+                            this.player.unMute();
+                            this.player.setVolume(100);
+                            this.isMuted = false;
+                        }
+                    }
+                }
+            }
+        </script>
+        
+                
 
         
         <!-- Hero Card - "Pare de sofrer..." -->
@@ -196,8 +233,6 @@
                 Você vive alguma dessas situações?
             </h2>
 
-
-
             <div class="space-y-4">
                 <div class="flex items-center gap-3 bg-brand-50/50 p-4 border-l-4 border-brand-500 rounded-r-xl font-bold shadow-sm reveal hover:bg-brand-50 transition-colors" style="transition-delay: 0.1s;">
                     <span class="text-xl">😣</span> Medo constante de oferecer os alimentos errados
@@ -217,9 +252,53 @@
             </div>
         </div>
 
-
+        <!-- QUEM SOU  -->
+        <div class="card reveal bg-white overflow-hidden border-none shadow-xl mt-8">
+            <div class="flex flex-col md:flex-row items-center gap-8">
+                <div class="w-48 h-48 md:w-64 md:h-64 shrink-0">
+                    <img 
+            
+                        src="https://raw.githubusercontent.com/LuanFaria/luvics/4b61cdc29227757b8c498f5c117f8697dd01a86b/pratinho/imagens/Captura%20de%20tela%202026-04-28%20173831.png" 
+                        alt="Autora do Luvics Pratinho" 
+                        class="w-full h-full object-cover rounded-3xl shadow-lg border-4 border-brand-100"
+                    />
+                </div>
         
+                <div class="text-center md:text-left">
+                    <h3 class="text-brand-500 font-black uppercase tracking-widest text-[10px] mb-2">Quem criou o método</h3>
+                    <h2 class="text-2xl font-display font-black text-brand-800 mb-4">Olá, eu sou a Victória 👋</h2>
+                    
+                    <p class="text-brand-900/80 text-sm leading-relaxed mb-4">
+                        Eu sou mãe do Lyan e já estive exatamente onde você está hoje: exausta e preocupada com a alimentação do meu pequeno. Depois de estudar muito e testar dezenas de receitas, descobri que o segredo não é passar horas na cozinha, mas sim ter as combinações certas.
+                    </p>
+                    
+                    <p class="text-brand-900 font-bold text-sm">
+                        Criei o Luvics Pratinho para que você não precise passar por tudo o que eu passei. Quero te dar o atalho para um bebê que come de tudo e com prazer! ❤️
+                    </p>
+                </div>
+            </div>
+        </div>
 
+        <!-- IMAGEM PERDIDA VERTICAL -->
+        <div class="reveal mt-16 mb-12 text-center px-4">
+            <h3 class="text-xl md:text-2xl font-display font-black text-brand-800 leading-tight mb-6">
+                Imagine só: refeições tranquilas e seu bebê comendo com prazer... ❤️
+            </h3>
+        
+            <div class="flex justify-center mb-6">
+                <div class="w-full max-w-[280px] overflow-hidden rounded-[32px] border-4 border-white shadow-2xl">
+                    <img 
+                        src="https://raw.githubusercontent.com/LuanFaria/luvics/d1b23589d74b197377058f1fe73828ade7146de5/pratinho/imagens/imagem%20inteira.png" 
+                        alt="Resultado Luvics Pratinho" 
+                        class="w-full h-auto object-cover block"
+                    />
+                </div>
+            </div>
+        
+            <p class="text-sm font-medium text-brand-900/70 max-w-sm mx-auto">
+                Com o método Luvics, o momento da comida volta a ser um momento de amor, não de estresse.
+            </p>
+        </div>
        
         <!-- PRODUTO PRINCIPAL   src="https://raw.githubusercontent.com/LuanFaria/luvics/ae3b0b867d5a1ce5dd54799bcffe5367c0c214e3/pratinho/imagens/v2capa%20(1).png"  -->
      
@@ -333,16 +412,17 @@
             <div class="space-y-6">
                 <!-- Depoimento 1 -->
                 <div class="bg-brand-50/30 p-6 rounded-[24px] border border-brand-100 flex flex-col md:flex-row gap-4 items-center reveal">
-                    <img src="https://picsum.photos/seed/ana_mom/100/100" class="w-16 h-16 rounded-full border-4 border-white shadow-md" alt="Ana" referrerPolicy="no-referrer" />
+                    <img src="https://raw.githubusercontent.com/LuanFaria/luvics/52094a81a0f7fb2245634e6ca7b87a08de50427c/pratinho/imagens/cliente%202.png" class="w-16 h-16 rounded-full border-4 border-white shadow-md" alt="Ana" referrerPolicy="no-referrer" />
                     <div class="text-center md:text-left">
                         <div class="font-bold text-brand-900 text-lg">Ana Silveira</div>
                         <div class="text-[10px] text-orange-600 font-black uppercase tracking-widest mb-2">Mãe do Pedro (10 meses)</div>
                         <p class="text-sm font-medium italic text-brand-900/80 leading-relaxed">"Minha vida mudou depois dessas receitas! O Pedro não comia nada, chorava no cadeirão... agora ele devora o pratinho sozinho e eu fico em paz."</p>
                     </div>
                 </div>
+               
                 <!-- Depoimento 2 -->
                 <div class="bg-brand-50/30 p-6 rounded-[24px] border border-brand-100 flex flex-col md:flex-row gap-4 items-center reveal">
-                    <img src="https://picsum.photos/seed/julia_mom/100/100" class="w-16 h-16 rounded-full border-4 border-white shadow-md" alt="Juliana" referrerPolicy="no-referrer" />
+                    <img src="https://raw.githubusercontent.com/LuanFaria/luvics/52094a81a0f7fb2245634e6ca7b87a08de50427c/pratinho/imagens/Cliente%201.jpg" class="w-16 h-16 rounded-full border-4 border-white shadow-md" alt="Juliana" referrerPolicy="no-referrer" />
                     <div class="text-center md:text-left">
                         <div class="font-bold text-brand-900 text-lg">Juliana Mendes</div>
                         <div class="text-[10px] text-orange-600 font-black uppercase tracking-widest mb-2">Mãe da Alice (1 ano)</div>
@@ -352,26 +432,49 @@
             </div>
         </div>
 
+
+
         <!-- Oferta Principal - "Combo Exclusivo" -->
         <div class="card border-4 border-brand-500 shadow-2xl relative overflow-visible reveal" id="comprar">
             <div class="text-center">
                 <div class="bg-brand-500 text-white px-6 py-2 rounded-full text-[10px] font-black uppercase tracking-widest inline-block mb-8">Oferta de Lançamento</div>
                 
-                <div class="space-y-3 mb-8 text-left max-w-sm mx-auto p-5 bg-brand-50 rounded-2xl border border-brand-100">
-                    <div class="flex items-center gap-3 font-bold text-brand-900 text-sm">
-                        <i data-lucide="check-circle-2" class="w-5 h-5 text-green-600 shrink-0"></i>
-                        + de 101 Receitinhas Saudáveis
+                    <div class="space-y-4 mb-8 text-left max-w-sm mx-auto p-6 bg-white rounded-3xl border-2 border-brand-100 shadow-inner">
+                        <div class="flex items-start gap-3">
+                            <div class="bg-green-100 p-1 rounded-full shrink-0 mt-0.5">
+                                <i data-lucide="check" class="w-4 h-4 text-green-600"></i>
+                            </div>
+                            <div class="flex flex-col">
+                                <span class="font-black text-brand-900 text-sm tracking-tight">+101 Receitinhas Saudáveis</span>
+                                <span class="text-[10px] text-brand-700/60 leading-none">Guia completo em PDF</span>
+                            </div>
+                        </div>
+                    
+                        <div class="flex items-start gap-3">
+                            <div class="bg-green-100 p-1 rounded-full shrink-0 mt-0.5">
+                                <i data-lucide="check" class="w-4 h-4 text-green-600"></i>
+                            </div>
+                            <div class="flex flex-col">
+                                <span class="font-bold text-brand-900 text-sm tracking-tight">
+                                    <span class="text-brand-500 uppercase text-[10px] block font-black mb-0.5">Presente 01</span>
+                                    Ebook: Meu Filho Não Quer Comer?
+                                </span>
+                            </div>
+                        </div>
+                    
+                        <div class="flex items-start gap-3">
+                            <div class="bg-green-100 p-1 rounded-full shrink-0 mt-0.5">
+                                <i data-lucide="check" class="w-4 h-4 text-green-600"></i>
+                            </div>
+                            <div class="flex flex-col">
+                                <span class="font-bold text-brand-900 text-sm tracking-tight">
+                                    <span class="text-brand-500 uppercase text-[10px] block font-black mb-0.5">Presente 02</span>
+                                    Tabela: Quantidade de Comida por Idade
+                                </span>
+                            </div>
+                        </div>
                     </div>
-                    <div class="flex items-center gap-3 font-bold text-brand-900 text-sm">
-                        <i data-lucide="check-circle-2" class="w-5 h-5 text-green-600 shrink-0"></i>
-                        Bônus 1: Bônus 1: Meu Filho Não quer Comer? O que Fazer?
-                    </div>
-                    <div class="flex items-center gap-3 font-bold text-brand-900 text-sm">
-                        <i data-lucide="check-circle-2" class="w-5 h-5 text-green-600 shrink-0"></i>
-                        Bônus 2: Bônus 2: Tabela: Quantidade de Comida por Idade
-                    </div>
-                </div>
-                
+                                    
                 <div class="text-xl italic text-gray-400">De <s class="text-red-500">R$59,90</s> por apenas</div>
                 <div class="text-5xl md:text-8xl text-brand-700 font-black font-display my-4 leading-none tracking-tighter">R$14,90</div>
                 
@@ -381,19 +484,18 @@
 
                 <div class="mt-10 bg-green-50 p-6 rounded-2xl border border-green-100 flex flex-col items-center gap-4 text-center">
                     <div class="relative w-24 h-24 flex items-center justify-center">
-                        <div class="absolute bg-brand-500 text-white w-20 h-20 rounded-full border-4 border-white shadow-lg flex items-center justify-center">
-                            <i data-lucide="shield-check" class="w-12 h-12"></i>
-                        </div>
                         <img 
-                            src="https://raw.githubusercontent.com/LuanFaria/luvics/0ce6f63412b182f767a4edda7ec97e8df6a7e937/pratinho/imagens/selo.png" 
+                            
+                            src="https://raw.githubusercontent.com/LuanFaria/luvics/515de49e754d6fe82db66bb0f0410bc0c7e6619b/pratinho/imagens/Medalha_de_Garantia_de_Satisfacao_100%25_PNG_Transparente_Sem_Fundo.png" 
                             class="w-full h-full object-contain drop-shadow-md z-10 relative opacity-0 transition-opacity duration-300" 
                             alt="Garantia"
                             referrerpolicy="no-referrer"
                             onload="this.style.opacity='1'"
                         >
                     </div>
-                    <div class="flex items-center gap-2 text-green-700 font-black text-xs uppercase tracking-wide">
-                        <i data-lucide="shield-check" class="w-5 h-5"></i>Pagamento 100% Seguro
+                    <div class="flex items-center justify-center gap-2 text-green-700 font-black text-xs uppercase tracking-wide">
+                        <i data-lucide="shield-check" class="w-5 h-5"></i>
+                        <span>Pagamento 100% Seguro</span>
                     </div>
                 </div>
             </div>
@@ -422,13 +524,11 @@
 
         <!-- Garantia Risco Zero -->
         <div class="card text-center relative mt-16 overflow-visible reveal">
-            <div class="absolute -top-12 left-1/2 -translate-x-1/2 z-20">
+            <div class="absolute -top-6 left-1/2 -translate-x-1/2 z-20">
                 <div class="relative w-24 h-24 animate-pulse-soft flex items-center justify-center">
-                    <div class="absolute bg-brand-500 text-white w-20 h-20 rounded-full border-4 border-white shadow-xl flex items-center justify-center">
-                        <i data-lucide="shield-check" class="w-12 h-12"></i>
-                    </div>
+                    
                     <img 
-                        src="https://raw.githubusercontent.com/LuanFaria/luvics/0ce6f63412b182f767a4edda7ec97e8df6a7e937/pratinho/imagens/selo.png" 
+                        src="https://raw.githubusercontent.com/LuanFaria/luvics/515de49e754d6fe82db66bb0f0410bc0c7e6619b/pratinho/imagens/Medalha_de_Garantia_de_Satisfacao_100%25_PNG_Transparente_Sem_Fundo.png" 
                         class="w-full h-full object-contain drop-shadow-xl z-10 relative opacity-0 transition-opacity duration-300" 
                         alt="Garantia"
                         referrerpolicy="no-referrer"
@@ -436,7 +536,7 @@
                     >
                 </div>
             </div>
-            <div class="pt-12">
+            <div class="pt-6">
                 <h2 class="font-display font-black text-2xl text-brand-800 uppercase tracking-tighter">Risco Zero</h2>
                 <p class="text-sm font-medium text-brand-900/80 px-6 mt-2 leading-relaxed">
                     Se você não amar o material em até 7 dias, devolvemos seu dinheiro sem burocracia.
