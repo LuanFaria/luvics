@@ -136,10 +136,11 @@
     <main class="max-w-[620px] mx-auto px-4 pt-6">
 
 
-    <!-- VSL VERTICAL - FIX DE TRAVAMENTO -->
+    <!-- VSL VERTICAL - SOLUÇÃO DEFINITIVA (RE-LOADER) -->
     <div class="w-screen relative left-1/2 right-1/2 -mx-[50vw] bg-gradient-to-b from-brand-50 via-white to-white py-12 reveal" x-data="vslPlayer()">
         <div class="max-w-[350px] mx-auto px-4 text-center">
             
+            <!-- Botão de Unmute -->
             <div x-show="isMuted" class="mb-6">
                 <button 
                     @click="unmuteVideo()"
@@ -155,17 +156,18 @@
     
             <div class="relative aspect-[9/16] rounded-[32px] overflow-hidden shadow-2xl bg-black border-[6px] border-white">
                 
-                <!-- Overlay com prioridade de clique Z-30 -->
+                <!-- Camada de clique z-50 -->
                 <div 
                     x-show="isMuted" 
                     @click="unmuteVideo()"
-                    class="absolute inset-0 z-30 cursor-pointer bg-black/10 flex items-center justify-center"
+                    class="absolute inset-0 z-50 cursor-pointer bg-black/10 flex items-center justify-center"
                 >
                     <div class="bg-brand-500 text-white w-16 h-16 rounded-full flex items-center justify-center shadow-xl">
                         <i data-lucide="play" class="w-8 h-8 fill-current"></i>
                     </div>
                 </div>
     
+                <!-- Div que o YouTube vai preencher -->
                 <div class="absolute inset-0 w-full h-full pointer-events-none">
                     <div id="player" class="w-full h-full"></div>
                 </div>
@@ -184,47 +186,47 @@
             return {
                 isMuted: true,
                 player: null,
+                videoId: 'D80SF_OthK4',
                 init() {
+                    this.loadYouTubeAPI();
+                },
+                loadYouTubeAPI() {
                     if (!window.YT) {
                         const tag = document.createElement('script');
                         tag.src = "https://www.youtube.com/iframe_api";
-                        const firstScriptTag = document.getElementsByTagName('script')[0];
-                        firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+                        document.head.appendChild(tag);
+                        window.onYouTubeIframeAPIReady = () => this.createPlayer(true);
+                    } else {
+                        this.createPlayer(true);
                     }
-    
-                    window.onYouTubeIframeAPIReady = () => {
-                        this.player = new YT.Player('player', {
-                            videoId: 'D80SF_OthK4',
-                            playerVars: {
-                                'autoplay': 1,
-                                'mute': 1,
-                                'controls': 0,
-                                'rel': 0,
-                                'loop': 1,
-                                'playlist': 'D80SF_OthK4',
-                                'modestbranding': 1,
-                                'playsinline': 1,
-                                'enablejsapi': 1
-                            },
-                            events: {
-                                'onReady': (e) => e.target.playVideo()
-                            }
-                        });
-                    };
+                },
+                createPlayer(muted) {
+                    if (this.player) {
+                        this.player.destroy();
+                    }
+                    this.player = new YT.Player('player', {
+                        videoId: this.videoId,
+                        playerVars: {
+                            'autoplay': 1,
+                            'mute': muted ? 1 : 0,
+                            'controls': 0,
+                            'modestbranding': 1,
+                            'playsinline': 1,
+                            'rel': 0,
+                            'showinfo': 0,
+                            'loop': 1,
+                            'playlist': this.videoId
+                        },
+                        events: {
+                            'onReady': (e) => e.target.playVideo()
+                        }
+                    });
                 },
                 unmuteVideo() {
-                    if (this.player) {
-                        // Técnica de Re-Sync: O player limpa o estado de mudo e dá play de novo
-                        this.isMuted = false;
-                        this.player.unMute();
-                        this.player.setVolume(100);
-                        
-                        // Pequeno delay para o YouTube processar o comando de áudio antes do play
-                        setTimeout(() => {
-                            this.player.seekTo(this.player.getCurrentTime()); // Mantém no mesmo segundo
-                            this.player.playVideo();
-                        }, 50);
-                    }
+                    this.isMuted = false;
+                    // Em vez de dar unmute, criamos um novo player com som desde o início
+                    // Isso o navegador aceita porque o clique foi "direto" na ação de carregar
+                    this.createPlayer(false);
                 }
             }
         }
