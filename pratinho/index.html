@@ -137,6 +137,7 @@
 
 
     <!-- VSL VERTICAL - SOLUÇÃO DEFINITIVA (RE-LOADER) -->
+    <!-- VSL VERTICAL - TECNICA DE COMPATIBILIDADE TOTAL -->
     <div class="w-screen relative left-1/2 right-1/2 -mx-[50vw] bg-gradient-to-b from-brand-50 via-white to-white py-12 reveal" x-data="vslPlayer()">
         <div class="max-w-[350px] mx-auto px-4 text-center">
             
@@ -154,21 +155,22 @@
                 </button>
             </div>
     
+            <!-- Container do Vídeo -->
             <div class="relative aspect-[9/16] rounded-[32px] overflow-hidden shadow-2xl bg-black border-[6px] border-white">
                 
-                <!-- Camada de clique z-50 -->
+                <!-- Overlay de Clique -->
                 <div 
                     x-show="isMuted" 
                     @click="unmuteVideo()"
-                    class="absolute inset-0 z-50 cursor-pointer bg-black/10 flex items-center justify-center"
+                    class="absolute inset-0 z-20 cursor-pointer bg-black/10 flex items-center justify-center"
                 >
                     <div class="bg-brand-500 text-white w-16 h-16 rounded-full flex items-center justify-center shadow-xl">
                         <i data-lucide="play" class="w-8 h-8 fill-current"></i>
                     </div>
                 </div>
     
-                <!-- Div que o YouTube vai preencher -->
-                <div class="absolute inset-0 w-full h-full pointer-events-none">
+                <!-- Player YouTube -->
+                <div class="absolute inset-0 w-full h-full">
                     <div id="player" class="w-full h-full"></div>
                 </div>
             </div>
@@ -186,47 +188,44 @@
             return {
                 isMuted: true,
                 player: null,
-                videoId: 'D80SF_OthK4',
                 init() {
-                    this.loadYouTubeAPI();
-                },
-                loadYouTubeAPI() {
+                    // Carrega a API apenas se não existir
                     if (!window.YT) {
                         const tag = document.createElement('script');
                         tag.src = "https://www.youtube.com/iframe_api";
                         document.head.appendChild(tag);
-                        window.onYouTubeIframeAPIReady = () => this.createPlayer(true);
-                    } else {
-                        this.createPlayer(true);
                     }
-                },
-                createPlayer(muted) {
-                    if (this.player) {
-                        this.player.destroy();
-                    }
-                    this.player = new YT.Player('player', {
-                        videoId: this.videoId,
-                        playerVars: {
-                            'autoplay': 1,
-                            'mute': muted ? 1 : 0,
-                            'controls': 0,
-                            'modestbranding': 1,
-                            'playsinline': 1,
-                            'rel': 0,
-                            'showinfo': 0,
-                            'loop': 1,
-                            'playlist': this.videoId
-                        },
-                        events: {
-                            'onReady': (e) => e.target.playVideo()
-                        }
-                    });
+    
+                    window.onYouTubeIframeAPIReady = () => {
+                        this.player = new YT.Player('player', {
+                            videoId: 'D80SF_OthK4',
+                            playerVars: {
+                                'autoplay': 1,
+                                'mute': 1,
+                                'controls': 0,
+                                'rel': 0,
+                                'playsinline': 1,
+                                'loop': 1,
+                                'playlist': 'D80SF_OthK4',
+                                'enablejsapi': 1,
+                                'origin': window.location.origin
+                            },
+                            events: {
+                                'onReady': (e) => {
+                                    e.target.playVideo();
+                                }
+                            }
+                        });
+                    };
                 },
                 unmuteVideo() {
-                    this.isMuted = false;
-                    // Em vez de dar unmute, criamos um novo player com som desde o início
-                    // Isso o navegador aceita porque o clique foi "direto" na ação de carregar
-                    this.createPlayer(false);
+                    if (this.player) {
+                        this.isMuted = false;
+                        this.player.unMute();
+                        this.player.setVolume(100);
+                        // O segredo: forçamos o play novamente após o unmute
+                        this.player.playVideo(); 
+                    }
                 }
             }
         }
