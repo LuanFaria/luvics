@@ -137,14 +137,14 @@
 
 
     <!-- VSL VERTICAL - SOLUÇÃO DEFINITIVA (RE-LOADER) -->
-    <!-- VSL VERTICAL - TECNICA DE COMPATIBILIDADE TOTAL -->
+    <!-- VSL VERTICAL - FIX CLIQUE ÚNICO -->
     <div class="w-screen relative left-1/2 right-1/2 -mx-[50vw] bg-gradient-to-b from-brand-50 via-white to-white py-12 reveal" x-data="vslPlayer()">
         <div class="max-w-[350px] mx-auto px-4 text-center">
             
-            <!-- Botão de Unmute -->
-            <div x-show="isMuted" class="mb-6">
+            <!-- Botão de Unmute - Z-INDEX 50 PARA CLIQUE ÚNICO -->
+            <div x-show="isMuted" class="mb-6 relative z-50">
                 <button 
-                    @click="unmuteVideo()"
+                    @click.prevent="unmuteVideo()"
                     class="inline-flex items-center gap-3 bg-white border-2 border-brand-500 text-brand-600 font-black py-2 px-6 rounded-full text-sm uppercase tracking-tight shadow-sm hover:bg-brand-50 transition-all animate-bounce"
                 >
                     <span class="relative flex h-3 w-3">
@@ -155,14 +155,13 @@
                 </button>
             </div>
     
-            <!-- Container do Vídeo -->
             <div class="relative aspect-[9/16] rounded-[32px] overflow-hidden shadow-2xl bg-black border-[6px] border-white">
                 
-                <!-- Overlay de Clique -->
+                <!-- Overlay de Play - Z-INDEX 40 -->
                 <div 
                     x-show="isMuted" 
-                    @click="unmuteVideo()"
-                    class="absolute inset-0 z-20 cursor-pointer bg-black/10 flex items-center justify-center"
+                    @click.prevent="unmuteVideo()"
+                    class="absolute inset-0 z-40 cursor-pointer bg-black/10 flex items-center justify-center"
                 >
                     <div class="bg-brand-500 text-white w-16 h-16 rounded-full flex items-center justify-center shadow-xl">
                         <i data-lucide="play" class="w-8 h-8 fill-current"></i>
@@ -189,7 +188,6 @@
                 isMuted: true,
                 player: null,
                 init() {
-                    // Carrega a API apenas se não existir
                     if (!window.YT) {
                         const tag = document.createElement('script');
                         tag.src = "https://www.youtube.com/iframe_api";
@@ -208,7 +206,8 @@
                                 'loop': 1,
                                 'playlist': 'D80SF_OthK4',
                                 'enablejsapi': 1,
-                                'origin': window.location.origin
+                                'origin': window.location.origin,
+                                'widget_referrer': window.location.href
                             },
                             events: {
                                 'onReady': (e) => {
@@ -219,12 +218,18 @@
                     };
                 },
                 unmuteVideo() {
-                    if (this.player) {
+                    if (this.player && typeof this.player.unMute === 'function') {
                         this.isMuted = false;
+                        
+                        // Executa os comandos em sequência imediata
+                        this.player.playVideo();
                         this.player.unMute();
                         this.player.setVolume(100);
-                        // O segredo: forçamos o play novamente após o unmute
-                        this.player.playVideo(); 
+                        
+                        // Reforço para garantir que o play aconteça após o ganho de foco
+                        setTimeout(() => {
+                            this.player.playVideo();
+                        }, 50);
                     }
                 }
             }
