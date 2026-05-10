@@ -456,6 +456,104 @@
                 </div>
             </div>
         </div>
+
+
+
+        
+        <!-- CARROCEL -->        
+        <section class="py-16 bg-gray-50">
+            <div class="max-w-6xl mx-auto px-4">
+                <div class="text-center mb-10">
+                    <h2 class="text-3xl md:text-4xl font-bold text-gray-800 mb-4">Um gostinho do que você vai aprender</h2>
+                    <p class="text-gray-600">Receitas planejadas para cada fase do desenvolvimento do seu bebê.</p>
+                </div>
+        
+                <div class="relative overflow-hidden group">
+                    <div id="recipeCarousel" class="flex transition-transform duration-500 ease-in-out" style="transform: translateX(0%);">
+                        
+                        <div class="min-w-[100%] md:min-w-[33.33%] p-3">
+                            <div class="bg-white rounded-3xl shadow-md overflow-hidden border border-gray-100">
+                                <img src="https://raw.githubusercontent.com/LuanFaria/luvics/main/pratinho/imagens/papinha.jpg" alt="Papinha" class="w-full h-64 object-cover">
+                                <div class="p-5 text-center">
+                                    <span class="bg-orange-100 text-orange-600 text-xs font-bold px-3 py-1 rounded-full uppercase">Fase 1: Início</span>
+                                    <h3 class="text-xl font-bold text-gray-800 mt-3">Papinha Nutritiva</h3>
+                                </div>
+                            </div>
+                        </div>
+        
+                        <div class="min-w-[100%] md:min-w-[33.33%] p-3">
+                            <div class="bg-white rounded-3xl shadow-md overflow-hidden border border-gray-100">
+                                <img src="https://raw.githubusercontent.com/LuanFaria/luvics/main/pratinho/imagens/sopa%20de%20letrinha.jpg" alt="Sopa de Letrinha" class="w-full h-64 object-cover">
+                                <div class="p-5 text-center">
+                                    <span class="bg-blue-100 text-blue-600 text-xs font-bold px-3 py-1 rounded-full uppercase">Exploração</span>
+                                    <h3 class="text-xl font-bold text-gray-800 mt-3">Sopinha de Letrinhas</h3>
+                                </div>
+                            </div>
+                        </div>
+        
+                        <div class="min-w-[100%] md:min-w-[33.33%] p-3">
+                            <div class="bg-white rounded-3xl shadow-md overflow-hidden border border-gray-100">
+                                <img src="https://raw.githubusercontent.com/LuanFaria/luvics/main/pratinho/imagens/panqueca.jpg" alt="Panqueca" class="w-full h-64 object-cover">
+                                <div class="p-5 text-center">
+                                    <span class="bg-yellow-100 text-yellow-600 text-xs font-bold px-3 py-1 rounded-full uppercase">Autonomia (BLW)</span>
+                                    <h3 class="text-xl font-bold text-gray-800 mt-3">Mini Panquecas</h3>
+                                </div>
+                            </div>
+                        </div>
+        
+                        <div class="min-w-[100%] md:min-w-[33.33%] p-3">
+                            <div class="bg-white rounded-3xl shadow-md overflow-hidden border border-gray-100">
+                                <img src="https://raw.githubusercontent.com/LuanFaria/luvics/main/pratinho/imagens/pratinho.jpg" alt="Pratinho" class="w-full h-64 object-cover">
+                                <div class="p-5 text-center">
+                                    <span class="bg-green-100 text-green-600 text-xs font-bold px-3 py-1 rounded-full uppercase">Refeição Completa</span>
+                                    <h3 class="text-xl font-bold text-gray-800 mt-3">Pratinho Equilibrado</h3>
+                                </div>
+                            </div>
+                        </div>
+        
+                        <div class="min-w-[100%] md:min-w-[33.33%] p-3">
+                            <div class="bg-white rounded-3xl shadow-md overflow-hidden border border-gray-100">
+                                <img src="https://raw.githubusercontent.com/LuanFaria/luvics/main/pratinho/imagens/sopinha.jpg" alt="Sopinha" class="w-full h-64 object-cover">
+                                <div class="p-5 text-center">
+                                    <span class="bg-purple-100 text-purple-600 text-xs font-bold px-3 py-1 rounded-full uppercase">Confort Food</span>
+                                    <h3 class="text-xl font-bold text-gray-800 mt-3">Sopa Cremosa</h3>
+                                </div>
+                            </div>
+                        </div>
+        
+                    </div>
+        
+                    <button onclick="moveCarousel(-1)" class="absolute left-0 top-1/2 -translate-y-1/2 bg-white/80 hover:bg-white p-3 rounded-full shadow-lg ml-2 transition-all">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-gray-800" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
+                        </svg>
+                    </button>
+                    <button onclick="moveCarousel(1)" class="absolute right-0 top-1/2 -translate-y-1/2 bg-white/80 hover:bg-white p-3 rounded-full shadow-lg mr-2 transition-all">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-gray-800" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </section>
+        
+        <script>
+            let currentPos = 0;
+            const carousel = document.getElementById('recipeCarousel');
+            const totalCards = 5;
+        
+            function moveCarousel(direction) {
+                const cardWidth = window.innerWidth < 768 ? 100 : 33.33;
+                const maxPos = window.innerWidth < 768 ? totalCards - 1 : totalCards - 3;
+                
+                currentPos += direction;
+        
+                if (currentPos < 0) currentPos = 0;
+                if (currentPos > maxPos) currentPos = maxPos;
+        
+                carousel.style.transform = `translateX(-${currentPos * cardWidth}%)`;
+            }
+        </script>
     
     
     
