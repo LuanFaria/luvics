@@ -7,6 +7,7 @@
 
     <link rel="icon" href="https://raw.githubusercontent.com/LuanFaria/luvic.nutrition/refs/heads/main/logo.png">
 
+    <!-- META PIXEL -->
     <script>
     !function(f,b,e,v,n,t,s)
     {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
@@ -37,64 +38,123 @@
 
         body {
             font-family: 'Inter', sans-serif;
-            background: linear-gradient(rgba(0,0,0,0.85), rgba(0,0,0,0.95)),
-                        url('https://raw.githubusercontent.com/LuanFaria/luvic.nutrition/refs/heads/main/FUNDO.png') center/cover no-repeat fixed;
+            /* Fundo Atualizado com o link RAW */
+            background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.85)),
+                        url('https://raw.githubusercontent.com/LuanFaria/luvics/b0908677efe967e8e83db61bcf11055e5ab5d238/pratinho/imagens/Fundo%201.png') center/cover no-repeat fixed;
             color: #fff;
             min-height: 100vh;
         }
 
         .container {
-            max-width: 800px;
+            max-width: 600px; /* Mais estreito para focar no mobile */
             margin: 0 auto;
-            padding: 40px 20px;
+            padding: 30px 20px;
             text-align: center;
         }
 
-        /* LOGO / PERFIL */
+        /* IMAGEM DE DESTAQUE (ANTIGO PERFIL) - Aumentada */
         .profile-img {
-            width: 120px;
-            height: 120px;
-            border-radius: 50%;
-            border: 3px solid #fff;
+            width: 100%;
+            max-width: 320px; /* Tamanho bem maior */
+            height: auto;
+            border-radius: 20px; /* Bordas arredondadas ao invés de círculo */
             margin-bottom: 20px;
-            box-shadow: 0 0 20px rgba(255,255,255,0.2);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+            border: 2px solid rgba(255,255,255,0.1);
         }
 
         h1 {
             font-size: 1.8rem;
-            margin-bottom: 10px;
+            margin-bottom: 5px;
             font-weight: 900;
             letter-spacing: -1px;
         }
 
         .sub {
             font-size: 1rem;
-            color: #ccc;
-            margin-bottom: 40px;
+            color: #ddd;
+            margin-bottom: 30px;
         }
 
-        /* LAYOUT PRINCIPAL */
-        .main-content {
+        /* ==== CARROSSEL DE PRODUTOS (NOVIDADE) ==== */
+        .carousel-container {
+            margin-bottom: 30px;
+        }
+        
+        .carousel-title {
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: #aaa;
+            margin-bottom: 10px;
+        }
+
+        .carousel {
             display: flex;
-            align-items: flex-start;
-            justify-content: center;
-            gap: 20px;
-            position: relative;
+            overflow-x: auto;
+            scroll-snap-type: x mandatory; /* Faz a rolagem "travar" na imagem */
+            gap: 15px;
+            padding-bottom: 15px;
+            /* Esconde a barra de rolagem mas mantém a função */
+            scrollbar-width: none; 
+            -ms-overflow-style: none;
+        }
+        
+        .carousel::-webkit-scrollbar { 
+            display: none; 
         }
 
-        /* BOTÕES */
+        .carousel a {
+            flex: 0 0 75%; /* Cada imagem ocupa 75% da tela, mostrando um pedaço da próxima */
+            scroll-snap-align: center;
+            border-radius: 15px;
+            overflow: hidden;
+            position: relative;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.4);
+            transition: transform 0.3s ease;
+        }
+
+        .carousel a:active {
+            transform: scale(0.95);
+        }
+
+        .carousel img {
+            width: 100%;
+            height: 200px; /* Altura padrão para os banners do carrossel */
+            object-fit: cover; /* Garante que a imagem não distorça */
+            display: block;
+        }
+
+        /* Efeito de brilho em cima do carrossel */
+        .carousel a::after {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: linear-gradient(to top, rgba(0,0,0,0.8), transparent);
+            pointer-events: none;
+        }
+
+        .carousel-legenda {
+            position: absolute;
+            bottom: 10px;
+            left: 15px;
+            font-weight: bold;
+            font-size: 1.1rem;
+            text-align: left;
+            z-index: 2;
+        }
+
+        /* ==== BOTÕES ==== */
         .buttons {
             display: flex;
             flex-direction: column;
-            gap: 18px;
+            gap: 15px;
             width: 100%;
-            max-width: 400px;
-            z-index: 2;
         }
 
         .btn {
             width: 100%;
-            padding: 20px;
+            padding: 18px;
             font-size: 1.1rem;
             font-weight: 800;
             border-radius: 15px;
@@ -105,100 +165,38 @@
             border: 2px solid transparent;
         }
 
-        .btn:hover {
-            transform: scale(1.03);
-        }
+        .btn:active { transform: scale(0.97); }
 
-        /* ESTILOS ESPECÍFICOS DOS BOTÕES */
-        
-        /* 1. Ebook Receitas */
+        /* Estilos dos Botões */
         .btn-receitas {
             background-color: var(--receitas-laranja);
             color: #333;
             border-color: var(--receitas-verde);
-            box-shadow: 0 0 15px rgba(255, 179, 138, 0.4);
+            box-shadow: 0 0 15px rgba(255, 179, 138, 0.2);
         }
-        .btn-receitas:hover {
-            box-shadow: 0 0 30px var(--receitas-laranja), 0 0 10px var(--receitas-verde);
-        }
-
-        /* 2. Roteiro do Sono */
         .btn-sono {
             background: linear-gradient(135deg, var(--sono-azul-claro), var(--sono-azul-escuro));
             color: #fff;
-            box-shadow: 0 0 15px rgba(0, 71, 171, 0.4);
+            box-shadow: 0 0 15px rgba(0, 71, 171, 0.3);
         }
-        .btn-sono:hover {
-            box-shadow: 0 0 30px var(--sono-azul-claro);
-        }
-
-        /* 3. Curso Desmame */
         .btn-desmame {
             background-color: var(--desmame-roxo);
             color: #fff;
-            border-color: #fff;
-            box-shadow: 0 0 15px rgba(138, 43, 226, 0.4);
+            border-color: rgba(255,255,255,0.3);
+            box-shadow: 0 0 15px rgba(138, 43, 226, 0.3);
         }
-        .btn-desmame:hover {
-            box-shadow: 0 0 30px var(--desmame-roxo);
-        }
-
-        /* 4. Mercado Livre */
         .btn-ml {
             background-color: var(--ml-amarelo);
             color: var(--ml-azul);
             border-color: var(--ml-azul);
-            box-shadow: 0 0 15px rgba(255, 241, 89, 0.3);
-        }
-        .btn-ml:hover {
-            box-shadow: 0 0 30px var(--ml-amarelo);
-        }
-
-        /* ESPAÇOS PARA IMAGENS LATERAIS (DESKTOP) */
-        .side-img-container {
-            flex: 1;
-            display: flex;
-            flex-direction: column;
-            gap: 20px;
-        }
-
-        .side-img-container img {
-            width: 100%;
-            max-width: 150px;
-            border-radius: 12px;
-            opacity: 0.8;
-            transition: opacity 0.3s;
-        }
-
-        .side-img-container img:hover { opacity: 1; }
-
-        /* RESPONSIVIDADE MOBILE */
-        @media(max-width: 768px){
-            .main-content {
-                flex-direction: column;
-                align-items: center;
-            }
-
-            .side-img-container {
-                display: flex;
-                flex-direction: row; /* Imagens ficam lado a lado abaixo dos botões no mobile */
-                flex-wrap: wrap;
-                justify-content: center;
-                margin-top: 20px;
-            }
-
-            .side-img-container img {
-                max-width: 120px;
-            }
-
-            h1 { font-size: 1.5rem; }
+            box-shadow: 0 0 15px rgba(255, 241, 89, 0.2);
         }
 
         footer {
-            margin-top: 60px;
-            padding-bottom: 40px;
+            margin-top: 50px;
+            padding-bottom: 20px;
             font-size: 0.8rem;
-            color: #666;
+            color: #888;
         }
     </style>
 </head>
@@ -207,45 +205,57 @@
 
 <div class="container">
 
-    <img src="https://raw.githubusercontent.com/LuanFaria/luvic.nutrition/refs/heads/main/logo.png" alt="Logo Luvic" class="profile-img">
+    <!-- IMAGEM TOPO ATUALIZADA (Maior) -->
+    <img src="https://raw.githubusercontent.com/LuanFaria/luvics/b0908677efe967e8e83db61bcf11055e5ab5d238/pratinho/imagens/Captura%20de%20tela%202026-04-28%20173831.png" alt="Luvic Nutrition" class="profile-img">
     
     <h1>Luvic Nutrition</h1>
     <div class="sub">
         Transforme sua rotina e a saúde da sua família
     </div>
 
-    <div class="main-content">
-
-        <div class="side-img-container">
-            <img src="https://raw.githubusercontent.com/LuanFaria/luvics/0789b586920cd4bde768e71029c32947efab6e75/pratinho/imagens/ChatGPT%20Image%2023%20de%20abr.%20de%202026%2C%2023_55_49%20(1).png" alt="">
-            <img src="URL_DA_SUA_IMAGEM_2" alt="">
-        </div>
-
-        <div class="buttons">
-
-            <a href="https://luvics.com.br/pratinho" target="_blank" class="btn btn-receitas">
-                🍎 +101 Receitinhas Saudáveis
-            </a>
-
-            <a href="#" target="_blank" class="btn btn-sono">
-                🌙 Roteiro do Sono Infantil
-            </a>
-
-            <a href="https://luvics.com.br/desmame-na-pratica" target="_blank" class="btn btn-desmame">
-                🍼 Curso Desmame na Prática
-            </a>
+    <!-- ==== CARROSSEL (ARRASTE PARA O LADO) ==== -->
+    <div class="carousel-container">
+        <div class="carousel-title">Nossos Destaques</div>
+        <div class="carousel">
             
-            <a href="#" target="_blank" class="btn btn-ml">
-                🛍️ Minha Lojinha Mercado Livre
+            <!-- Item 1 do Carrossel (Ebook Receitas) -->
+            <a href="https://luvics.com.br/pratinho" target="_blank">
+                <!-- Substitua este link de imagem pelo MOCKUP do seu ebook -->
+                <img src="https://via.placeholder.com/400x300/FFB38A/333333?text=Mockup+Ebook+Receitas" alt="Ebook Receitas">
+                <div class="carousel-legenda" style="color: #fff;">+101 Receitinhas</div>
+            </a>
+
+            <!-- Item 2 do Carrossel (Ebook Sono) -->
+            <a href="#" target="_blank">
+                 <!-- Substitua este link de imagem pelo MOCKUP do seu ebook -->
+                <img src="https://via.placeholder.com/400x300/89CFF0/ffffff?text=Mockup+Ebook+Sono" alt="Roteiro do Sono">
+                <div class="carousel-legenda" style="color: #fff;">Roteiro do Sono</div>
+            </a>
+
+            <!-- Item 3 do Carrossel (Curso Desmame) -->
+            <a href="https://luvics.com.br/desmame-na-pratica" target="_blank">
+                 <!-- Substitua este link de imagem pelo MOCKUP do seu curso -->
+                <img src="https://via.placeholder.com/400x300/8A2BE2/ffffff?text=Mockup+Curso" alt="Curso Desmame">
+                <div class="carousel-legenda" style="color: #fff;">Curso Desmame</div>
             </a>
 
         </div>
+    </div>
 
-        <div class="side-img-container">
-            <img src="https://raw.githubusercontent.com/LuanFaria/luvics/d1b23589d74b197377058f1fe73828ade7146de5/pratinho/imagens/imagem%20inteira" alt="">
-            <img src="URL_DA_SUA_IMAGEM_4" alt="">
-        </div>
-
+    <!-- ==== BLOCO DE BOTÕES ==== -->
+    <div class="buttons">
+        <a href="https://luvics.com.br/pratinho" target="_blank" class="btn btn-receitas">
+            🍎 +101 Receitinhas Saudáveis
+        </a>
+        <a href="#" target="_blank" class="btn btn-sono">
+            🌙 Roteiro do Sono Infantil
+        </a>
+        <a href="https://luvics.com.br/desmame-na-pratica" target="_blank" class="btn btn-desmame">
+            🍼 Curso Desmame na Prática
+        </a>
+        <a href="#" target="_blank" class="btn btn-ml">
+            🛍️ Loja no Mercado Livre
+        </a>
     </div>
 
     <footer>
