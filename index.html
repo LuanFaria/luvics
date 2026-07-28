@@ -26,25 +26,61 @@
       color: var(--text-main);
       line-height: 1.6;
       -webkit-font-smoothing: antialiased;
+      scroll-behavior: smooth;
     }
 
-    /* TOP BRAND BAR */
-    .top-bar {
-      background: var(--primary);
-      padding: 12px 0;
-      text-align: center;
-      font-size: 0.9rem;
-      color: rgba(255,255,255,0.8);
-      font-weight: 600;
-      letter-spacing: 0.5px;
+    /* NAVBAR / PAINEL TECNOLÓGICO SUPERIOR */
+    .navbar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 15px 5%;
+      background: rgba(9, 26, 38, 0.85);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid rgba(16, 185, 129, 0.2);
+      z-index: 1000;
     }
-    .top-bar span { color: var(--accent-orange); }
+
+    .nav-logo {
+      font-size: 1.15rem;
+      font-weight: 800;
+      color: #ffffff;
+      letter-spacing: 1px;
+      text-decoration: none;
+    }
+
+    .nav-logo span {
+      color: var(--accent-orange);
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 25px;
+      list-style: none;
+    }
+
+    .nav-links a {
+      text-decoration: none;
+      color: rgba(255, 255, 255, 0.8);
+      font-size: 0.95rem;
+      font-weight: 600;
+      transition: color 0.3s ease, text-shadow 0.3s ease;
+    }
+
+    .nav-links a:hover {
+      color: var(--accent-green);
+      text-shadow: 0 0 8px rgba(16, 185, 129, 0.5);
+    }
 
     /* HEADER / HERO */
     header {
       background: linear-gradient(135deg, var(--primary), var(--secondary));
       color: #fff;
-      padding: 80px 20px;
+      padding: 140px 20px 80px 20px; /* Padding superior ajustado por causa da navbar fixa */
       text-align: center;
       position: relative;
       overflow: hidden;
@@ -225,7 +261,10 @@
 
     /* RESPONSIVIDADE */
     @media (max-width: 768px) {
-      header { padding: 50px 15px; }
+      .navbar { padding: 15px 20px; }
+      .nav-links { gap: 15px; }
+      .nav-links a { font-size: 0.85rem; }
+      header { padding: 120px 15px 50px 15px; }
       header h1 { font-size: 2.3rem; }
       section { padding: 40px 15px; }
       .card-container { padding: 20px; }
@@ -233,13 +272,19 @@
     }
   </style>
 </head>
-<body>
+<body id="home">
 
-  <div class="top-bar">
-    TECH LUVICS <span>//</span> ENGENHARIA, GEOTECNOLOGIA E DADOS
-  </div>
+  <!-- PAINEL / NAVBAR SUPERIOR -->
+  <nav class="navbar">
+    <a href="#home" class="nav-logo">TECH <span>LUVICS</span></a>
+    <ul class="nav-links">
+      <li><a href="#home">Home</a></li>
+      <li><a href="#curso">Curso</a></li>
+      <li><a href="#sobre">Sobre / Portfólio</a></li>
+    </ul>
+  </nav>
 
-  <!-- HEADER -->
+  <!-- HEADER / HERO -->
   <header>
     <h1>TECH LUVICS</h1>
     <p>Transforme conhecimento em renda com geotecnologia e QGIS</p>
@@ -297,6 +342,15 @@
           <img src="https://github.com/LuanFaria/GEOCODELAB/blob/main/IMG/curso.png?raw=true" alt="Curso de QGIS" />
         </div>
       </div>
+    </div>
+  </section>
+
+  <!-- SEÇÃO SOBRE / PORTFÓLIO -->
+  <section id="sobre">
+    <div class="card-container" style="text-align: center; max-width: 800px; margin: 0 auto;">
+      <h2>💼 Sobre & Portfólio</h2>
+      <p>Aqui você pode destacar a sua trajetória profissional, suas principais competências em geoprocessamento e os projetos de destaque que já desenvolveu no mercado.</p>
+      <p style="color: var(--text-main); font-weight: 600; margin-top: 20px;">[ Espaço reservado para adicionar os seus projetos, cases de sucesso e experiências ]</p>
     </div>
   </section>
 
