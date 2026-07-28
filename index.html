@@ -5,112 +5,125 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>TECH LUVICS | Geoprocessamento e Renda</title>
   <style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
+
     :root {
-      --primary: #091a26;
-      --secondary: #103b31;
-      --accent-orange: #ff9800;
-      --accent-green: #10b981;
-      --bg-light: #f8fafc;
-      --text-main: #1e293b;
-      --text-muted: #64748b;
-      --card-bg: #ffffff;
-      --shadow: 0 20px 40px -15px rgba(15, 45, 63, 0.1);
-      --radius: 16px;
+      /* Nova Paleta Tech / SaaS */
+      --bg-dark: #070B14;
+      --bg-light: #F8FAFC;
+      --card-bg: #FFFFFF;
+      --primary-accent: #2563EB; /* Azul Tech Moderno */
+      --primary-hover: #1D4ED8;
+      --secondary-accent: #0EA5E9;
+      --text-main: #0F172A;
+      --text-muted: #64748B;
+      --text-light: #F1F5F9;
+      
+      --shadow-sm: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+      --shadow-lg: 0 20px 40px -15px rgba(15, 23, 42, 0.1);
+      --radius: 20px;
     }
 
     * { box-sizing: border-box; margin: 0; padding: 0; }
     
     body {
-      font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+      font-family: 'Inter', system-ui, -apple-system, sans-serif;
       background-color: var(--bg-light);
       color: var(--text-main);
-      line-height: 1.6;
+      line-height: 1.7;
       -webkit-font-smoothing: antialiased;
       scroll-behavior: smooth;
     }
 
-    /* NAVBAR / PAINEL TECNOLÓGICO SUPERIOR */
+    /* NAVBAR / PAINEL SUPERIOR */
     .navbar {
       position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
+      top: 0; left: 0; width: 100%;
       display: flex;
       justify-content: space-between;
       align-items: center;
-      padding: 15px 5%;
-      background: rgba(9, 26, 38, 0.85);
-      backdrop-filter: blur(12px);
-      border-bottom: 1px solid rgba(16, 185, 129, 0.2);
+      padding: 20px 8%;
+      background: rgba(7, 11, 20, 0.75);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.05);
       z-index: 1000;
+      transition: all 0.3s ease;
     }
 
     .nav-logo {
-      font-size: 1.15rem;
+      font-size: 1.25rem;
       font-weight: 800;
       color: #ffffff;
-      letter-spacing: 1px;
+      letter-spacing: -0.5px;
       text-decoration: none;
     }
 
     .nav-logo span {
-      color: var(--accent-orange);
+      color: var(--secondary-accent);
     }
 
     .nav-links {
       display: flex;
-      gap: 25px;
+      gap: 30px;
       list-style: none;
     }
 
     .nav-links a {
       text-decoration: none;
-      color: rgba(255, 255, 255, 0.8);
+      color: rgba(255, 255, 255, 0.7);
       font-size: 0.95rem;
-      font-weight: 600;
-      transition: color 0.3s ease, text-shadow 0.3s ease;
+      font-weight: 500;
+      transition: color 0.3s ease;
     }
 
     .nav-links a:hover {
-      color: var(--accent-green);
-      text-shadow: 0 0 8px rgba(16, 185, 129, 0.5);
+      color: #ffffff;
     }
 
-    /* HEADER / HERO */
+    /* HEADER / HERO - Estilo Big Data / IA */
     header {
-      background: linear-gradient(135deg, var(--primary), var(--secondary));
-      color: #fff;
-      padding: 140px 20px 80px 20px; /* Padding superior ajustado por causa da navbar fixa */
+      background-color: var(--bg-dark);
+      background-image: 
+        radial-gradient(circle at 15% 30%, rgba(37, 99, 235, 0.15) 0%, transparent 40%),
+        radial-gradient(circle at 85% 70%, rgba(14, 165, 233, 0.15) 0%, transparent 40%);
+      color: var(--text-light);
+      padding: 180px 20px 100px 20px;
       text-align: center;
       position: relative;
-      overflow: hidden;
     }
-    
-    header::after {
-      content: '';
-      position: absolute;
-      bottom: 0; left: 0; right: 0;
-      height: 4px;
-      background: linear-gradient(90deg, var(--accent-orange), var(--accent-green));
+
+    /* Pequena pílula acima do título */
+    .hero-badge {
+      display: inline-block;
+      padding: 6px 14px;
+      background: rgba(37, 99, 235, 0.2);
+      color: #60A5FA;
+      border-radius: 30px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      margin-bottom: 24px;
+      letter-spacing: 0.5px;
+      border: 1px solid rgba(37, 99, 235, 0.3);
     }
 
     header h1 {
-      font-size: 3.2rem;
+      font-size: 3.5rem;
       font-weight: 800;
-      letter-spacing: 1.5px;
-      margin-bottom: 12px;
+      letter-spacing: -1px;
+      margin-bottom: 18px;
+      line-height: 1.1;
     }
 
     header p {
       font-size: 1.25rem;
       max-width: 650px;
-      margin: 0 auto 24px auto;
-      opacity: 0.95;
+      margin: 0 auto 36px auto;
+      color: #94A3B8;
     }
 
-    /* CTA BUTTONS */
+    /* BOTOES MODERNOS */
     .cta-buttons {
-      margin-top: 24px;
       display: flex;
       justify-content: center;
       gap: 16px;
@@ -119,59 +132,77 @@
 
     .btn {
       text-decoration: none;
-      padding: 14px 28px;
-      background: var(--accent-orange);
+      padding: 14px 32px;
+      background: var(--primary-accent);
       color: white;
-      font-weight: 700;
+      font-weight: 600;
       border-radius: 12px;
       display: inline-flex;
       align-items: center;
       gap: 8px;
-      box-shadow: 0 10px 25px rgba(255, 152, 0, 0.35);
-      transition: all 0.2s ease;
+      transition: all 0.3s ease;
+      border: 1px solid transparent;
     }
 
     .btn.secondary {
-      background: var(--accent-green);
-      box-shadow: 0 10px 25px rgba(16, 185, 129, 0.35);
+      background: transparent;
+      color: white;
+      border: 1px solid rgba(255, 255, 255, 0.2);
     }
 
     .btn:hover {
       transform: translateY(-2px);
-      filter: brightness(1.05);
-      box-shadow: 0 12px 30px rgba(0,0,0,0.15);
+      box-shadow: 0 10px 20px rgba(37, 99, 235, 0.25);
+    }
+
+    .btn.secondary:hover {
+      background: rgba(255, 255, 255, 0.05);
+      border-color: rgba(255, 255, 255, 0.4);
+      box-shadow: none;
     }
 
     /* SECTIONS */
     section {
-      padding: 70px 20px;
+      padding: 80px 20px;
       max-width: 1100px;
       margin: auto;
     }
 
-    .section-title {
-      font-size: 2.2rem;
-      color: var(--primary);
+    .section-intro {
       text-align: center;
-      margin-bottom: 40px;
-      font-weight: 800;
+      max-width: 700px;
+      margin: -30px auto 60px auto;
     }
 
-    /* CARD CONTAINER */
+    .section-title {
+      font-size: 2.5rem;
+      color: var(--text-main);
+      text-align: center;
+      margin-bottom: 50px;
+      font-weight: 800;
+      letter-spacing: -0.5px;
+    }
+
+    /* CARDS ESTILO SAAS */
     .card-container {
       background: var(--card-bg);
       border-radius: var(--radius);
-      box-shadow: var(--shadow);
-      padding: 40px;
+      box-shadow: var(--shadow-sm);
+      padding: 50px;
       margin-bottom: 40px;
-      border: 1px solid rgba(0,0,0,0.04);
+      border: 1px solid #E2E8F0;
+      transition: box-shadow 0.3s ease;
+    }
+
+    .card-container:hover {
+      box-shadow: var(--shadow-lg);
     }
 
     .flex {
       display: flex;
       flex-wrap: wrap;
       align-items: center;
-      gap: 40px;
+      gap: 50px;
     }
 
     .flex .text, .flex .image {
@@ -180,95 +211,133 @@
 
     .flex img {
       width: 100%;
-      border-radius: 12px;
-      box-shadow: var(--shadow);
+      border-radius: 16px;
+      box-shadow: 0 15px 30px -10px rgba(0,0,0,0.1);
       display: block;
-      transition: transform 0.3s ease;
+      transition: transform 0.4s ease;
     }
 
-    .flex img:hover {
-      transform: scale(1.02);
+    .flex:hover img {
+      transform: translateY(-5px);
     }
 
-    h2 { font-size: 1.8rem; margin-bottom: 16px; color: var(--primary); }
-    p { margin-bottom: 16px; color: var(--text-muted); font-size: 1.05rem; }
-
-    ul {
-      list-style: none;
-      margin-bottom: 24px;
+    .text h2 {
+      font-size: 2rem;
+      margin-bottom: 16px;
+      color: var(--text-main);
+      font-weight: 700;
+      letter-spacing: -0.5px;
     }
+
+    .text p { margin-bottom: 24px; color: var(--text-muted); font-size: 1.05rem; }
+
+    ul { list-style: none; margin-bottom: 30px; }
 
     ul li {
       position: relative;
-      padding-left: 28px;
-      margin-bottom: 12px;
+      padding-left: 32px;
+      margin-bottom: 14px;
       color: var(--text-main);
       font-weight: 500;
     }
 
     ul li::before {
-      content: '✔';
+      content: '✓';
       position: absolute;
       left: 0;
-      color: var(--accent-green);
+      top: 0;
+      background: #DBEAFE;
+      color: var(--primary-accent);
+      width: 20px;
+      height: 20px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 50%;
+      font-size: 0.75rem;
       font-weight: bold;
     }
 
     blockquote {
       font-style: italic;
-      background: #f1f5f9;
-      padding: 20px;
-      border-left: 5px solid var(--accent-green);
-      margin: 20px 0;
-      border-radius: 0 8px 8px 0;
-      color: var(--text-main);
+      background: #F8FAFC;
+      padding: 24px;
+      border-left: 4px solid var(--primary-accent);
+      margin: 24px 0;
+      border-radius: 0 12px 12px 0;
+      color: var(--text-muted);
+      font-size: 1.05rem;
     }
 
-    /* GALERIA */
+    /* GALERIA PORTFÓLIO */
     .gallery {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-      gap: 24px;
-      margin-top: 20px;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 30px;
+    }
+
+    .gallery-item {
+      overflow: hidden;
+      border-radius: 16px;
+      box-shadow: var(--shadow-sm);
     }
 
     .gallery-item img {
       width: 100%;
-      height: 220px;
+      height: 240px;
       object-fit: cover;
-      border-radius: 12px;
-      box-shadow: var(--shadow);
-      transition: transform 0.3s ease;
+      display: block;
+      transition: transform 0.5s ease;
     }
 
-    .gallery-item img:hover {
-      transform: translateY(-5px);
+    .gallery-item:hover img {
+      transform: scale(1.05);
     }
 
     /* RODAPÉ */
     footer {
-      background: var(--primary);
+      background: var(--bg-dark);
       color: white;
       text-align: center;
-      padding: 60px 20px;
+      padding: 80px 20px;
       margin-top: 40px;
+      border-top: 1px solid rgba(255, 255, 255, 0.05);
     }
 
-    footer h2 { color: white; font-size: 2rem; margin-bottom: 16px; }
-    footer p { color: rgba(255,255,255,0.8); max-width: 600px; margin: 0 auto 24px auto; }
-    footer a { color: #ffb46f; text-decoration: none; font-weight: 600; }
-    footer a:hover { text-decoration: underline; }
+    footer h2 { 
+      color: white; 
+      font-size: 2.2rem; 
+      margin-bottom: 20px; 
+      letter-spacing: -0.5px;
+    }
+    
+    footer p { 
+      color: #94A3B8; 
+      max-width: 600px; 
+      margin: 0 auto 30px auto; 
+    }
+    
+    footer a.link-email { 
+      color: var(--secondary-accent); 
+      text-decoration: none; 
+      font-weight: 500; 
+    }
+    
+    footer a.link-email:hover { 
+      color: #ffffff; 
+    }
 
     /* RESPONSIVIDADE */
     @media (max-width: 768px) {
-      .navbar { padding: 15px 20px; }
-      .nav-links { gap: 15px; }
-      .nav-links a { font-size: 0.85rem; }
-      header { padding: 120px 15px 50px 15px; }
-      header h1 { font-size: 2.3rem; }
-      section { padding: 40px 15px; }
-      .card-container { padding: 20px; }
+      .navbar { padding: 15px 5%; flex-direction: column; gap: 15px; }
+      header { padding: 160px 15px 70px 15px; }
+      header h1 { font-size: 2.4rem; }
+      .section-intro { margin-top: 20px; }
+      section { padding: 50px 15px; }
+      .card-container { padding: 30px 20px; }
+      .flex { gap: 30px; }
       .flex .text, .flex .image { flex: 1 1 100%; }
+      .gallery-item img { height: 200px; }
     }
   </style>
 </head>
@@ -276,29 +345,24 @@
 
   <!-- PAINEL / NAVBAR SUPERIOR -->
   <nav class="navbar">
-    <a href="#home" class="nav-logo">TECH <span>LUVICS</span></a>
+    <a href="/" class="nav-logo">TECH<span>LUVICS</span></a>
     <ul class="nav-links">
-      <li><a href="home">Home</a></li>
-      <li><a href="curso">Curso</a></li>
-      <li><a href="sobre">Sobre / Portfólio</a></li>
+      <li><a href="/">Home</a></li>
+      <li><a href="/curso">Curso</a></li>
+      <li><a href="/sobre">Sobre / Portfólio</a></li>
     </ul>
   </nav>
 
   <!-- HEADER / HERO -->
   <header>
-    <h1>TECH LUVICS</h1>
-    <p>Transforme conhecimento em renda com geotecnologia e QGIS</p>
+    <div class="hero-badge">Inovação em Geotecnologia</div>
+    <h1>Transforme dados espaciais<br>em oportunidades reais</h1>
+    <p>Acreditamos que a geotecnologia deve ser acessível e lucrativa. Transforme seu conhecimento de QGIS e IA em soluções que o mercado realmente busca.</p>
     <div class="cta-buttons">
-      <a href="https://pay.kiwify.com.br/7QhAguk" class="btn" target="_blank" rel="noopener">📘 Ver eBook</a>
-      <a href="curso/" class="btn secondary">🎓 Ver Curso Completo</a>
+      <a href="https://pay.kiwify.com.br/7QhAguk" class="btn" target="_blank" rel="noopener">Acessar eBook</a>
+      <a href="/curso" class="btn secondary">Conhecer o Curso</a>
     </div>
   </header>
-
-  <!-- DIFERENCIAL / INTRO -->
-  <section style="text-align: center; max-width: 800px; padding-bottom: 20px;">
-    <h2 style="font-size: 2rem; margin-bottom: 16px;">Por que escolher a Tech Luvics?</h2>
-    <p style="font-size: 1.15rem;">Porque acreditamos que a geotecnologia deve ser simples, acessível e lucrativa. Transformamos dados em insights e insights em oportunidades — para qualquer pessoa, em qualquer lugar.</p>
-  </section>
 
   <!-- EBOOK -->
   <section id="ebook">
@@ -308,12 +372,12 @@
           <img src="https://github.com/LuanFaria/GEOCODELAB/blob/main/IMG/capa%20ebook.png?raw=true" alt="eBook Geoprocessamento" />
         </div>
         <div class="text">
-          <h2>📘 eBook: Como Ganhar Dinheiro com Geoprocessamento</h2>
-          <p>Descubra como aplicar geotecnologia na prática para gerar renda. Com esse eBook, você vai aprender:</p>
+          <h2>Como Ganhar Dinheiro com Geoprocessamento</h2>
+          <p>Descubra como aplicar geotecnologia na prática para gerar renda. Este eBook é o mapa exato para você começar do zero.</p>
           <ul>
-            <li>Como encontrar nichos que pagam por análise espacial</li>
-            <li>Ferramentas gratuitas para trabalhar de casa</li>
-            <li>Como atrair seus primeiros clientes</li>
+            <li>Estratégias para encontrar nichos de alta demanda</li>
+            <li>Stack de ferramentas gratuitas para home office</li>
+            <li>Técnicas de prospecção para seus primeiros clientes</li>
           </ul>
           <a href="https://pay.kiwify.com.br/7QhAguk" class="btn" target="_blank" rel="noopener">Quero o eBook</a>
         </div>
@@ -326,17 +390,17 @@
     <div class="card-container">
       <div class="flex">
         <div class="text">
-          <h2>🎓 Curso Completo: Do Zero à Renda com QGIS</h2>
+          <h2>Do Zero à Renda com QGIS</h2>
           <blockquote>
-            “Não é um curso de como vender curso, aqui você vai aprender do zero a como montar mapas, e fazer renda extra com um trabalho de verdade.”
+            “Não é um curso sobre como vender curso. Aqui você vai aprender na prática como montar mapas e fechar projetos reais.”
           </blockquote>
-          <p>Ideal para quem nunca abriu o QGIS ou para quem já conhece, mas ainda não sabe como transformar isso em dinheiro. No curso, você vai aprender:</p>
+          <p>Seja você um iniciante absoluto ou alguém que já domina as ferramentas mas não sabe como monetizar. Você vai aprender:</p>
           <ul>
-            <li>Instalação e uso prático do QGIS</li>
-            <li>Análise espacial, sensoriamento remoto e NDVI</li>
-            <li>Precificação e prospecção de clientes reais</li>
+            <li>Domínio prático e instalação do ecossistema QGIS</li>
+            <li>Análise espacial avançada, Sensoriamento e índices (NDVI)</li>
+            <li>Precificação de serviços e posicionamento de mercado</li>
           </ul>
-          <a href="curso/" class="btn secondary">Entrar no Curso</a>
+          <a href="/curso" class="btn">Entrar no Curso</a>
         </div>
         <div class="image">
           <img src="https://github.com/LuanFaria/GEOCODELAB/blob/main/IMG/curso.png?raw=true" alt="Curso de QGIS" />
@@ -345,31 +409,32 @@
     </div>
   </section>
 
-  <!-- GALERIA -->
+  <!-- GALERIA PORTFÓLIO -->
   <section>
-    <h2 class="section-title">Tecnologia e Prática em Ação</h2>
-    <div class="gallery" aria-label="Galeria de imagens">
+    <h2 class="section-title">Tecnologia Aplicada</h2>
+    <div class="gallery" aria-label="Galeria de projetos">
       <div class="gallery-item">
-        <img src="https://github.com/LuanFaria/GEOCODELAB/blob/main/IMG/PROCESS_IMG.png?raw=true" alt="Machine Learning" />
+        <img src="https://github.com/LuanFaria/GEOCODELAB/blob/main/IMG/PROCESS_IMG.png?raw=true" alt="Processamento de Imagens e IA" title="Processamento de Imagens e IA" />
       </div>
       <div class="gallery-item">
-        <img src="https://github.com/LuanFaria/GEOCODELAB/blob/main/IMG/tecnologia_campo.jpeg?raw=true" alt="Campo / Drone" />
+        <img src="https://github.com/LuanFaria/GEOCODELAB/blob/main/IMG/tecnologia_campo.jpeg?raw=true" alt="Tecnologia de Campo e Drones" title="Levantamento de Campo" />
       </div>
       <div class="gallery-item">
-        <img src="https://github.com/LuanFaria/GEOCODELAB/blob/main/IMG/ndvi.png?raw=true" alt="Mapa NDVI" />
+        <img src="https://github.com/LuanFaria/GEOCODELAB/blob/main/IMG/ndvi.png?raw=true" alt="Análise de NDVI e Índices" title="Análise Espacial - NDVI" />
       </div>
     </div>
   </section>
 
   <!-- FOOTER -->
   <footer>
-    <h2>Pronto para transformar seu conhecimento em liberdade financeira?</h2>
-    <p>Vamos juntos. Com o apoio certo, qualquer um pode fazer da geotecnologia uma fonte de renda real.</p>
+    <h2>Pronto para escalar sua carreira?</h2>
+    <p>Vamos juntos. Com as ferramentas e a orientação certa, você pode construir sua independência usando a geotecnologia.</p>
     <div class="cta-buttons">
-      <a href="https://pay.kiwify.com.br/7QhAguk" class="btn" target="_blank" rel="noopener">Acessar eBook</a>
-      <a href="curso/" class="btn secondary">Entrar no Curso</a>
+      <a href="/curso" class="btn">Começar Agora</a>
     </div>
-    <p style="margin-top: 30px;">📧 Contato: <a href="mailto:contato@techluvics.com.br">contato@techluvics.com.br</a></p>
+    <p style="margin-top: 40px; font-size: 0.95rem;">
+      Contato direto: <a href="mailto:contato@techluvics.com.br" class="link-email">contato@techluvics.com.br</a>
+    </p>
   </footer>
 
 </body>
