@@ -86,18 +86,19 @@
     .header {
       background-color: var(--bg-dark);
       background-image: 
-        radial-gradient(circle at 15% 30%, rgba(5, 150, 105, 0.15) 0%, transparent 45%),
-        radial-gradient(circle at 85% 70%, rgba(214, 197, 165, 0.1) 0%, transparent 45%);
+        radial-gradient(circle at 15% 30%, rgba(5, 150, 105, 0.2) 0%, transparent 45%),
+        radial-gradient(circle at 85% 70%, rgba(214, 197, 165, 0.12) 0%, transparent 45%);
       color: var(--text-light);
-      padding: 180px 20px 70px 20px;
+      padding: 180px 20px 80px 20px;
       text-align: center;
+      position: relative;
     }
 
     .hero h1 {
       font-size: 3rem;
       font-weight: 800;
       letter-spacing: -1px;
-      margin-bottom: 12px;
+      margin-bottom: 15px;
       animation: fadeIn 1s ease both;
     }
 
@@ -110,43 +111,142 @@
     }
 
     /* Sections */
-    section { padding: 60px 0; position: relative; }
+    section { padding: 40px 0; position: relative; }
 
-    .sobre {
+    /* SEÇÃO QUEM SOMOS / FUNDADOR */
+    .sobre-principal {
       background: var(--card-bg);
       border-radius: var(--radius);
-      padding: 50px;
+      padding: 60px;
       box-shadow: var(--shadow-sm);
       border: 1px solid #EBE8E0;
-      margin-top: -30px;
+      margin-top: -40px;
       animation: fadeUp .6s ease both;
+      position: relative;
+      z-index: 10;
     }
 
-    .sobre h2 {
-      color: var(--text-main);
+    .fundador-grid {
+      display: grid;
+      grid-template-columns: 320px 1fr;
+      gap: 50px;
+      align-items: center;
+    }
+
+    .fundador-foto-wrapper {
+      position: relative;
       text-align: center;
-      margin-bottom: 24px;
+    }
+
+    .fundador-foto-wrapper img {
+      width: 260px;
+      height: 260px;
+      border-radius: 24px;
+      object-fit: cover;
+      box-shadow: var(--shadow-lg);
+      border: 3px solid var(--secondary-accent);
+    }
+
+    .fundador-badge {
+      position: absolute;
+      bottom: -15px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: var(--bg-dark);
+      color: var(--secondary-accent);
+      padding: 6px 16px;
+      border-radius: 20px;
+      font-size: 0.85rem;
+      font-weight: 700;
+      border: 1px solid rgba(214, 197, 165, 0.3);
+      white-space: nowrap;
+    }
+
+    .fundador-info h2 {
+      color: var(--text-main);
       font-size: 2.2rem;
       font-weight: 800;
+      margin-bottom: 16px;
+      letter-spacing: -0.5px;
     }
 
-    .sobre p {
+    .fundador-info p {
       color: var(--text-muted);
       font-size: 1.05rem;
       margin-bottom: 16px;
     }
 
-    /* Cards grid */
+    .citacao {
+      margin-top: 25px;
+      padding: 20px;
+      background: #F4F2EC;
+      border-left: 4px solid var(--primary-accent);
+      border-radius: 12px;
+      font-style: italic;
+      color: var(--text-main);
+      font-size: 1rem;
+    }
+
+    /* ESPECIALIDADES TECNOLÓGICAS */
+    .especialidades-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 20px;
+      margin-top: 40px;
+    }
+
+    .esp-card {
+      background: var(--card-bg);
+      padding: 24px;
+      border-radius: var(--radius);
+      border: 1px solid #EBE8E0;
+      box-shadow: var(--shadow-sm);
+      text-align: center;
+      transition: transform 0.3s ease, border-color 0.3s ease;
+    }
+
+    .esp-card:hover {
+      transform: translateY(-4px);
+      border-color: var(--primary-accent);
+      box-shadow: var(--shadow-lg);
+    }
+
+    .esp-icone {
+      background: var(--primary-light);
+      color: var(--primary-accent);
+      width: 50px;
+      height: 50px;
+      border-radius: 14px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 15px auto;
+    }
+
+    .esp-card h4 {
+      font-size: 1.05rem;
+      font-weight: 700;
+      color: var(--text-main);
+      margin-bottom: 6px;
+    }
+
+    .esp-card p {
+      font-size: 0.9rem;
+      color: var(--text-muted);
+    }
+
+    /* Cards grid (Missão, Visão, Valores) */
     .sobre-blocos {
       display: grid;
       gap: 24px;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      margin-top: 20px;
     }
 
     .bloco {
       background: var(--card-bg);
       border-radius: var(--radius);
-      padding: 30px;
+      padding: 35px;
       box-shadow: var(--shadow-sm);
       border: 1px solid #EBE8E0;
       transition: transform .3s ease, box-shadow .3s ease;
@@ -158,19 +258,19 @@
     }
 
     .bloco h3 {
-      margin-bottom: 12px;
+      margin-bottom: 15px;
       color: var(--text-main);
       display: flex;
       align-items: center;
-      gap: 10px;
-      font-size: 1.3rem;
+      gap: 12px;
+      font-size: 1.35rem;
       font-weight: 700;
     }
 
-    .bloco svg { width: 24px; height: 24px; color: var(--primary-accent); }
-    .bloco p, .bloco li { color: var(--text-muted); }
+    .bloco i { width: 24px; height: 24px; color: var(--primary-accent); }
+    .bloco p, .bloco li { color: var(--text-muted); font-size: 0.98rem; }
     .bloco ul { padding-left: 20px; margin-top: 8px; list-style: disc; }
-    .bloco li { margin-bottom: 6px; }
+    .bloco li { margin-bottom: 8px; }
 
     /* CTA */
     .cta {
@@ -179,11 +279,12 @@
         radial-gradient(circle at 15% 30%, rgba(5, 150, 105, 0.15) 0%, transparent 45%),
         radial-gradient(circle at 85% 70%, rgba(214, 197, 165, 0.1) 0%, transparent 45%);
       border-radius: var(--radius);
-      padding: 50px;
+      padding: 60px;
       color: #fff;
       box-shadow: var(--shadow-lg);
       text-align: center;
-      margin-top: 20px;
+      margin-top: 40px;
+      margin-bottom: 40px;
     }
 
     .cta h2 { margin-bottom: 12px; font-size: 2.2rem; font-weight: 800; }
@@ -230,7 +331,6 @@
       color: #A3A8A6;
       text-align: center;
       padding: 40px 0;
-      margin-top: 60px;
       border-top: 1px solid rgba(214, 197, 165, 0.1);
       font-size: .95rem;
     }
@@ -239,12 +339,17 @@
     @keyframes fadeUp { from{opacity:0;transform:translateY(10px)} to{opacity:1;transform:translateY(0)}}
     @keyframes fadeIn { from{opacity:0} to{opacity:1}}
 
+    @media (max-width: 900px) {
+      .fundador-grid { grid-template-columns: 1fr; text-align: center; justify-items: center; }
+      .citacao { text-align: left; }
+    }
+
     @media (max-width: 768px) {
       .navbar { padding: 15px 5%; flex-direction: column; gap: 15px; }
       .header { padding: 160px 15px 50px 15px; }
       .hero h1 { font-size: 2.2rem; }
-      .sobre { padding: 30px 20px; }
-      .cta { padding: 30px 20px; }
+      .sobre-principal { padding: 35px 20px; }
+      .cta { padding: 40px 20px; }
     }
   </style>
 </head>
@@ -264,30 +369,54 @@
   <header class="header">
     <div class="container hero">
       <h1>Transformando conhecimento em oportunidade no geoprocessamento</h1>
-      <p>Conteúdo prático, metodologia clara e foco em resultados reais.</p>
+      <p>Conteúdo prático, metodologia clara e foco em resultados reais para profissionais do futuro.</p>
     </div>
   </header>
 
-  <!-- Sobre -->
+  <!-- Sobre / Fundador -->
   <section class="container">
-    <div class="sobre">
-      <h2>Quem Somos</h2>
-      <p>
-        Somos a <strong>Tech Luvics</strong>. Nossa missão é tornar o geoprocessamento acessível, prático e rentável.
-        Ajudamos profissionais e empresas a transformar dados geoespaciais em decisões e projetos que geram valor —
-        sem complicação e com aplicação imediata.
-      </p>
-      <p>
-        À frente do projeto, <strong>Luan Faria</strong> reúne experiência prática e didática objetiva.
-        Depois de atuar em campo e em projetos reais, percebemos a falta de materiais claros para quem deseja
-        <strong>começar do zero e viver de geoprocessamento</strong>. Daí nasceram nosso eBook e curso completo.
-      </p>
+    <div class="sobre-principal">
+      <div class="fundador-grid">
+        <div class="fundador-foto-wrapper">
+          <img src="https://github.com/LuanFaria/GEOCODELAB/blob/main/IMG/drone.jpeg?raw=true" alt="Luan Faria">
+          <div class="fundador-badge">Fundador & Instrutor</div>
+        </div>
+        <div class="fundador-info">
+          <h2>Quem está por trás da Tech Luvics</h2>
+          <p>
+            Somos a <strong>Tech Luvics</strong>. Nossa missão é democratizar o geoprocessamento, transformando ferramentas técnicas complexas em soluções lucrativas e acessíveis para qualquer profissional ou estudante.
+          </p>
+          <p>
+            À frente do projeto, <strong>Luan Faria</strong> acumula vasta experiência prática em campo e no desenvolvimento de tecnologias para o setor geoespacial. Percebendo a carência de materiais objetivos no mercado, uniu didática e engenharia para criar formações completas.
+          </p>
+          <div class="citacao">
+            "Trabalho com geotecnologias aplicadas à análise de dados espaciais, agricultura de precisão, machine learning e sensoriamento remoto. Criei esta plataforma para mostrar que qualquer pessoa pode gerar alta renda com geoprocessamento — direto de casa."
+          </div>
+        </div>
+      </div>
 
-      <div style="display:flex;align-items:center;gap:24px;margin-top:30px;flex-wrap:wrap;">
-        <img src="https://github.com/LuanFaria/GEOCODELAB/blob/main/IMG/drone.jpeg?raw=true" alt="Foto de Luan Faria" style="width:140px;height:140px;border-radius:50%;object-fit:cover;box-shadow:var(--shadow-sm);border:3px solid var(--primary-accent);">
-        <p style="color:var(--text-main);font-size:1.05rem;max-width:700px;font-style:italic;">
-          "Trabalho com geotecnologias aplicadas à análise de dados espaciais, agricultura de precisão, machine learning e sensoriamento remoto. Com base nisso, criei materiais que mostram como qualquer pessoa pode gerar renda a partir dessas ferramentas — mesmo sem sair de casa."
-        </p>
+      <!-- Especialidades Técnicas -->
+      <div class="especialidades-grid">
+        <div class="esp-card">
+          <div class="esp-icone"><i data-lucide="map"></i></div>
+          <h4>Geoprocessamento</h4>
+          <p>Mapeamento e análise espacial avançada.</p>
+        </div>
+        <div class="esp-card">
+          <div class="esp-icone"><i data-lucide="cpu"></i></div>
+          <h4>Sensoriamento Remoto</h4>
+          <p>Processamento e leitura de imagens orbitais.</p>
+        </div>
+        <div class="esp-card">
+          <div class="esp-icone"><i data-lucide="trending-up"></i></div>
+          <h4>Agricultura de Precisão</h4>
+          <p>Tecnologia aplicada ao campo e lavouras.</p>
+        </div>
+        <div class="esp-card">
+          <div class="esp-icone"><i data-lucide="code"></i></div>
+          <h4>Automação & IA</h4>
+          <p>Modelagem preditiva e scripts eficientes.</p>
+        </div>
       </div>
     </div>
   </section>
@@ -297,19 +426,19 @@
     <div class="sobre-blocos">
       <div class="bloco">
         <h3><i data-lucide="target"></i> Missão</h3>
-        <p>Entregar conhecimento técnico de forma prática e aplicável, ajudando você a transformar dados em oportunidades reais.</p>
+        <p>Entregar conhecimento técnico avançado de forma extremamente didática e aplicável, permitindo que nossos alunos transformem dados brutos em oportunidades reais e negócios de sucesso.</p>
       </div>
       <div class="bloco">
         <h3><i data-lucide="eye"></i> Visão</h3>
-        <p>Acreditamos que o geoprocessamento não precisa ser complexo. Com método e ferramentas certas, qualquer pessoa cria projetos incríveis e lucrativos.</p>
+        <p>Ser referência nacional na capacitação em geotecnologias, provando que ferramentas poderosas não precisam ser difíceis de dominar quando se tem o método correto.</p>
       </div>
       <div class="bloco">
         <h3><i data-lucide="heart"></i> Valores</h3>
         <ul>
-          <li><strong>Clareza:</strong> direto ao ponto, sem jargões desnecessários.</li>
-          <li><strong>Praticidade:</strong> foco no que gera resultado.</li>
-          <li><strong>Acessibilidade:</strong> conteúdo para todos os níveis.</li>
-          <li><strong>Resultados:</strong> aprender, aplicar e colher retorno.</li>
+          <li><strong>Clareza:</strong> Conteúdo direto ao ponto, sem enrolação.</li>
+          <li><strong>Praticidade:</strong> Foco absoluto no que gera retorno financeiro.</li>
+          <li><strong>Acessibilidade:</strong> Do iniciante ao profissional experiente.</li>
+          <li><strong>Inovação:</strong> Sempre atualizado com as tendências do mercado.</li>
         </ul>
       </div>
     </div>
@@ -318,10 +447,10 @@
   <!-- CTA -->
   <section class="container">
     <div class="cta">
-      <h2>Pronto para dar o próximo passo?</h2>
-      <p>Conheça nossos materiais e acelere sua jornada no geoprocessamento.</p>
+      <h2>Pronto para dar o próximo passo na sua carreira?</h2>
+      <p>Conheça nossos treinamentos exclusivos e domine o mercado de geotecnologias.</p>
       <div class="botoes">
-        <a class="btn btn-primary" href="https://pay.kiwify.com.br/7QhAguk">📘 Conhecer o eBook / Curso</a>
+        <a class="btn btn-primary" href="https://pay.kiwify.com.br/7QhAguk">📘 Quero Garantir Minha Vaga</a>
         <a class="btn btn-secondary" href="/curso">🎓 Ver Detalhes do Curso</a>
       </div>
     </div>
