@@ -2,311 +2,307 @@
 <html lang="pt-BR">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>GEOCODLAB | Geoprocessamento e Renda</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Curso Completo de QGIS | GeoCodLab</title>
   <style>
     :root {
-      --primary: #0f2d3f;
-      --secondary: #195c4d;
-      --accent-orange: #ff9800;
-      --accent-green: #28a745;
-      --bg-light: #f8fafc;
-      --text-main: #1e293b;
-      --text-muted: #64748b;
+      --brand-dark: #0f2d3f;
+      --brand-teal: #195c4d;
+      --accent: #ff9800;
+      --bg: #f4f4f4;
+      --text: #333;
+      --muted: #566;
+      --card: #ffffff;
+      --shadow: 0 10px 30px rgba(16, 30, 40, 0.08);
+      --radius: 14px;
     }
-
-    * { box-sizing: border-box; margin: 0; padding: 0; }
-    
     body {
-      font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
-      background-color: var(--bg-light);
-      color: var(--text-main);
-      line-height: 1.6;
-      -webkit-font-smoothing: antialiased;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      margin: 0;
+      color: var(--text);
+      background: var(--bg);
+      line-height: 1.55;
     }
-
-    /* HEADER / HERO */
-    header {
-      background: linear-gradient(135deg, var(--primary), var(--secondary));
+    .container {
+      width: min(1120px, 92vw);
+      margin-inline: auto;
+    }
+    /* Hero */
+    .hero {
+      width: 100%;
+      background: linear-gradient(90deg, var(--brand-dark), var(--brand-teal));
       color: #fff;
-      padding: 80px 20px;
-      text-align: center;
-      position: relative;
-      overflow: hidden;
+      padding: 60px 0;
     }
-    
-    header::after {
-      content: '';
-      position: absolute;
-      bottom: 0; left: 0; right: 0;
-      height: 4px;
-      background: linear-gradient(90deg, var(--accent-orange), var(--accent-green));
-    }
-
-    header h1 {
-      font-size: 3.2rem;
-      font-weight: 800;
-      letter-spacing: 1.5px;
-      margin-bottom: 12px;
-    }
-
-    header p {
-      font-size: 1.25rem;
-      max-width: 650px;
-      margin: 0 auto 24px auto;
-      opacity: 0.95;
-    }
-
-    /* CTA BUTTONS */
-    .cta-buttons {
-      margin-top: 24px;
-      display: flex;
-      justify-content: center;
-      gap: 16px;
-      flex-wrap: wrap;
-    }
-
-    .btn {
-      text-decoration: none;
-      padding: 14px 28px;
-      background: var(--accent-orange);
-      color: white;
-      font-weight: 700;
-      border-radius: 8px;
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      box-shadow: 0 4px 12px rgba(255, 152, 0, 0.3);
-      transition: all 0.2s ease;
-    }
-
-    .btn.secondary {
-      background: var(--accent-green);
-      box-shadow: 0 4px 12px rgba(40, 167, 69, 0.3);
-    }
-
-    .btn:hover {
-      transform: translateY(-3px);
-      filter: brightness(1.05);
-      box-shadow: 0 6px 16px rgba(0,0,0,0.15);
-    }
-
-    /* SECTIONS */
-    section {
-      padding: 70px 20px;
-      max-width: 1100px;
-      margin: auto;
-    }
-
-    .section-title {
-      font-size: 2.2rem;
-      color: var(--primary);
-      text-align: center;
-      margin-bottom: 40px;
-      font-weight: 700;
-    }
-
-    /* CARD CONTAINER (FLEX) */
-    .card-container {
-      background: #ffffff;
-      border-radius: 16px;
-      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
-      padding: 40px;
-      margin-bottom: 40px;
-      border: 1px solid rgba(0,0,0,0.04);
-    }
-
-    .flex {
+    .hero .container {
       display: flex;
       flex-wrap: wrap;
       align-items: center;
       gap: 40px;
     }
-
-    .flex .text, .flex .image {
-      flex: 1 1 45%;
+    .hero-text {
+      flex: 1;
+      min-width: 320px;
     }
-
-    .flex img {
-      width: 100%;
-      border-radius: 12px;
-      box-shadow: 0 8px 20px rgba(0,0,0,0.08);
-      display: block;
-      transition: transform 0.3s ease;
-    }
-
-    .flex img:hover {
-      transform: scale(1.02);
-    }
-
-    h2 { font-size: 1.8rem; margin-bottom: 16px; color: var(--primary); }
-    p { margin-bottom: 16px; color: var(--text-muted); font-size: 1.05rem; }
-
-    ul {
-      list-style: none;
-      margin-bottom: 24px;
-    }
-
-    ul li {
-      position: relative;
-      padding-left: 28px;
+    .hero-text h1 {
+      font-size: 2.5rem;
       margin-bottom: 10px;
-      color: var(--text-main);
-      font-weight: 500;
     }
-
-    ul li::before {
-      content: '✔';
-      position: absolute;
-      left: 0;
-      color: var(--accent-green);
-      font-weight: bold;
+    .hero-text p {
+      font-size: 1.2rem;
+      opacity: 0.95;
+      margin-bottom: 20px;
     }
-
-    blockquote {
-      font-style: italic;
-      background: #f1f5f9;
+    .hero-offer {
+      background: var(--card);
+      color: var(--text);
       padding: 20px;
-      border-left: 5px solid var(--accent-green);
-      margin: 20px 0;
-      border-radius: 0 8px 8px 0;
-      color: var(--text-main);
-    }
-
-    /* GALERIA */
-    .gallery {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-      gap: 24px;
-      margin-top: 20px;
-    }
-
-    .gallery-item img {
-      width: 100%;
-      height: 220px;
-      object-fit: cover;
-      border-radius: 12px;
-      box-shadow: 0 6px 16px rgba(0,0,0,0.08);
-      transition: transform 0.3s ease;
-    }
-
-    .gallery-item img:hover {
-      transform: translateY(-5px);
-    }
-
-    /* RODAPÉ */
-    footer {
-      background: var(--primary);
-      color: white;
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
       text-align: center;
-      padding: 60px 20px;
+      max-width: 400px;
+    }
+    .hero-offer .desconto {
+      background: var(--accent);
+      color: #fff;
+      padding: 4px 10px;
+      border-radius: 20px;
+      font-size: 0.9rem;
+      display: inline-block;
+      margin-bottom: 8px;
+    }
+    .hero-offer span {
+      display: block;
+      font-size: 1rem;
+      color: var(--muted);
+      text-decoration: line-through;
+    }
+    .hero-offer strong {
+      display: block;
+      font-size: 2rem;
+      color: var(--accent);
+      margin: 5px 0 15px;
+    }
+    .contador {
+      font-size: 1.1rem;
+      color: #c62828;
+      font-weight: bold;
+      margin-top: 10px;
+    }
+    .bonus-card {
+      background: #fff3e0;
+      padding: 15px;
+      border-radius: var(--radius);
+      margin-top: 15px;
+      font-size: 0.95rem;
+      color: var(--brand-dark);
+      box-shadow: var(--shadow);
+    }
+    .btn-comprar {
+      display: inline-block;
+      background: var(--accent);
+      color: #fff;
+      padding: 14px 26px;
+      font-weight: bold;
+      text-decoration: none;
+      border-radius: 10px;
+      box-shadow: 0 8px 18px rgba(255, 152, 0, .25);
+      transition: transform .15s ease, box-shadow .2s ease;
+      margin-top: 15px;
+    }
+    .btn-comprar:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 10px 22px rgba(255, 152, 0, .32);
+    }
+    .hero img {
+      flex: 1;
+      max-width: 480px;
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      object-fit: cover;
+      object-position: center;
+    }
+    /* Benefícios */
+    .beneficios {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 20px;
       margin-top: 40px;
     }
-
-    footer h2 { color: white; font-size: 2rem; margin-bottom: 16px; }
-    footer p { color: rgba(255,255,255,0.8); max-width: 600px; margin: 0 auto 24px auto; }
-    footer a { color: #ffb46f; text-decoration: none; font-weight: 600; }
-    footer a:hover { text-decoration: underline; }
-
-    /* RESPONSIVIDADE */
+    .beneficio-card {
+      background: var(--card);
+      border-radius: var(--radius);
+      padding: 20px;
+      box-shadow: var(--shadow);
+      text-align: center;
+    }
+    .beneficio-card h3 {
+      margin-top: 10px;
+      color: var(--brand-dark);
+    }
+    /* Módulos */
+    .modulos {
+      background: var(--card);
+      border-radius: var(--radius);
+      padding: 30px;
+      box-shadow: var(--shadow);
+      margin-top: 40px;
+    }
+    .modulos h3 {
+      color: var(--brand-teal);
+      margin-top: 20px;
+    }
+    .modulos ul {
+      margin-top: 10px;
+      padding-left: 20px;
+    }
+    .modulos li {
+      margin-bottom: 6px;
+    }
+    /* Garantia */
+    .garantia {
+      background: #fffbe6;
+      border-radius: var(--radius);
+      padding: 20px;
+      margin-top: 40px;
+      box-shadow: var(--shadow);
+      text-align: center;
+    }
+    /* CTA Final */
+    .cta-final {
+      background: var(--brand-teal);
+      color: #fff;
+      padding: 40px 20px;
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      text-align: center;
+      margin: 50px auto;
+      max-width: 900px;
+    }
+    .cta-final h2 {
+      margin-bottom: 15px;
+      font-size: 1.8rem;
+    }
+    .cta-final p {
+      font-size: 1.1rem;
+      margin-bottom: 20px;
+    }
     @media (max-width: 768px) {
-      header { padding: 50px 15px; }
-      header h1 { font-size: 2.3rem; }
-      section { padding: 40px 15px; }
-      .card-container { padding: 20px; }
-      .flex .text, .flex .image { flex: 1 1 100%; }
+      .hero .container {
+        flex-direction: column;
+        text-align: center;
+      }
+      .hero-text h1 {
+        font-size: 2rem;
+      }
+      .hero-text p {
+        font-size: 1rem;
+      }
+      .hero img {
+        max-width: 100%;
+        height: auto;
+        object-fit: contain;
+        margin-top: 20px;
+      }
     }
   </style>
 </head>
 <body>
 
-  <!-- HEADER -->
-  <header>
-    <h1>GEOCODLAB</h1>
-    <p>Transforme conhecimento em renda com geotecnologia e QGIS</p>
-    <div class="cta-buttons">
-      <a href="https://pay.kiwify.com.br/7QhAguk" class="btn" target="_blank" rel="noopener">📘 Ver eBook</a>
-      <a href="https://tech.luvics.com.br/curso" class="btn secondary" target="_blank" rel="noopener">🎓 Ver Curso Completo</a>
-    </div>
-  </header>
-
-  <!-- DIFERENCIAL / INTRO -->
-  <section style="text-align: center; max-width: 800px; padding-bottom: 20px;">
-    <h2 style="font-size: 2rem; margin-bottom: 16px;">Por que escolher a GeoCodLab?</h2>
-    <p style="font-size: 1.15rem;">Porque acreditamos que a geotecnologia deve ser simples, acessível e lucrativa. Transformamos dados em insights e insights em oportunidades — para qualquer pessoa, em qualquer lugar.</p>
-  </section>
-
-  <!-- EBOOK -->
-  <section id="ebook">
-    <div class="card-container">
-      <div class="flex">
-        <div class="image">
-          <img src="https://github.com/LuanFaria/GEOCODELAB/blob/main/IMG/capa%20ebook.png?raw=true" alt="eBook Geoprocessamento" />
-        </div>
-        <div class="text">
-          <h2>📘 eBook: Como Ganhar Dinheiro com Geoprocessamento</h2>
-          <p>Descubra como aplicar geotecnologia na prática para gerar renda. Com esse eBook, você vai aprender:</p>
-          <ul>
-            <li>Como encontrar nichos que pagam por análise espacial</li>
-            <li>Ferramentas gratuitas para trabalhar de casa</li>
-            <li>Como atrair seus primeiros clientes</li>
-          </ul>
-          <a href="https://pay.kiwify.com.br/7QhAguk" class="btn" target="_blank" rel="noopener">Quero o eBook</a>
+  <!-- Hero -->
+  <section class="hero">
+    <div class="container">
+      <div class="hero-text">
+        <h1>Domine o QGIS</h1>
+        <p>Do zero à prática profissional — aprenda e aplique de forma simples e lucrativa.</p>
+        <div class="hero-offer">
+          <div class="desconto">🔥 Oferta Especial Pré-Lançamento</div>
+          <div class="contador">⏳ Promoção até o lançamento do 3º Módulo</div>
+          <span>De R$350</span>
+          <div class="bonus-card">
+             <strong>Por apenas R$97</strong>
+          </div>
+          <a class="btn-comprar" href="https://pay.kiwify.com.br/7QhAguk" target="_blank" rel="noopener">💳 Quero me inscrever agora</a>
         </div>
       </div>
+      <img src="https://github.com/LuanFaria/GEOCODELAB/blob/main/IMG/curso.png?raw=true" alt="Mapa e geotecnologia">
     </div>
   </section>
 
-  <!-- CURSO -->
-  <section id="curso">
-    <div class="card-container">
-      <div class="flex">
-        <div class="text">
-          <h2>🎓 Curso Completo: Do Zero à Renda com QGIS</h2>
-          <blockquote>
-            “Não é um curso de como vender curso, aqui você vai aprender do zero a como montar mapas, e fazer renda extra com um trabalho de verdade.”
-          </blockquote>
-          <p>Ideal para quem nunca abriu o QGIS ou para quem já conhece, mas ainda não sabe como transformar isso em dinheiro. No curso, você vai aprender:</p>
-          <ul>
-            <li>Instalação e uso prático do QGIS</li>
-            <li>Análise espacial, sensoriamento remoto e NDVI</li>
-            <li>Precificação e prospecção de clientes reais</li>
-          </ul>
-          <a href="https://tech.luvics.com.br/curso" class="btn secondary" target="_blank" rel="noopener">Entrar no Curso</a>
-        </div>
-        <div class="image">
-          <img src="https://github.com/LuanFaria/GEOCODELAB/blob/main/IMG/curso.png?raw=true" alt="Curso de QGIS" />
-        </div>
-      </div>
+  <!-- Benefícios -->
+  <section class="container beneficios">
+    <div class="beneficio-card">
+      <h3>Aprenda do Zero</h3>
+      <p>Mesmo sem experiência prévia, você vai dominar o QGIS passo a passo.</p>
+    </div>
+    <div class="beneficio-card">
+      <h3>Aplicações Reais</h3>
+      <p>Conteúdo prático para usar em geoprocessamento, agricultura e planejamento.</p>
+    </div>
+    <div class="beneficio-card">
+      <h3>Acesso Vitalício</h3>
+      <p>Estude no seu ritmo e tenha acesso às futuras atualizações do curso.</p>
+    </div>
+    <div class="beneficio-card">
+      <h3>Bônus Exclusivo</h3>
+      <p>Aprenda a precificar serviços e conquistar seus primeiros clientes.</p>
     </div>
   </section>
 
-  <!-- GALERIA -->
-  <section>
-    <h2 class="section-title">Tecnologia e Prática em Ação</h2>
-    <div class="gallery" aria-label="Galeria de imagens">
-      <div class="gallery-item">
-        <img src="https://github.com/LuanFaria/GEOCODELAB/blob/main/IMG/PROCESS_IMG.png?raw=true" alt="Machine Learning" />
-      </div>
-      <div class="gallery-item">
-        <img src="https://github.com/LuanFaria/GEOCODELAB/blob/main/IMG/tecnologia_campo.jpeg?raw=true" alt="Campo / Drone" />
-      </div>
-      <div class="gallery-item">
-        <img src="https://github.com/LuanFaria/GEOCODELAB/blob/main/IMG/ndvi.png?raw=true" alt="Mapa NDVI" />
-      </div>
-    </div>
+  <!-- Conteúdo -->
+  <section class="container modulos">
+    <h2>O que você vai aprender</h2>
+    <h3>Módulo 1</h3>
+    <ul>
+      <li>Introdução ao QGIS e Configuração Inicial</li>
+      <li>Dados Geográficos e Ferramentas Básicas</li>
+      <li>Edição de Dados Vetoriais</li>
+      <li>Simbologia e Estilização de Camadas</li>
+      <li>Trabalhando com Tabelas e Dados Atributos</li>
+      <li>Operações Espaciais Básicas</li>
+      <li>Layout e Impressão de Mapas</li>
+    </ul>
+    <h3>Módulo 2</h3>
+    <ul>
+      <li>Georreferenciamento de Imagens</li>
+      <li>Análises de Proximidade</li>
+      <li>Modelagem de Terreno com Dados Raster</li>
+      <li>Integração com Dados Externos (PostGIS e Web)</li>
+      <li>Expressões e Calculadora de Campos Avançada</li>
+    </ul>
+    <h3>Módulo 3</h3>
+    <ul>
+      <li>Automação com Modelos no QGIS</li>
+      <li>Introdução ao QGIS com Python (PyQGIS)</li>
+      <li>Análise Avançada com Algoritmos do Processing</li>
+      <li>Publicação de Mapas Online (QGIS Server)</li>
+    </ul>
+    <h3>Módulo 4</h3>
+    <ul>
+      <li>Processamento de Imagens de Satélite no QGIS</li>
+      <li>Análises Temporais no QGIS</li>
+      <li>Introdução a Personalização de Plugins no QGIS</li>
+      <li>QGIS para Planejamento Urbano e Ambiental</li>
+      <li>Encerramento e Discussão de Projetos</li>
+    </ul>
+    <h3>Bônus</h3>
+    <ul>
+      <li>Como fazer precificação e captar clientes</li>
+    </ul>
   </section>
 
-  <!-- FOOTER -->
-  <footer>
-    <h2>Pronto para transformar seu conhecimento em liberdade financeira?</h2>
-    <p>Vamos juntos. Com o apoio certo, qualquer um pode fazer da geotecnologia uma fonte de renda real.</p>
-    <div class="cta-buttons">
-      <a href="https://pay.kiwify.com.br/7QhAguk" class="btn" target="_blank" rel="noopener">Acessar eBook</a>
-      <a href="https://tech.luvics.com.br/curso" class="btn secondary" target="_blank" rel="noopener">Entrar no Curso</a>
-    </div>
-    <p style="margin-top: 30px;">📧 Contato: <a href="mailto:geocodlab@gmail.com">geocodlab@gmail.com</a></p>
-  </footer>
+  <!-- Garantia -->
+  <section class="container garantia">
+    <h2>Garantia Incondicional de 7 dias</h2>
+    <p>Se por qualquer motivo você não ficar satisfeito, solicite o reembolso em até 7 dias e devolveremos 100% do seu investimento.</p>
+  </section>
+
+  <!-- CTA Final -->
+  <section class="cta-final">
+    <h2>Garanta sua vaga agora!</h2>
+    <p>✅ Curso completo de QGIS | ✅ Acesso vitalício | ✅ Certificado | ✅ Bônus em Templates</p>
+    <a class="btn-comprar" href="https://pay.kiwify.com.br/7QhAguk" target="_blank" rel="noopener">💳 Quero começar agora por R$97</a>
+  </section>
 
 </body>
 </html>
