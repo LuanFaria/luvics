@@ -5,107 +5,100 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Curso Completo de QGIS | Tech Luvics</title>
   <style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
+
     :root {
-      --brand-dark: #091a26;
-      --brand-teal: #103b31;
-      --brand-green: #195c4d;
-      --accent: #ff9800;
-      --accent-hover: #f57c00;
-      --bg: #f8fafc;
-      --text: #1e293b;
-      --muted: #64748b;
-      --card: #ffffff;
-      --shadow: 0 20px 40px -15px rgba(15, 45, 63, 0.1);
-      --radius: 16px;
+      --bg-dark: #0A1411; 
+      --bg-light: #F9F8F4; 
+      --card-bg: #FFFFFF;
+      --primary-accent: #059669; 
+      --primary-hover: #047857;
+      --primary-light: #D1FAE5; 
+      --secondary-accent: #D6C5A5; 
+      --secondary-hover: #C2B08D;
+      --text-main: #1C1E1D; 
+      --text-muted: #5C615E; 
+      --text-light: #F3F4F1; 
+      --shadow-sm: 0 4px 6px -1px rgba(10, 20, 17, 0.05);
+      --shadow-lg: 0 20px 40px -15px rgba(10, 20, 17, 0.12);
+      --radius: 20px;
     }
 
     * { box-sizing: border-box; margin: 0; padding: 0; }
 
     body {
-      font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
-      color: var(--text);
-      background: var(--bg);
-      line-height: 1.6;
+      font-family: 'Inter', system-ui, -apple-system, sans-serif;
+      background-color: var(--bg-light);
+      color: var(--text-main);
+      line-height: 1.7;
       -webkit-font-smoothing: antialiased;
       scroll-behavior: smooth;
     }
 
     .container {
-      width: min(1160px, 90vw);
+      width: min(1120px, 92vw);
       margin-inline: auto;
     }
 
-    /* Top Brand Bar */
-    .top-bar {
-      background: var(--brand-dark);
-      padding: 12px 0;
-      text-align: center;
-      font-size: 0.9rem;
-      color: rgba(255,255,255,0.8);
-      font-weight: 600;
-      letter-spacing: 0.5px;
-    }
-    .top-bar span { color: var(--accent); }
-
-    /* Navigation Bar */
+    /* NAVBAR UNIFICADA */
     .navbar {
-      background: var(--brand-dark);
-      padding: 16px 0;
-      position: sticky;
-      top: 0;
-      z-index: 100;
-      border-top: 1px solid rgba(255, 255, 255, 0.05);
-      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
-    }
-
-    .navbar .container {
+      position: fixed;
+      top: 0; left: 0; width: 100%;
       display: flex;
-      justify-content: center;
-      gap: 24px;
-      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: center;
+      padding: 20px 8%;
+      background: rgba(10, 20, 17, 0.85);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border-bottom: 1px solid rgba(214, 197, 165, 0.15);
+      z-index: 1000;
+      transition: all 0.3s ease;
     }
 
-    .nav-btn {
-      color: rgba(255, 255, 255, 0.9);
+    .nav-logo {
+      font-size: 1.25rem;
+      font-weight: 800;
+      color: #ffffff;
+      letter-spacing: -0.5px;
       text-decoration: none;
-      font-weight: 600;
-      font-size: 1rem;
-      padding: 10px 24px;
-      border-radius: 8px;
-      background: rgba(255, 255, 255, 0.05);
-      border: 1px solid rgba(255, 255, 255, 0.1);
-      transition: all 0.2s ease;
     }
 
-    .nav-btn:hover {
-      background: var(--accent);
-      border-color: var(--accent);
-      color: #fff;
-      transform: translateY(-2px);
+    .nav-logo span { color: var(--secondary-accent); }
+
+    .nav-links {
+      display: flex;
+      gap: 30px;
+      list-style: none;
+    }
+
+    .nav-links a {
+      text-decoration: none;
+      color: rgba(255, 255, 255, 0.7);
+      font-size: 0.95rem;
+      font-weight: 500;
+      transition: color 0.3s ease;
+    }
+
+    .nav-links a:hover, .nav-links a.active {
+      color: var(--secondary-accent);
     }
 
     /* Hero */
     .hero {
-      background: linear-gradient(135deg, var(--brand-dark), var(--brand-teal));
-      color: #fff;
-      padding: 70px 0 90px 0;
-      position: relative;
-      overflow: hidden;
-    }
-
-    .hero::after {
-      content: '';
-      position: absolute;
-      bottom: 0; left: 0; right: 0;
-      height: 6px;
-      background: linear-gradient(90deg, var(--accent), #28a745);
+      background-color: var(--bg-dark);
+      background-image: 
+        radial-gradient(circle at 15% 30%, rgba(5, 150, 105, 0.15) 0%, transparent 45%),
+        radial-gradient(circle at 85% 70%, rgba(214, 197, 165, 0.1) 0%, transparent 45%);
+      color: var(--text-light);
+      padding: 180px 20px 90px 20px;
     }
 
     .hero .container {
       display: flex;
       flex-wrap: wrap;
       align-items: center;
-      gap: 50px;
+      gap: 40px;
     }
 
     .hero-text {
@@ -116,52 +109,51 @@
     .hero-text h1 {
       font-size: 3rem;
       font-weight: 800;
-      line-height: 1.2;
-      margin-bottom: 16px;
+      margin-bottom: 15px;
+      letter-spacing: -1px;
     }
 
     .hero-text p {
       font-size: 1.2rem;
-      opacity: 0.9;
+      color: #A3A8A6;
       margin-bottom: 30px;
     }
 
     .hero-offer {
-      background: var(--card);
-      color: var(--text);
-      padding: 28px;
+      background: var(--card-bg);
+      color: var(--text-main);
+      padding: 25px;
       border-radius: var(--radius);
-      box-shadow: var(--shadow);
+      box-shadow: var(--shadow-lg);
       text-align: center;
-      max-width: 420px;
-      border: 1px solid rgba(255,255,255,0.1);
+      max-width: 400px;
+      border: 1px solid #EBE8E0;
     }
 
     .hero-offer .desconto {
-      background: rgba(255, 152, 0, 0.15);
-      color: #d97706;
+      background: rgba(5, 150, 105, 0.15);
+      color: #34D399;
+      border: 1px solid rgba(5, 150, 105, 0.3);
       padding: 6px 14px;
-      border-radius: 30px;
+      border-radius: 20px;
       font-size: 0.85rem;
-      font-weight: 700;
+      font-weight: 600;
       display: inline-block;
       margin-bottom: 12px;
-      text-transform: uppercase;
-      letter-spacing: 0.5px;
     }
 
     .hero-offer span {
       display: block;
-      font-size: 1.05rem;
-      color: var(--muted);
+      font-size: 1rem;
+      color: var(--text-muted);
       text-decoration: line-through;
     }
 
     .hero-offer strong {
       display: block;
-      font-size: 2.4rem;
-      color: var(--accent);
-      margin: 4px 0 12px;
+      font-size: 2.2rem;
+      color: var(--primary-accent);
+      margin: 5px 0 15px;
       font-weight: 800;
     }
 
@@ -169,21 +161,23 @@
       font-size: 0.95rem;
       color: #dc2626;
       font-weight: 600;
-      margin-top: 12px;
-      background: #fef2f2;
-      padding: 8px;
-      border-radius: 8px;
+      margin-top: 10px;
     }
 
     .bonus-card {
-      background: #fffbeb;
-      border: 1px solid #fde68a;
-      padding: 12px;
-      border-radius: 10px;
-      margin-bottom: 16px;
-      font-size: 0.9rem;
-      color: #92400e;
-      font-weight: 500;
+      background: #F4F2EC;
+      padding: 15px;
+      border-radius: 12px;
+      margin-top: 15px;
+      font-size: 0.95rem;
+      color: var(--text-main);
+      border-left: 4px solid var(--primary-accent);
+      text-align: left;
+    }
+
+    .bonus-card span {
+      font-weight: bold;
+      color: var(--primary-accent);
     }
 
     .btn-comprar {
@@ -192,257 +186,173 @@
       justify-content: center;
       gap: 8px;
       width: 100%;
-      background: var(--accent);
+      background: var(--primary-accent);
       color: #fff;
-      padding: 16px 28px;
-      font-size: 1.1rem;
+      padding: 16px 26px;
       font-weight: 700;
       text-decoration: none;
       border-radius: 12px;
-      box-shadow: 0 10px 25px rgba(255, 152, 0, 0.35);
-      transition: all 0.2s ease;
+      margin-top: 20px;
+      box-shadow: 0 10px 20px rgba(5, 150, 105, 0.25);
+      transition: all 0.3s ease;
     }
 
     .btn-comprar:hover {
-      background: var(--accent-hover);
+      background: var(--primary-hover);
       transform: translateY(-2px);
-      box-shadow: 0 12px 30px rgba(255, 152, 0, 0.45);
+      box-shadow: 0 12px 25px rgba(5, 150, 105, 0.35);
     }
 
     .hero img {
       flex: 1;
       max-width: 480px;
       border-radius: var(--radius);
-      box-shadow: var(--shadow);
+      box-shadow: var(--shadow-lg);
       object-fit: cover;
     }
 
-    /* Sobre & Benefícios */
-    .sobre-wrapper {
-      padding-bottom: 20px;
-    }
-
+    /* Benefícios */
     .beneficios {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
       gap: 24px;
-      margin-top: -50px;
-      position: relative;
-      z-index: 10;
+      margin-top: 60px;
       margin-bottom: 60px;
     }
 
     .beneficio-card {
-      background: var(--card);
+      background: var(--card-bg);
       border-radius: var(--radius);
       padding: 30px 24px;
-      box-shadow: var(--shadow);
+      box-shadow: var(--shadow-sm);
       text-align: center;
-      border-top: 5px solid var(--accent);
-      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      border: 1px solid #EBE8E0;
+      transition: transform 0.3s ease;
     }
 
     .beneficio-card:hover {
-      transform: translateY(-8px);
-      box-shadow: 0 25px 50px -12px rgba(15, 45, 63, 0.15);
-    }
-
-    .beneficio-card .icon {
-      font-size: 2rem;
-      margin-bottom: 12px;
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      width: 60px;
-      height: 60px;
-      background: rgba(255, 152, 0, 0.1);
-      border-radius: 50%;
+      transform: translateY(-5px);
+      box-shadow: var(--shadow-lg);
     }
 
     .beneficio-card h3 {
-      margin-top: 10px;
-      color: var(--brand-dark);
-      font-size: 1.2rem;
+      margin-top: 12px;
+      color: var(--text-main);
+      font-weight: 700;
     }
 
     .beneficio-card p {
-      color: var(--muted);
+      color: var(--text-muted);
       font-size: 0.95rem;
       margin-top: 8px;
     }
 
-    /* Bloco Detalhado Sobre a Tech Luvics */
-    .sobre-grid {
-      display: grid;
-      grid-template-columns: 1.2fr 1fr;
-      gap: 40px;
-      align-items: center;
-      background: var(--card);
+    /* Módulos */
+    .modulos {
+      background: var(--card-bg);
       border-radius: var(--radius);
       padding: 50px;
-      box-shadow: var(--shadow);
-      border-left: 5px solid var(--brand-green);
+      box-shadow: var(--shadow-sm);
+      margin-top: 40px;
+      border: 1px solid #EBE8E0;
     }
 
-    .sobre-texto h2 {
+    .modulos h2 {
       font-size: 2.2rem;
-      color: var(--brand-dark);
-      margin-bottom: 20px;
+      color: var(--text-main);
+      margin-bottom: 30px;
       font-weight: 800;
+      text-align: center;
     }
 
-    .sobre-texto p {
-      color: var(--muted);
-      font-size: 1.05rem;
-      margin-bottom: 16px;
-    }
-
-    .sobre-lista {
-      list-style: none;
-      margin-top: 24px;
-    }
-
-    .sobre-lista li {
-      position: relative;
-      padding-left: 30px;
+    .modulos h3 {
+      color: var(--primary-accent);
+      margin-top: 25px;
       margin-bottom: 12px;
-      color: var(--text);
-      font-weight: 600;
-    }
-
-    .sobre-lista li::before {
-      content: '✔';
-      position: absolute;
-      left: 0;
-      color: var(--accent);
-      font-size: 1.1rem;
-    }
-
-    .sobre-brand-box {
-      background: linear-gradient(135deg, var(--brand-dark), var(--brand-teal));
-      color: #fff;
-      border-radius: var(--radius);
-      padding: 50px 30px;
-      text-align: center;
-      box-shadow: 0 15px 30px rgba(16, 59, 49, 0.2);
-      height: 100%;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-    }
-
-    .sobre-brand-box h3 {
-      font-size: 2rem;
-      color: var(--accent);
-      margin-bottom: 8px;
-    }
-
-    .sobre-brand-box span {
-      font-size: 1rem;
-      opacity: 0.9;
-    }
-
-    /* Módulos */
-    .modulos-section {
-      padding: 80px 0;
-    }
-
-    .section-title {
-      text-align: center;
-      font-size: 2.3rem;
-      color: var(--brand-dark);
-      margin-bottom: 50px;
-      font-weight: 800;
-    }
-
-    .modulos-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-      gap: 30px;
-    }
-
-    .modulo-card {
-      background: var(--card);
-      border-radius: var(--radius);
-      padding: 35px;
-      box-shadow: var(--shadow);
-      border-top: 5px solid var(--brand-green);
-    }
-
-    .modulo-card h3 {
-      color: var(--brand-dark);
-      font-size: 1.4rem;
-      margin-bottom: 16px;
+      font-size: 1.25rem;
+      font-weight: 700;
       display: flex;
       align-items: center;
-      gap: 10px;
+      gap: 8px;
     }
 
-    .modulo-card ul {
+    .modulos ul {
       list-style: none;
+      padding-left: 0;
     }
 
-    .modulo-card li {
+    .modulos li {
       position: relative;
-      padding-left: 24px;
-      margin-bottom: 12px;
-      color: var(--text);
-      font-size: 0.98rem;
+      padding-left: 28px;
+      margin-bottom: 10px;
+      color: var(--text-main);
+      font-size: 1rem;
     }
 
-    .modulo-card li::before {
-      content: '✔';
+    .modulos li::before {
+      content: '✓';
       position: absolute;
       left: 0;
-      color: #10b981;
+      top: 0;
+      background: var(--primary-light);
+      color: var(--primary-accent);
+      width: 18px;
+      height: 18px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 50%;
+      font-size: 0.7rem;
       font-weight: bold;
     }
 
     /* Garantia */
     .garantia {
-      background: linear-gradient(135deg, #fefce8, #fef9c3);
-      border: 1px solid #fef08a;
+      background: #F4F2EC;
+      border: 1px solid #EBE8E0;
       border-radius: var(--radius);
       padding: 40px;
-      max-width: 900px;
-      margin: 40px auto;
-      box-shadow: var(--shadow);
-      display: flex;
-      align-items: center;
-      gap: 30px;
+      margin-top: 60px;
+      box-shadow: var(--shadow-sm);
+      text-align: center;
     }
 
-    .garantia-text h2 {
-      color: #854d0e;
-      font-size: 1.6rem;
-      margin-bottom: 8px;
+    .garantia h2 {
+      color: var(--text-main);
+      margin-bottom: 10px;
+      font-weight: 700;
     }
 
-    .garantia-text p {
-      color: #713f12;
-      font-size: 1.05rem;
+    .garantia p {
+      color: var(--text-muted);
+      max-width: 700px;
+      margin: 0 auto;
     }
 
     /* CTA Final */
     .cta-final {
-      background: linear-gradient(135deg, var(--brand-dark), var(--brand-teal));
+      background: var(--bg-dark);
+      background-image: 
+        radial-gradient(circle at 15% 30%, rgba(5, 150, 105, 0.15) 0%, transparent 45%),
+        radial-gradient(circle at 85% 70%, rgba(214, 197, 165, 0.1) 0%, transparent 45%);
       color: #fff;
       padding: 70px 20px;
       border-radius: var(--radius);
-      box-shadow: var(--shadow);
+      box-shadow: var(--shadow-lg);
       text-align: center;
       margin: 60px auto;
-      max-width: 1000px;
+      max-width: 1120px;
     }
 
     .cta-final h2 {
+      margin-bottom: 15px;
       font-size: 2.2rem;
-      margin-bottom: 16px;
+      font-weight: 800;
     }
 
     .cta-final p {
-      font-size: 1.15rem;
-      opacity: 0.9;
+      font-size: 1.1rem;
+      color: #A3A8A6;
       margin-bottom: 30px;
     }
 
@@ -452,172 +362,135 @@
     }
 
     @media (max-width: 768px) {
-      .hero { padding: 40px 0 60px 0; }
+      .navbar { padding: 15px 5%; flex-direction: column; gap: 15px; }
+      .hero { padding: 160px 15px 60px 15px; }
       .hero .container { flex-direction: column; text-align: center; }
       .hero-text h1 { font-size: 2.2rem; }
-      .beneficios { margin-top: 20px; margin-bottom: 40px; }
-      .sobre-grid { grid-template-columns: 1fr; padding: 30px 20px; }
-      .sobre-brand-box { min-height: 250px; }
-      .garantia { flex-direction: column; text-align: center; padding: 25px; }
+      .modulos { padding: 30px 20px; }
       .hero img { max-width: 100%; }
-      .navbar .container { gap: 12px; }
-      .nav-btn { padding: 8px 16px; font-size: 0.9rem; }
     }
   </style>
 </head>
 <body>
 
-  <div class="top-bar">
-    TECH LUVICS <span>//</span> ENGENHARIA, GEOTECNOLOGIA E DADOS
-  </div>
-
-  <!-- Navegação -->
+  <!-- NAVBAR -->
   <nav class="navbar">
-    <div class="container">
-      <a href="#home" class="nav-btn">Home</a>
-      <a href="#sobre" class="nav-btn">Sobre</a>
-      <a href="#curso" class="nav-btn">Curso</a>
-    </div>
+    <a href="/" class="nav-logo">TECH<span>LUVICS</span></a>
+    <ul class="nav-links">
+      <li><a href="/">Home</a></li>
+      <li><a href="/curso" class="active">Curso</a></li>
+      <li><a href="/sobre">Sobre</a></li>
+    </ul>
   </nav>
 
-  <!-- Hero (Home) -->
-  <section class="hero" id="home">
+  <!-- Hero -->
+  <section class="hero">
     <div class="container">
       <div class="hero-text">
-        <h1>Domine o QGIS do Zero à Prática Profissional</h1>
-        <p>Aprenda geoprocessamento aplicado de forma simples, direta ao ponto e voltada para gerar renda real no mercado.</p>
+        <h1>Domine o QGIS</h1>
+        <p>Do zero à prática profissional — aprenda e aplique de forma simples e lucrativa.</p>
         <div class="hero-offer">
           <div class="desconto">🔥 Oferta Especial Pré-Lançamento</div>
           <span>De R$ 350,00</span>
           <strong>Por apenas R$ 97,00</strong>
           
           <div class="bonus-card">
-            🎁 Inclui Bônus: Precificação e Captação de Clientes
+            🎁 <span>Bônus:</span> Precificação e captação de clientes incluídos.
           </div>
 
-          <div class="contador">⏳ Condição por tempo limitado</div>
+          <div class="contador">⏳ Promoção por tempo limitado</div>
           <a class="btn-comprar" href="https://pay.kiwify.com.br/7QhAguk" target="_blank" rel="noopener">💳 Quero me inscrever agora</a>
         </div>
       </div>
-      <img src="https://github.com/LuanFaria/GEOCODELAB/blob/main/IMG/curso.png?raw=true" alt="Curso QGIS Tech Luvics">
+      <img src="https://github.com/LuanFaria/GEOCODELAB/blob/main/IMG/curso.png?raw=true" alt="Mapa e geotecnologia">
     </div>
   </section>
 
-  <!-- Sobre & Benefícios -->
-  <section class="sobre-wrapper" id="sobre">
-    <div class="container beneficios">
-      <div class="beneficio-card">
-        <div class="icon">🚀</div>
-        <h3>Aprenda do Zero</h3>
-        <p>Passo a passo didático, ideal mesmo para quem nunca abriu o software.</p>
-      </div>
-      <div class="beneficio-card">
-        <div class="icon">🎯</div>
-        <h3>Aplicações Reais</h3>
-        <p>Conteúdo focado em demandas reais de mercado, agro e planejamento.</p>
-      </div>
-      <div class="beneficio-card">
-        <div class="icon">♾️</div>
-        <h3>Acesso Vitalício</h3>
-        <p>Estude no seu ritmo e receba todas as atualizações futuras sem custo extra.</p>
-      </div>
-      <div class="beneficio-card">
-        <div class="icon">💼</div>
-        <h3>Foco em Negócios</h3>
-        <p>Aprenda a empacotar seu trabalho e conquistar seus primeiros clientes.</p>
-      </div>
+  <!-- Benefícios -->
+  <section class="container beneficios">
+    <div class="beneficio-card">
+      <div style="font-size: 2rem; margin-bottom: 10px;">🚀</div>
+      <h3>Aprenda do Zero</h3>
+      <p>Mesmo sem experiência prévia, você vai dominar o QGIS passo a passo.</p>
     </div>
-
-    <div class="container">
-      <div class="sobre-grid">
-        <div class="sobre-texto">
-          <h2>Sobre a Tech Luvics e o Curso</h2>
-          <p>Nós da <strong>Tech Luvics</strong> acreditamos que ferramentas de geoprocessamento não devem ser um bicho de sete cabeças. O mercado de engenharia, agro e dados precisa de profissionais altamente capacitados e práticos.</p>
-          <p>Criamos este treinamento utilizando a mesma linguagem direta que você vê aqui: <strong>sem enrolação</strong>. Condensamos anos de experiência em projetos reais em um método validado para você dominar o QGIS e gerar renda imediata.</p>
-          <ul class="sobre-lista">
-            <li>Foco 100% no que o mercado realmente exige na prática</li>
-            <li>Didática pensada para iniciantes e níveis avançados</li>
-            <li>Metodologia orientada a resultados técnicos e de negócios</li>
-          </ul>
-        </div>
-        <div class="sobre-brand-box">
-          <h3>TECH LUVICS</h3>
-          <span>Engenharia, Geotecnologia e Dados</span>
-          <div style="margin-top: 20px; font-size: 3rem;">🌍</div>
-        </div>
-      </div>
+    <div class="beneficio-card">
+      <div style="font-size: 2rem; margin-bottom: 10px;">🎯</div>
+      <h3>Aplicações Reais</h3>
+      <p>Conteúdo prático para usar em geoprocessamento, agricultura e planejamento.</p>
+    </div>
+    <div class="beneficio-card">
+      <div style="font-size: 2rem; margin-bottom: 10px;">♾️</div>
+      <h3>Acesso Vitalício</h3>
+      <p>Estude no seu ritmo e tenha acesso às futuras atualizações do curso.</p>
+    </div>
+    <div class="beneficio-card">
+      <div style="font-size: 2rem; margin-bottom: 10px;">💼</div>
+      <h3>Bônus Exclusivo</h3>
+      <p>Aprenda a precificar serviços e conquistar seus primeiros clientes.</p>
     </div>
   </section>
 
-  <!-- Conteúdo / Módulos (Curso) -->
-  <section class="container modulos-section" id="curso">
-    <h2 class="section-title">O que você vai aprender</h2>
+  <!-- Conteúdo -->
+  <section class="container modulos">
+    <h2>O que você vai aprender</h2>
     
-    <div class="modulos-grid">
-      <div class="modulo-card">
-        <h3>📍 Módulo 1: Fundamentos</h3>
-        <ul>
-          <li>Introdução ao QGIS e Configuração Inicial</li>
-          <li>Dados Geográficos e Ferramentas Básicas</li>
-          <li>Edição de Dados Vetoriais</li>
-          <li>Simbologia e Estilização de Camadas</li>
-          <li>Trabalhando com Tabelas e Atributos</li>
-          <li>Operações Espaciais Básicas</li>
-          <li>Layout e Impressão de Mapas Profissionais</li>
-        </ul>
-      </div>
+    <h3>📌 Módulo 1: Fundamentos</h3>
+    <ul>
+      <li>Introdução ao QGIS e Configuração Inicial</li>
+      <li>Dados Geográficos e Ferramentas Básicas</li>
+      <li>Edição de Dados Vetoriais</li>
+      <li>Simbologia e Estilização de Camadas</li>
+      <li>Trabalhando com Tabelas e Dados Atributos</li>
+      <li>Operações Espaciais Básicas</li>
+      <li>Layout e Impressão de Mapas</li>
+    </ul>
 
-      <div class="modulo-card">
-        <h3>🛰️ Módulo 2: Análises Avançadas</h3>
-        <ul>
-          <li>Georreferenciamento de Imagens e Cartas</li>
-          <li>Análises de Proximidade e Buffer</li>
-          <li>Modelagem de Terreno com Dados Raster</li>
-          <li>Integração com Dados Externos (PostGIS/Web)</li>
-          <li>Expressões e Calculadora de Campos Avançada</li>
-        </ul>
-      </div>
+    <h3>🛰️ Módulo 2: Análises Avançadas</h3>
+    <ul>
+      <li>Georreferenciamento de Imagens</li>
+      <li>Análises de Proximidade</li>
+      <li>Modelagem de Terreno com Dados Raster</li>
+      <li>Integração com Dados Externos (PostGIS e Web)</li>
+      <li>Expressões e Calculadora de Campos Avançada</li>
+    </ul>
 
-      <div class="modulo-card">
-        <h3>⚡ Módulo 3: Automação e Web</h3>
-        <ul>
-          <li>Automação de Processos com Modelos no QGIS</li>
-          <li>Introdução ao QGIS com Python (PyQGIS)</li>
-          <li>Análise Avançada com Algoritmos do Processing</li>
-          <li>Publicação de Mapas Online (QGIS Server)</li>
-        </ul>
-      </div>
+    <h3>⚡ Módulo 3: Automação e Web</h3>
+    <ul>
+      <li>Automação com Modelos no QGIS</li>
+      <li>Introdução ao QGIS com Python (PyQGIS)</li>
+      <li>Análise Avançada com Algoritmos do Processing</li>
+      <li>Publicação de Mapas Online (QGIS Server)</li>
+    </ul>
 
-      <div class="modulo-card">
-        <h3>🌱 Módulo 4: Aplicações de Mercado</h3>
-        <ul>
-          <li>Processamento de Imagens de Satélite (NDVI)</li>
-          <li>Análises Temporais no QGIS</li>
-          <li>Introdução à Personalização de Plugins</li>
-          <li>QGIS para Planejamento Urbano e Ambiental</li>
-          <li>Encerramento e Projetos Práticos</li>
-        </ul>
-      </div>
-    </div>
+    <h3>🌱 Módulo 4: Aplicações de Mercado</h3>
+    <ul>
+      <li>Processamento de Imagens de Satélite no QGIS</li>
+      <li>Análises Temporais no QGIS</li>
+      <li>Introdução a Personalização de Plugins no QGIS</li>
+      <li>QGIS para Planejamento Urbano e Ambiental</li>
+      <li>Encerramento e Discussão de Projetos</li>
+    </ul>
+
+    <h3>🎁 Bônus</h3>
+    <ul>
+      <li>Como fazer precificação e captar clientes</li>
+    </ul>
   </section>
 
   <!-- Garantia -->
-  <div class="container">
+  <section class="container">
     <div class="garantia">
-      <div style="font-size: 3rem;">🛡️</div>
-      <div class="garantia-text">
-        <h2>Garantia Incondicional de 7 Dias</h2>
-        <p>Se você entrar no curso e achar que o conteúdo não é para você, basta pedir o reembolso dentro de 7 dias na plataforma da Kiwify. Devolvemos 100% do seu dinheiro sem burocracia.</p>
-      </div>
+      <h2>Garantia Incondicional de 7 Dias</h2>
+      <p>Se por qualquer motivo você não ficar satisfeito, solicite o reembolso em até 7 dias na plataforma e devolveremos 100% do seu investimento sem burocracia.</p>
     </div>
-  </div>
+  </section>
 
   <!-- CTA Final -->
   <section class="container">
     <div class="cta-final">
-      <h2>Pronto para dominar o QGIS e destravar sua renda?</h2>
-      <p>✅ Curso completo | ✅ Acesso vitalício | ✅ Certificado oficial | ✅ Módulo de Mercado</p>
-      <a class="btn-comprar" href="https://pay.kiwify.com.br/7QhAguk" target="_blank" rel="noopener">💳 Quero me inscrever por R$ 97</a>
+      <h2>Garanta sua vaga agora!</h2>
+      <p>✅ Curso completo de QGIS | ✅ Acesso vitalício | ✅ Certificado | ✅ Bônus em Templates</p>
+      <a class="btn-comprar" href="https://pay.kiwify.com.br/7QhAguk" target="_blank" rel="noopener">💳 Quero começar agora por R$ 97</a>
     </div>
   </section>
 
