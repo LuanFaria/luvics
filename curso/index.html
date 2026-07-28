@@ -88,10 +88,19 @@
     .hero {
       background-color: var(--bg-dark);
       background-image: 
-        radial-gradient(circle at 15% 30%, rgba(5, 150, 105, 0.15) 0%, transparent 45%),
-        radial-gradient(circle at 85% 70%, rgba(214, 197, 165, 0.1) 0%, transparent 45%);
+        radial-gradient(circle at 15% 30%, rgba(5, 150, 105, 0.2) 0%, transparent 45%),
+        radial-gradient(circle at 85% 70%, rgba(214, 197, 165, 0.12) 0%, transparent 45%);
       color: var(--text-light);
       padding: 180px 20px 90px 20px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero::after {
+      content: '';
+      position: absolute;
+      bottom: 0; left: 0; width: 100%; height: 40px;
+      background: linear-gradient(to top, var(--bg-light), transparent);
     }
 
     .hero .container {
@@ -209,6 +218,7 @@
       border-radius: var(--radius);
       box-shadow: var(--shadow-lg);
       object-fit: cover;
+      border: 1px solid rgba(255, 255, 255, 0.1);
     }
 
     /* Benefícios */
@@ -227,12 +237,13 @@
       box-shadow: var(--shadow-sm);
       text-align: center;
       border: 1px solid #EBE8E0;
-      transition: transform 0.3s ease;
+      transition: transform 0.3s ease, border-color 0.3s ease;
     }
 
     .beneficio-card:hover {
       transform: translateY(-5px);
       box-shadow: var(--shadow-lg);
+      border-color: var(--primary-accent);
     }
 
     .beneficio-card h3 {
@@ -247,63 +258,153 @@
       margin-top: 8px;
     }
 
-    /* Módulos */
-    .modulos {
+    /* --- MÓDULOS TECNOLÓGICOS (NOVO DESIGN) --- */
+    .secao-modulos-wrapper {
+      margin: 80px auto;
+    }
+
+    .secao-titulo-central {
+      text-align: center;
+      font-size: 2.5rem;
+      font-weight: 800;
+      color: var(--text-main);
+      letter-spacing: -0.5px;
+      margin-bottom: 12px;
+    }
+
+    .secao-subtitulo-central {
+      text-align: center;
+      color: var(--text-muted);
+      font-size: 1.1rem;
+      margin-bottom: 40px;
+    }
+
+    .modulos-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 30px;
+    }
+
+    .modulo-card {
       background: var(--card-bg);
       border-radius: var(--radius);
-      padding: 50px;
+      padding: 35px 30px;
       box-shadow: var(--shadow-sm);
-      margin-top: 40px;
       border: 1px solid #EBE8E0;
+      position: relative;
+      transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
     }
 
-    .modulos h2 {
-      font-size: 2.2rem;
-      color: var(--text-main);
-      margin-bottom: 30px;
-      font-weight: 800;
-      text-align: center;
+    .modulo-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; width: 100%; height: 4px;
+      background: linear-gradient(90deg, var(--primary-accent), var(--secondary-accent));
+      border-radius: var(--radius) var(--radius) 0 0;
+      opacity: 0.8;
     }
 
-    .modulos h3 {
-      color: var(--primary-accent);
-      margin-top: 25px;
-      margin-bottom: 12px;
-      font-size: 1.25rem;
-      font-weight: 700;
+    .modulo-card:hover {
+      transform: translateY(-8px);
+      box-shadow: var(--shadow-lg);
+      border-color: var(--primary-accent);
+    }
+
+    .modulo-header {
       display: flex;
       align-items: center;
-      gap: 8px;
+      gap: 15px;
+      margin-bottom: 20px;
+      padding-bottom: 15px;
+      border-bottom: 1px solid #F0ECE1;
     }
 
-    .modulos ul {
-      list-style: none;
-      padding-left: 0;
-    }
-
-    .modulos li {
-      position: relative;
-      padding-left: 28px;
-      margin-bottom: 10px;
-      color: var(--text-main);
-      font-size: 1rem;
-    }
-
-    .modulos li::before {
-      content: '✓';
-      position: absolute;
-      left: 0;
-      top: 0;
+    .modulo-icone {
+      font-size: 2rem;
       background: var(--primary-light);
-      color: var(--primary-accent);
-      width: 18px;
-      height: 18px;
+      width: 55px;
+      height: 55px;
       display: flex;
       align-items: center;
       justify-content: center;
-      border-radius: 50%;
-      font-size: 0.7rem;
+      border-radius: 14px;
+      flex-shrink: 0;
+    }
+
+    .modulo-info h3 {
+      font-size: 1.25rem;
+      color: var(--text-main);
+      font-weight: 700;
+      letter-spacing: -0.3px;
+    }
+
+    .modulo-info span {
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: var(--primary-accent);
+      font-weight: 700;
+    }
+
+    .modulo-card ul {
+      list-style: none;
+      padding-left: 0;
+      margin-bottom: 10px;
+    }
+
+    .modulo-card li {
+      position: relative;
+      padding-left: 24px;
+      margin-bottom: 12px;
+      color: var(--text-muted);
+      font-size: 0.95rem;
+    }
+
+    .modulo-card li::before {
+      content: '✓';
+      position: absolute;
+      left: 0;
+      top: 1px;
+      color: var(--primary-accent);
+      font-size: 0.85rem;
       font-weight: bold;
+    }
+
+    .modulo-card.destaque-bonus {
+      background: linear-gradient(135deg, #0A1411 0%, #11221B 100%);
+      color: var(--text-light);
+      border: 1px solid rgba(214, 197, 165, 0.2);
+    }
+
+    .modulo-card.destaque-bonus::before {
+      background: linear-gradient(90deg, var(--secondary-accent), var(--primary-accent));
+    }
+
+    .modulo-card.destaque-bonus .modulo-header {
+      border-bottom-color: rgba(255, 255, 255, 0.1);
+    }
+
+    .modulo-card.destaque-bonus .modulo-icone {
+      background: rgba(214, 197, 165, 0.15);
+    }
+
+    .modulo-card.destaque-bonus .modulo-info h3 {
+      color: #ffffff;
+    }
+
+    .modulo-card.destaque-bonus .modulo-info span {
+      color: var(--secondary-accent);
+    }
+
+    .modulo-card.destaque-bonus li {
+      color: #C2C7C4;
+    }
+
+    .modulo-card.destaque-bonus li::before {
+      color: var(--secondary-accent);
     }
 
     /* Garantia */
@@ -366,8 +467,8 @@
       .hero { padding: 160px 15px 60px 15px; }
       .hero .container { flex-direction: column; text-align: center; }
       .hero-text h1 { font-size: 2.2rem; }
-      .modulos { padding: 30px 20px; }
       .hero img { max-width: 100%; }
+      .modulos-grid { grid-template-columns: 1fr; }
     }
   </style>
 </head>
@@ -378,7 +479,7 @@
     <a href="/" class="nav-logo">TECH<span>LUVICS</span></a>
     <ul class="nav-links">
       <li><a href="/">Home</a></li>
-      <li><a href="/curso" class="active">Curso</a></li>
+      <li><a href="/curso">Curso</a></li>
       <li><a href="/sobre">Sobre</a></li>
     </ul>
   </nav>
@@ -430,51 +531,111 @@
     </div>
   </section>
 
-  <!-- Conteúdo -->
-  <section class="container modulos">
-    <h2>O que você vai aprender</h2>
+  <!-- Conteúdo em Módulos (Grid Tecnológico) -->
+  <section class="container secao-modulos-wrapper">
+    <h2 class="secao-titulo-central">O que você vai aprender</h2>
+    <p class="secao-subtitulo-central">Uma grade modular desenhada para transformar você em um especialista requisitado pelo mercado.</p>
     
-    <h3>📌 Módulo 1: Fundamentos</h3>
-    <ul>
-      <li>Introdução ao QGIS e Configuração Inicial</li>
-      <li>Dados Geográficos e Ferramentas Básicas</li>
-      <li>Edição de Dados Vetoriais</li>
-      <li>Simbologia e Estilização de Camadas</li>
-      <li>Trabalhando com Tabelas e Dados Atributos</li>
-      <li>Operações Espaciais Básicas</li>
-      <li>Layout e Impressão de Mapas</li>
-    </ul>
+    <div class="modulos-grid">
+      <!-- Módulo 1 -->
+      <div class="modulo-card">
+        <div>
+          <div class="modulo-header">
+            <div class="modulo-icone">🗺️</div>
+            <div class="modulo-info">
+              <span>Módulo 01</span>
+              <h3>Fundamentos</h3>
+            </div>
+          </div>
+          <ul>
+            <li>Introdução ao QGIS e Configuração Inicial</li>
+            <li>Dados Geográficos e Ferramentas Básicas</li>
+            <li>Edição de Dados Vetoriais</li>
+            <li>Simbologia e Estilização de Camadas</li>
+            <li>Trabalhando com Tabelas e Dados Atributos</li>
+            <li>Operações Espaciais Básicas</li>
+            <li>Layout e Impressão de Mapas</li>
+          </ul>
+        </div>
+      </div>
 
-    <h3>🛰️ Módulo 2: Análises Avançadas</h3>
-    <ul>
-      <li>Georreferenciamento de Imagens</li>
-      <li>Análises de Proximidade</li>
-      <li>Modelagem de Terreno com Dados Raster</li>
-      <li>Integração com Dados Externos (PostGIS e Web)</li>
-      <li>Expressões e Calculadora de Campos Avançada</li>
-    </ul>
+      <!-- Módulo 2 -->
+      <div class="modulo-card">
+        <div>
+          <div class="modulo-header">
+            <div class="modulo-icone">🛰️</div>
+            <div class="modulo-info">
+              <span>Módulo 02</span>
+              <h3>Análises Avançadas</h3>
+            </div>
+          </div>
+          <ul>
+            <li>Georreferenciamento de Imagens</li>
+            <li>Análises de Proximidade</li>
+            <li>Modelagem de Terreno com Dados Raster</li>
+            <li>Integração com Dados Externos (PostGIS e Web)</li>
+            <li>Expressões e Calculadora de Campos Avançada</li>
+          </ul>
+        </div>
+      </div>
 
-    <h3>⚡ Módulo 3: Automação e Web</h3>
-    <ul>
-      <li>Automação com Modelos no QGIS</li>
-      <li>Introdução ao QGIS com Python (PyQGIS)</li>
-      <li>Análise Avançada com Algoritmos do Processing</li>
-      <li>Publicação de Mapas Online (QGIS Server)</li>
-    </ul>
+      <!-- Módulo 3 -->
+      <div class="modulo-card">
+        <div>
+          <div class="modulo-header">
+            <div class="modulo-icone">⚡</div>
+            <div class="modulo-info">
+              <span>Módulo 03</span>
+              <h3>Automação & Web</h3>
+            </div>
+          </div>
+          <ul>
+            <li>Automação com Modelos no QGIS</li>
+            <li>Introdução ao QGIS com Python (PyQGIS)</li>
+            <li>Análise Avançada com Algoritmos do Processing</li>
+            <li>Publicação de Mapas Online (QGIS Server)</li>
+          </ul>
+        </div>
+      </div>
 
-    <h3>🌱 Módulo 4: Aplicações de Mercado</h3>
-    <ul>
-      <li>Processamento de Imagens de Satélite no QGIS</li>
-      <li>Análises Temporais no QGIS</li>
-      <li>Introdução a Personalização de Plugins no QGIS</li>
-      <li>QGIS para Planejamento Urbano e Ambiental</li>
-      <li>Encerramento e Discussão de Projetos</li>
-    </ul>
+      <!-- Módulo 4 -->
+      <div class="modulo-card">
+        <div>
+          <div class="modulo-header">
+            <div class="modulo-icone">🌱</div>
+            <div class="modulo-info">
+              <span>Módulo 04</span>
+              <h3>Aplicações de Mercado</h3>
+            </div>
+          </div>
+          <ul>
+            <li>Processamento de Imagens de Satélite no QGIS</li>
+            <li>Análises Temporais no QGIS</li>
+            <li>Introdução a Personalização de Plugins no QGIS</li>
+            <li>QGIS para Planejamento Urbano e Ambiental</li>
+            <li>Encerramento e Discussão de Projetos</li>
+          </ul>
+        </div>
+      </div>
 
-    <h3>🎁 Bônus</h3>
-    <ul>
-      <li>Como fazer precificação e captar clientes</li>
-    </ul>
+      <!-- Bônus (Cartão Destacado Especial) -->
+      <div class="modulo-card destaque-bonus" style="grid-column: 1 / -1; max-width: 600px; margin: 0 auto; width: 100%;">
+        <div>
+          <div class="modulo-header">
+            <div class="modulo-icone">🎁</div>
+            <div class="modulo-info">
+              <span>Módulo Bônus</span>
+              <h3>Monetização e Carreira</h3>
+            </div>
+          </div>
+          <ul>
+            <li>Como fazer precificação correta de projetos de geoprocessamento</li>
+            <li>Estratégias de prospecção e captação de clientes</li>
+            <li>Templates prontos para propostas comerciais</li>
+          </ul>
+        </div>
+      </div>
+    </div>
   </section>
 
   <!-- Garantia -->
