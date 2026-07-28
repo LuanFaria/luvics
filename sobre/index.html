@@ -1,1 +1,125 @@
-s
+/* ====== SOBRE & BENEFÍCIOS ====== */
+    .sobre-wrapper {
+      padding-bottom: 80px;
+    }
+
+    /* Cards Sobrepostos */
+    .beneficios {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 24px;
+      margin-top: -60px; /* Mantém o efeito visual de sobreposição no Hero */
+      position: relative;
+      z-index: 10;
+      margin-bottom: 60px;
+    }
+
+    .beneficio-card {
+      background: var(--card);
+      border-radius: var(--radius);
+      padding: 35px 24px;
+      box-shadow: var(--shadow);
+      text-align: center;
+      border-top: 5px solid var(--accent); /* Link visual com o botão e o Home */
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .beneficio-card:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 25px 50px -12px rgba(15, 45, 63, 0.15);
+    }
+
+    .beneficio-card .icon {
+      font-size: 2.2rem;
+      margin-bottom: 16px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 65px;
+      height: 65px;
+      background: rgba(255, 152, 0, 0.1); /* Círculo sutil atrás do ícone */
+      border-radius: 50%;
+    }
+
+    .beneficio-card h3 {
+      color: var(--brand-dark);
+      font-size: 1.25rem;
+      margin-bottom: 10px;
+    }
+
+    .beneficio-card p {
+      color: var(--muted);
+      font-size: 0.95rem;
+      line-height: 1.5;
+    }
+
+    /* Nova Seção: Sobre a Metodologia / Tech Luvics */
+    .sobre-grid {
+      display: grid;
+      grid-template-columns: 1.2fr 1fr;
+      gap: 40px;
+      align-items: center;
+      background: var(--card);
+      border-radius: var(--radius);
+      padding: 50px;
+      box-shadow: var(--shadow);
+      border-left: 5px solid var(--brand-green); /* Link visual com os Módulos */
+    }
+
+    .sobre-texto h2 {
+      font-size: 2.2rem;
+      color: var(--brand-dark);
+      margin-bottom: 20px;
+      font-weight: 800;
+    }
+
+    .sobre-texto p {
+      color: var(--muted);
+      font-size: 1.05rem;
+      margin-bottom: 16px;
+    }
+
+    .sobre-lista {
+      list-style: none;
+      margin-top: 24px;
+    }
+
+    .sobre-lista li {
+      position: relative;
+      padding-left: 30px;
+      margin-bottom: 12px;
+      color: var(--text);
+      font-weight: 600;
+    }
+
+    .sobre-lista li::before {
+      content: '✔';
+      position: absolute;
+      left: 0;
+      color: var(--accent);
+      font-size: 1.1rem;
+    }
+
+    .sobre-brand-box {
+      background: linear-gradient(135deg, var(--brand-dark), var(--brand-teal));
+      color: #fff;
+      border-radius: var(--radius);
+      padding: 50px 30px;
+      text-align: center;
+      box-shadow: 0 15px 30px rgba(16, 59, 49, 0.2);
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    .sobre-brand-box h3 {
+      font-size: 2rem;
+      color: var(--accent);
+      margin-bottom: 8px;
+    }
+
+    .sobre-brand-box span {
+      font-size: 1rem;
+      opacity: 0.9;
+    }
