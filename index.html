@@ -209,6 +209,12 @@
       transition: transform 0.4s ease;
     }
 
+    /* AJUSTE ESPECÍFICO PARA A PRIMEIRA IMAGEM HORIZONTAL */
+    .flex img.img-landscape {
+      height: 320px;
+      object-fit: cover;
+    }
+
     .flex:hover img {
       transform: translateY(-5px);
     }
@@ -223,7 +229,6 @@
 
     .text p { margin-bottom: 24px; color: var(--text-muted); font-size: 1.05rem; }
 
-    /* Listas comuns limpas */
     .text ul { 
       padding-left: 20px; 
       margin-bottom: 30px; 
@@ -313,6 +318,7 @@
       .flex { gap: 30px; }
       .flex .text, .flex .image { flex: 1 1 100%; }
       .gallery-item img { height: 200px; }
+      .flex img.img-landscape { height: 240px; }
     }
   </style>
 </head>
@@ -358,8 +364,8 @@
           <a href="mailto:contato@techluvics.com.br" class="btn">Solicitar Análise</a>
         </div>
         <div class="image">
-          <!-- Substitua o link abaixo pela imagem desejada para este serviço -->
-          <img src="https://raw.github.com/LuanFaria/GEOCODELAB/f2089bacb788832b55e6f49a30b5e26f609320d6/IMG/IA_geada.png" alt="Monitoramento com IA em Cana-de-Açúcar" />
+          <!-- Adicionada a classe img-landscape para dar mais destaque e altura adequada à imagem horizontal -->
+          <img src="https://raw.github.com/LuanFaria/GEOCODELAB/f2089bacb788832b55e6f49a30b5e26f609320d6/IMG/IA_geada.png" alt="Monitoramento com IA em Cana-de-Açúcar" class="img-landscape" />
         </div>
       </div>
     </div>
@@ -370,7 +376,6 @@
     <div class="card-container">
       <div class="flex">
         <div class="image">
-          <!-- Substitua o link abaixo pela imagem desejada para este serviço -->
           <img src="https://github.com/LuanFaria/GEOCODELAB/blob/main/IMG/curso.png?raw=true" alt="Mapas Temáticos e Laudos Ambientais" />
         </div>
         <div class="text">
@@ -402,7 +407,6 @@
           <a href="mailto:contato@techluvics.com.br" class="btn">Falar com Especialista</a>
         </div>
         <div class="image">
-          <!-- Substitua o link abaixo pela imagem desejada para este serviço -->
           <img src="https://github.com/LuanFaria/GEOCODELAB/blob/main/IMG/tecnologia_campo.jpeg?raw=true" alt="Consultoria em Geoprocessamento" />
         </div>
       </div>
