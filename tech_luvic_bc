@@ -223,7 +223,7 @@
 
     .text p { margin-bottom: 24px; color: var(--text-muted); font-size: 1.05rem; }
 
-    /* Listas comuns limpas (sem certinhos) */
+    /* Listas comuns limpas */
     .text ul { 
       padding-left: 20px; 
       margin-bottom: 30px; 
@@ -339,8 +339,78 @@
     </div>
   </header>
 
+  <!-- SERVIÇO 1: AGTECH COM INTELIGÊNCIA ARTIFICIAL (CANA-DE-AÇÚCAR) -->
+  <section id="servico-ia-cana">
+    <div class="section-title" style="margin-bottom: 20px;">Soluções Especializadas</div>
+    <p style="text-align: center; color: var(--text-muted); max-width: 650px; margin: 0 auto 50px auto; font-size: 1.1rem;">Tecnologia de ponta e inteligência espacial aplicadas para resolver desafios reais do mercado.</p>
+    
+    <div class="card-container">
+      <div class="flex">
+        <div class="text">
+          <span class="hero-badge" style="margin-bottom: 12px;">Alta Tecnologia & Inovação</span>
+          <h2>AgTech com Inteligência Artificial: Monitoramento de Cana</h2>
+          <p>Utilizamos modelos avançados de Inteligência Artificial e Visão Computacional aliados ao Sensoriamento Remoto para identificar com precisão cirúrgica danos causados por geadas e queimadas em lavouras de cana-de-açúcar.</p>
+          <ul>
+            <li>Detecção automatizada de perdas pós-eventos climáticos</li>
+            <li>Geração rápida de relatórios comparativos de antes e depois da safra</li>
+            <li>Suporte robusto para tomada de decisão, auditorias e seguros agrícolas</li>
+          </ul>
+          <a href="mailto:contato@techluvics.com.br" class="btn">Solicitar Análise</a>
+        </div>
+        <div class="image">
+          <!-- Substitua o link abaixo pela imagem desejada para este serviço -->
+          <img src="https://raw.github.com/LuanFaria/GEOCODELAB/f2089bacb788832b55e6f49a30b5e26f609320d6/IMG/IA_geada.png" alt="Monitoramento com IA em Cana-de-Açúcar" />
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SERVIÇO 2: MAPAS TEMÁTICOS E LAUDOS B2B -->
+  <section id="servico-mapas" style="padding-top: 0;">
+    <div class="card-container">
+      <div class="flex">
+        <div class="image">
+          <!-- Substitua o link abaixo pela imagem desejada para este serviço -->
+          <img src="https://github.com/LuanFaria/GEOCODELAB/blob/main/IMG/curso.png?raw=true" alt="Mapas Temáticos e Laudos Ambientais" />
+        </div>
+        <div class="text">
+          <h2>Elaboração de Mapas Temáticos e Laudos B2B</h2>
+          <p>Suporte cartográfico de alta precisão voltado para engenheiros, agrônomos, consultores e empresas que exigem rigor técnico e agilidade em entregas regulatórias.</p>
+          <ul>
+            <li>Mapas de localização, zoneamento e uso do solo</li>
+            <li>Suporte técnico cartográfico para perícias e licenciamentos</li>
+            <li>Padronização e conformidade com exigências legais</li>
+          </ul>
+          <a href="mailto:contato@techluvics.com.br" class="btn">Contratar Serviço</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SERVIÇO 3: CONSULTORIA EM GEOPROCESSAMENTO -->
+  <section id="servico-consultoria" style="padding-top: 0;">
+    <div class="card-container">
+      <div class="flex">
+        <div class="text">
+          <h2>Consultoria em Geoprocessamento e Análise Espacial</h2>
+          <p>Transformamos dados brutos em inteligência espacial estratégica para o seu negócio, desenhando fluxos de trabalho personalizados no QGIS.</p>
+          <ul>
+            <li>Desenvolvimento de metodologias espaciais sob medida</li>
+            <li>Otimização de processos e automação de rotinas cartográficas</li>
+            <li>Acompanhamento estratégico para projetos de geotecnologia</li>
+          </ul>
+          <a href="mailto:contato@techluvics.com.br" class="btn">Falar com Especialista</a>
+        </div>
+        <div class="image">
+          <!-- Substitua o link abaixo pela imagem desejada para este serviço -->
+          <img src="https://github.com/LuanFaria/GEOCODELAB/blob/main/IMG/tecnologia_campo.jpeg?raw=true" alt="Consultoria em Geoprocessamento" />
+        </div>
+      </div>
+    </div>
+  </section>
+
   <!-- EBOOK -->
-  <section id="ebook">
+  <section id="ebook" style="padding-top: 0;">
     <div class="card-container">
       <div class="flex">
         <div class="image">
@@ -361,7 +431,7 @@
   </section>
 
   <!-- CURSO -->
-  <section id="curso-secao">
+  <section id="curso-secao" style="padding-top: 0;">
     <div class="card-container">
       <div class="flex">
         <div class="text">
@@ -385,7 +455,7 @@
   </section>
 
   <!-- GALERIA PORTFÓLIO -->
-  <section>
+  <section style="padding-top: 0;">
     <h2 class="section-title">Tecnologia Aplicada</h2>
     <div class="gallery" aria-label="Galeria de projetos">
       <div class="gallery-item">
