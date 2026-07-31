@@ -209,16 +209,36 @@
       transition: transform 0.4s ease;
     }
 
-    /* AJUSTE PARA EXIBIR A IMAGEM INTEIRA (SEM CORTES) E COM BOM TAMANHO */
+    /* ESTILO PROFISSIONAL PARA A IMAGEM HORIZONTAL (SEM CORTES E PROPORCIONAL) */
+    .flex .image.landscape-wrapper {
+      background: #F4F2EC;
+      border-radius: 16px;
+      padding: 12px;
+      border: 1px solid #EBE8E0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
     .flex img.img-landscape {
-      height: 380px;
-      object-fit: contain;
       width: 100%;
-      background-color: #fcfcfc; /* Fundo leve opcional caso haja espaço de sobra */
+      height: auto; /* Mantém a proporção horizontal exata da imagem */
+      object-fit: contain;
+      box-shadow: none;
+      border-radius: 10px;
     }
 
     .flex:hover img {
       transform: translateY(-5px);
+    }
+
+    .flex:hover .landscape-wrapper img {
+      transform: none; /* Evita conflito de zoom duplo */
+    }
+
+    .flex:hover .landscape-wrapper {
+      transform: translateY(-5px);
+      transition: transform 0.4s ease;
     }
 
     .text h2 {
@@ -320,7 +340,6 @@
       .flex { gap: 30px; }
       .flex .text, .flex .image { flex: 1 1 100%; }
       .gallery-item img { height: 200px; }
-      .flex img.img-landscape { height: 250px; }
     }
   </style>
 </head>
@@ -365,8 +384,8 @@
           </ul>
           <a href="mailto:contato@techluvics.com.br" class="btn">Solicitar Análise</a>
         </div>
-        <div class="image">
-          <!-- Imagem ajustada com object-fit: contain para não cortar nenhuma borda -->
+        <!-- Wrapper com design moderno em moldura e proporção horizontal nativa -->
+        <div class="image landscape-wrapper">
           <img src="https://raw.github.com/LuanFaria/GEOCODELAB/f2089bacb788832b55e6f49a30b5e26f609320d6/IMG/IA_geada.png" alt="Monitoramento com IA em Cana-de-Açúcar" class="img-landscape" />
         </div>
       </div>
