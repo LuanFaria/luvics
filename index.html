@@ -209,10 +209,12 @@
       transition: transform 0.4s ease;
     }
 
-    /* AJUSTE ESPECÍFICO PARA A PRIMEIRA IMAGEM HORIZONTAL */
+    /* AJUSTE PARA EXIBIR A IMAGEM INTEIRA (SEM CORTES) E COM BOM TAMANHO */
     .flex img.img-landscape {
-      height: 320px;
-      object-fit: cover;
+      height: 380px;
+      object-fit: contain;
+      width: 100%;
+      background-color: #fcfcfc; /* Fundo leve opcional caso haja espaço de sobra */
     }
 
     .flex:hover img {
@@ -318,7 +320,7 @@
       .flex { gap: 30px; }
       .flex .text, .flex .image { flex: 1 1 100%; }
       .gallery-item img { height: 200px; }
-      .flex img.img-landscape { height: 240px; }
+      .flex img.img-landscape { height: 250px; }
     }
   </style>
 </head>
@@ -364,7 +366,7 @@
           <a href="mailto:contato@techluvics.com.br" class="btn">Solicitar Análise</a>
         </div>
         <div class="image">
-          <!-- Adicionada a classe img-landscape para dar mais destaque e altura adequada à imagem horizontal -->
+          <!-- Imagem ajustada com object-fit: contain para não cortar nenhuma borda -->
           <img src="https://raw.github.com/LuanFaria/GEOCODELAB/f2089bacb788832b55e6f49a30b5e26f609320d6/IMG/IA_geada.png" alt="Monitoramento com IA em Cana-de-Açúcar" class="img-landscape" />
         </div>
       </div>
