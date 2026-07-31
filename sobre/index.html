@@ -274,6 +274,82 @@
     .bloco ul { padding-left: 20px; margin-top: 8px; list-style: disc; }
     .bloco li { margin-bottom: 8px; }
 
+    /* NOVA SEÇÃO: CONTATO / PERFIL PROFISSIONAL VERTICAL */
+    .perfil-contato-card {
+      background: var(--card-bg);
+      border-radius: var(--radius);
+      padding: 50px;
+      box-shadow: var(--shadow-sm);
+      border: 1px solid #EBE8E0;
+      margin-top: 24px;
+    }
+
+    .perfil-contato-grid {
+      display: grid;
+      grid-template-columns: 280px 1fr;
+      gap: 40px;
+      align-items: center;
+    }
+
+    .perfil-foto-vertical {
+      width: 100%;
+      height: 360px;
+      border-radius: 16px;
+      object-fit: cover;
+      box-shadow: var(--shadow-sm);
+      border: 2px solid #EBE8E0;
+    }
+
+    .perfil-detalhes h3 {
+      font-size: 1.8rem;
+      font-weight: 800;
+      color: var(--text-main);
+      margin-bottom: 8px;
+    }
+
+    .perfil-cargo {
+      font-size: 1rem;
+      font-weight: 600;
+      color: var(--primary-accent);
+      margin-bottom: 24px;
+      display: inline-block;
+      background: var(--primary-light);
+      padding: 4px 12px;
+      border-radius: 20px;
+    }
+
+    .contato-lista {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+
+    .contato-lista li {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-size: 1rem;
+      color: var(--text-muted);
+    }
+
+    .contato-lista i {
+      width: 20px;
+      height: 20px;
+      color: var(--primary-accent);
+    }
+
+    .contato-lista a {
+      color: var(--text-muted);
+      text-decoration: none;
+      transition: color 0.2s ease;
+    }
+
+    .contato-lista a:hover {
+      color: var(--primary-accent);
+      text-decoration: underline;
+    }
+
     /* CTA */
     .cta {
       background: var(--bg-dark);
@@ -344,6 +420,8 @@
     @media (max-width: 900px) {
       .fundador-grid { grid-template-columns: 1fr; text-align: center; justify-items: center; }
       .citacao { text-align: left; }
+      .perfil-contato-grid { grid-template-columns: 1fr; text-align: center; justify-items: center; }
+      .contato-lista { align-items: center; }
     }
 
     @media (max-width: 768px) {
@@ -442,6 +520,40 @@
           <li><strong>Acessibilidade:</strong> Do iniciante ao profissional experiente.</li>
           <li><strong>Inovação:</strong> Sempre atualizado com as tendências do mercado.</li>
         </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- PERFIL E CONTATO DIRETO -->
+  <section class="container">
+    <div class="perfil-contato-card">
+      <div class="perfil-contato-grid">
+        <div>
+          <!-- Substitua o link abaixo pela URL da sua foto vertical -->
+          <img src="https://github.com/LuanFaria/GEOCODELAB/blob/main/IMG/drone.jpeg?raw=true" alt="Luan Faria" class="perfil-foto-vertical">
+        </div>
+        <div class="perfil-detalhes">
+          <h3>Luan Faria</h3>
+          <span class="perfil-cargo">Especialista em Geotecnologia & Fundador</span>
+          <ul class="contato-lista">
+            <li>
+              <i data-lucide="user"></i>
+              <span><strong>Nome:</strong> Luan Faria</span>
+            </li>
+            <li>
+              <i data-lucide="phone"></i>
+              <span><strong>Telefone:</strong> <a href="tel:+5500000000000">(00) 00000-0000</a></span>
+            </li>
+            <li>
+              <i data-lucide="mail"></i>
+              <span><strong>E-mail:</strong> <a href="mailto:contato@techluvics.com.br">contato@techluvics.com.br</a></span>
+            </li>
+            <li>
+              <i data-lucide="linkedin"></i>
+              <span><strong>LinkedIn:</strong> <a href="https://linkedin.com" target="_blank" rel="noopener">linkedin.com/in/seu-perfil</a></span>
+            </li>
+          </ul>
+        </div>
       </div>
     </div>
   </section>
