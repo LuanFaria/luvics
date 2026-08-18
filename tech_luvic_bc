@@ -209,6 +209,56 @@
       transition: transform 0.4s ease;
     }
 
+    /* ESTILO PARA O CARD EM DESTAQUE (VERTICAL: TÍTULO -> IMAGEM -> TEXTO) */
+    .featured-card {
+      text-align: center;
+    }
+
+    .featured-content {
+      max-width: 900px;
+      margin: 0 auto;
+    }
+
+    .featured-image-wrapper {
+      background: #F4F2EC;
+      border-radius: 16px;
+      padding: 16px;
+      border: 1px solid #EBE8E0;
+      margin: 30px 0;
+      box-shadow: 0 10px 25px -10px rgba(0,0,0,0.08);
+      transition: transform 0.4s ease, box-shadow 0.4s ease;
+    }
+
+    .featured-image-wrapper:hover {
+      transform: translateY(-4px);
+      box-shadow: var(--shadow-lg);
+    }
+
+    .featured-image-wrapper img {
+      width: 100%;
+      height: auto;
+      object-fit: contain;
+      border-radius: 10px;
+      display: block;
+      box-shadow: none;
+    }
+
+    .featured-text {
+      text-align: left;
+      margin-top: 30px;
+    }
+
+    .featured-text ul {
+      padding-left: 20px;
+      margin-bottom: 30px;
+      list-style: disc;
+    }
+
+    .featured-text ul li {
+      margin-bottom: 10px;
+      color: var(--text-muted);
+    }
+
     .flex:hover img {
       transform: translateY(-5px);
     }
@@ -223,7 +273,6 @@
 
     .text p { margin-bottom: 24px; color: var(--text-muted); font-size: 1.05rem; }
 
-    /* Listas comuns limpas */
     .text ul { 
       padding-left: 20px; 
       margin-bottom: 30px; 
@@ -339,27 +388,32 @@
     </div>
   </header>
 
-  <!-- SERVIÇO 1: AGTECH COM INTELIGÊNCIA ARTIFICIAL (CANA-DE-AÇÚCAR) -->
+  <!-- SERVIÇO 1: AGTECH COM INTELIGÊNCIA ARTIFICIAL (CANA-DE-AÇÚCAR) - DESTAQUE VERTICAL -->
   <section id="servico-ia-cana">
     <div class="section-title" style="margin-bottom: 20px;">Soluções Especializadas</div>
     <p style="text-align: center; color: var(--text-muted); max-width: 650px; margin: 0 auto 50px auto; font-size: 1.1rem;">Tecnologia de ponta e inteligência espacial aplicadas para resolver desafios reais do mercado.</p>
     
-    <div class="card-container">
-      <div class="flex">
-        <div class="text">
-          <span class="hero-badge" style="margin-bottom: 12px;">Alta Tecnologia & Inovação</span>
-          <h2>AgTech com Inteligência Artificial: Monitoramento de Cana</h2>
+    <div class="card-container featured-card">
+      <div class="featured-content">
+        <span class="hero-badge" style="margin-bottom: 12px;">Alta Tecnologia & Inovação</span>
+        <h2>AgTech com Inteligência Artificial: Monitoramento de Geada em Cana de Açucar</h2>
+        
+        <!-- Imagem Horizontal em Destaque logo abaixo do título -->
+        <div class="featured-image-wrapper">
+          <img src="https://raw.github.com/LuanFaria/GEOCODELAB/f2089bacb788832b55e6f49a30b5e26f609320d6/IMG/IA_geada.png" alt="Monitoramento com IA em Cana-de-Açúcar" />
+        </div>
+
+        <!-- Texto posicionado abaixo da imagem -->
+        <div class="featured-text">
           <p>Utilizamos modelos avançados de Inteligência Artificial e Visão Computacional aliados ao Sensoriamento Remoto para identificar com precisão cirúrgica danos causados por geadas e queimadas em lavouras de cana-de-açúcar.</p>
           <ul>
             <li>Detecção automatizada de perdas pós-eventos climáticos</li>
             <li>Geração rápida de relatórios comparativos de antes e depois da safra</li>
             <li>Suporte robusto para tomada de decisão, auditorias e seguros agrícolas</li>
           </ul>
-          <a href="mailto:contato@techluvics.com.br" class="btn">Solicitar Análise</a>
-        </div>
-        <div class="image">
-          <!-- Substitua o link abaixo pela imagem desejada para este serviço -->
-          <img src="https://raw.github.com/LuanFaria/GEOCODELAB/f2089bacb788832b55e6f49a30b5e26f609320d6/IMG/IA_geada.png" alt="Monitoramento com IA em Cana-de-Açúcar" />
+          <div style="text-align: center; margin-top: 30px;">
+            <a href="mailto:contato@techluvics.com.br" class="btn">Solicitar Análise</a>
+          </div>
         </div>
       </div>
     </div>
@@ -370,7 +424,6 @@
     <div class="card-container">
       <div class="flex">
         <div class="image">
-          <!-- Substitua o link abaixo pela imagem desejada para este serviço -->
           <img src="https://github.com/LuanFaria/GEOCODELAB/blob/main/IMG/curso.png?raw=true" alt="Mapas Temáticos e Laudos Ambientais" />
         </div>
         <div class="text">
@@ -402,7 +455,6 @@
           <a href="mailto:contato@techluvics.com.br" class="btn">Falar com Especialista</a>
         </div>
         <div class="image">
-          <!-- Substitua o link abaixo pela imagem desejada para este serviço -->
           <img src="https://github.com/LuanFaria/GEOCODELAB/blob/main/IMG/tecnologia_campo.jpeg?raw=true" alt="Consultoria em Geoprocessamento" />
         </div>
       </div>
