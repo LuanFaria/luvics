@@ -209,7 +209,6 @@
       transition: transform 0.4s ease;
     }
 
-    /* ESTILO PARA O CARD EM DESTAQUE (VERTICAL: TÍTULO -> IMAGEM -> TEXTO) */
     .featured-card {
       text-align: center;
     }
@@ -379,16 +378,16 @@
 
   <!-- HEADER / HERO -->
   <header>
-    <div class="hero-badge">Inovação em Geotecnologia</div>
-    <h1>Transforme dados espaciais<br>em oportunidades reais</h1>
-    <p>Acreditamos que a geotecnologia deve ser acessível e lucrativa. Transforme seu conhecimento de QGIS e IA em soluções que o mercado realmente busca.</p>
+    <div class="hero-badge">Inovação em Geotecnologia e IA</div>
+    <h1>Transforme dados espaciais e financeiros<br>em oportunidades reais</h1>
+    <p>Acreditamos que a tecnologia deve ser acessível e lucrativa. Transforme seu conhecimento em soluções que o mercado realmente busca.</p>
     <div class="cta-buttons">
       <a href="https://pay.kiwify.com.br/7QhAguk" class="btn" target="_blank" rel="noopener">Acessar eBook</a>
       <a href="/curso" class="btn secondary">Conhecer o Curso</a>
     </div>
   </header>
 
-  <!-- SERVIÇO 1: AGTECH COM INTELIGÊNCIA ARTIFICIAL (CANA-DE-AÇÚCAR) - DESTAQUE VERTICAL -->
+  <!-- SERVIÇO 1: AGTECH COM INTELIGÊNCIA ARTIFICIAL (CANA-DE-AÇÚCAR) -->
   <section id="servico-ia-cana">
     <div class="section-title" style="margin-bottom: 20px;">Soluções Especializadas</div>
     <p style="text-align: center; color: var(--text-muted); max-width: 650px; margin: 0 auto 50px auto; font-size: 1.1rem;">Tecnologia de ponta e inteligência espacial aplicadas para resolver desafios reais do mercado.</p>
@@ -398,12 +397,10 @@
         <span class="hero-badge" style="margin-bottom: 12px;">Alta Tecnologia & Inovação</span>
         <h2>AgTech com Inteligência Artificial: Monitoramento de Geada em Cana de Açucar</h2>
         
-        <!-- Imagem Horizontal em Destaque logo abaixo do título -->
         <div class="featured-image-wrapper">
           <img src="https://raw.github.com/LuanFaria/GEOCODELAB/f2089bacb788832b55e6f49a30b5e26f609320d6/IMG/IA_geada.png" alt="Monitoramento com IA em Cana-de-Açúcar" />
         </div>
 
-        <!-- Texto posicionado abaixo da imagem -->
         <div class="featured-text">
           <p>Utilizamos modelos avançados de Inteligência Artificial e Visão Computacional aliados ao Sensoriamento Remoto para identificar com precisão cirúrgica danos causados por geadas e queimadas em lavouras de cana-de-açúcar.</p>
           <ul>
@@ -414,6 +411,30 @@
           <div style="text-align: center; margin-top: 30px;">
             <a href="mailto:contato@techluvics.com.br" class="btn">Solicitar Análise</a>
           </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- NOVO SERVIÇO: DASHBOARD FINANCEIRO IA -->
+  <section id="projeto-ia-financas" style="padding-top: 0;">
+    <div class="card-container" style="border-left: 4px solid var(--secondary-accent);">
+      <div class="flex">
+        <div class="text">
+          <span class="hero-badge" style="margin-bottom: 12px; background: rgba(214, 197, 165, 0.2); color: #B09A6A; border: 1px solid rgba(214, 197, 165, 0.4);">Migração para IA</span>
+          <h2>Dashboard Financeiro com Inteligência Artificial</h2>
+          <p>Nossa nova solução aplica inteligência de dados no mercado financeiro. Um sistema completo que utiliza a <strong>IA do Google Gemini</strong> para analisar carteiras, cruzar dados e recomendar aportes estratégicos para proteção e rentabilidade.</p>
+          <ul>
+            <li>Gestão automatizada e raspagem de dados via StatusInvest</li>
+            <li>Análises macroeconômicas exclusivas baseadas na sua carteira</li>
+            <li>Filtros avançados e calculadora de juros compostos integrada</li>
+          </ul>
+          <!-- ATENÇÃO: Substitua o "#" abaixo pelo link de deploy do seu Streamlit (ex: URL do Streamlit Cloud) -->
+          <a href="#" class="btn" target="_blank" rel="noopener">Acessar Sistema Financeiro</a>
+        </div>
+        <div class="image">
+          <!-- Coloquei a logo temporariamente, mas você pode subir um "print" do dashboard do Streamlit no github e trocar o src abaixo -->
+          <img src="https://raw.github.com/LuanFaria/GEOCODELAB/eb78d51ee49d0fc7438657a5ef2514f3ce366861/IMG/ubXDA.jpg" alt="Dashboard Financeiro IA" style="border: 1px solid #EBE8E0;" />
         </div>
       </div>
     </div>
@@ -461,47 +482,28 @@
     </div>
   </section>
 
-  <!-- EBOOK -->
-  <section id="ebook" style="padding-top: 0;">
+  <!-- SESSÃO MESCLADA: EBOOK E CURSO (UM ÚNICO CARD) -->
+  <section id="formacao" style="padding-top: 0;">
     <div class="card-container">
-      <div class="flex">
-        <div class="image">
-          <img src="https://github.com/LuanFaria/GEOCODELAB/blob/main/IMG/capa%20ebook.png?raw=true" alt="eBook Geoprocessamento" />
+      <h2 style="text-align: center; margin-bottom: 40px; color: var(--text-main); font-size: 2.2rem; font-weight: 800; letter-spacing: -0.5px;">Expanda seus Conhecimentos</h2>
+      <div class="gallery" style="gap: 50px;">
+        
+        <!-- Bloco do eBook -->
+        <div style="text-align: center;">
+           <img src="https://github.com/LuanFaria/GEOCODELAB/blob/main/IMG/capa%20ebook.png?raw=true" alt="eBook Geoprocessamento" style="max-width: 250px; margin: 0 auto 20px auto; border-radius: 16px; box-shadow: 0 10px 20px -10px rgba(0,0,0,0.15);" />
+           <h3 style="font-size: 1.4rem; margin-bottom: 12px; color: var(--text-main);">eBook: Como Ganhar Dinheiro com Geoprocessamento</h3>
+           <p style="color: var(--text-muted); margin-bottom: 24px; font-size: 0.95rem;">Descubra como aplicar geotecnologia na prática para gerar renda. Este material é o mapa exato para você começar do zero e prospectar clientes.</p>
+           <a href="https://pay.kiwify.com.br/7QhAguk" class="btn secondary" target="_blank" rel="noopener">Quero o eBook</a>
         </div>
-        <div class="text">
-          <h2>Como Ganhar Dinheiro com Geoprocessamento</h2>
-          <p>Descubra como aplicar geotecnologia na prática para gerar renda. Este eBook é o mapa exato para você começar do zero.</p>
-          <ul>
-            <li>Estratégias para encontrar nichos de alta demanda</li>
-            <li>Stack de ferramentas gratuitas para home office</li>
-            <li>Técnicas de prospecção para seus primeiros clientes</li>
-          </ul>
-          <a href="https://pay.kiwify.com.br/7QhAguk" class="btn" target="_blank" rel="noopener">Quero o eBook</a>
-        </div>
-      </div>
-    </div>
-  </section>
 
-  <!-- CURSO -->
-  <section id="curso-secao" style="padding-top: 0;">
-    <div class="card-container">
-      <div class="flex">
-        <div class="text">
-          <h2>Do Zero à Renda com QGIS</h2>
-          <blockquote>
-            “Não é um curso sobre como vender curso. Aqui você vai aprender na prática como montar mapas e fechar projetos reais.”
-          </blockquote>
-          <p>Seja você um iniciante absoluto ou alguém que já domina as ferramentas mas não sabe como monetizar. Você vai aprender:</p>
-          <ul>
-            <li>Domínio prático e instalação do ecossistema QGIS</li>
-            <li>Análise espacial avançada, Sensoriamento e índices (NDVI)</li>
-            <li>Precificação de serviços e posicionamento de mercado</li>
-          </ul>
-          <a href="/curso" class="btn">Entrar no Curso</a>
+        <!-- Bloco do Curso -->
+        <div style="text-align: center;">
+           <img src="https://github.com/LuanFaria/GEOCODELAB/blob/main/IMG/curso.png?raw=true" alt="Curso de QGIS" style="max-width: 250px; margin: 0 auto 20px auto; border-radius: 16px; box-shadow: 0 10px 20px -10px rgba(0,0,0,0.15);" />
+           <h3 style="font-size: 1.4rem; margin-bottom: 12px; color: var(--text-main);">Curso: Do Zero à Renda com QGIS</h3>
+           <p style="color: var(--text-muted); margin-bottom: 24px; font-size: 0.95rem;">Não é um curso sobre vender cursos. Aprenda na prática como montar mapas profissionais, realizar análise espacial avançada e fechar projetos reais.</p>
+           <a href="/curso" class="btn">Entrar no Curso</a>
         </div>
-        <div class="image">
-          <img src="https://github.com/LuanFaria/GEOCODELAB/blob/main/IMG/curso.png?raw=true" alt="Curso de QGIS" />
-        </div>
+
       </div>
     </div>
   </section>
@@ -525,7 +527,7 @@
   <!-- FOOTER -->
   <footer>
     <h2>Pronto para escalar sua carreira?</h2>
-    <p>Vamos juntos. Com as ferramentas e a orientação certa, você pode construir sua independência usando a geotecnologia.</p>
+    <p>Vamos juntos. Com as ferramentas e a orientação certa, você pode construir sua independência usando a geotecnologia e Inteligência Artificial.</p>
     <div class="cta-buttons">
       <a href="/curso" class="btn">Começar Agora</a>
     </div>
