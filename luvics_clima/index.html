@@ -1,0 +1,874 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="Luvics Clima no Ponto — temperatura, previsão e alertas exatamente no talhão ou sede. Teste grátis e receba o relatório no e-mail." />
+  <link rel="icon" type="image/png" href="https://raw.githubusercontent.com/LuanFaria/GEOCODELAB/eb78d51ee49d0fc7438657a5ef2514f3ce366861/IMG/ubXDA.jpg">
+  <link rel="apple-touch-icon" href="https://raw.githubusercontent.com/LuanFaria/GEOCODELAB/eb78d51ee49d0fc7438657a5ef2514f3ce366861/IMG/ubXDA.jpg">
+  <title>Luvics Clima no Ponto | Tech Luvics</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
+    :root {
+      --bg-dark: #0A1411;
+      --bg-light: #F9F8F4;
+      --card-bg: #FFFFFF;
+      --primary-accent: #059669;
+      --primary-hover: #047857;
+      --primary-light: #D1FAE5;
+      --secondary-accent: #D6C5A5;
+      --secondary-hover: #C2B08D;
+      --text-main: #1C1E1D;
+      --text-muted: #5C615E;
+      --text-light: #F3F4F1;
+      --shadow-sm: 0 4px 6px -1px rgba(10, 20, 17, 0.05);
+      --shadow-lg: 0 20px 40px -15px rgba(10, 20, 17, 0.12);
+      --radius: 20px;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: 'Inter', system-ui, -apple-system, sans-serif;
+      background-color: var(--bg-light);
+      color: var(--text-main);
+      line-height: 1.7;
+      -webkit-font-smoothing: antialiased;
+      scroll-behavior: smooth;
+    }
+    .container {
+      width: min(1120px, 92vw);
+      margin-inline: auto;
+    }
+    .navbar {
+      position: fixed;
+      top: 0; left: 0; width: 100%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 20px 8%;
+      background: rgba(10, 20, 17, 0.85);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border-bottom: 1px solid rgba(214, 197, 165, 0.15);
+      z-index: 1000;
+    }
+    .nav-logo {
+      font-size: 1.25rem;
+      font-weight: 800;
+      color: #ffffff;
+      letter-spacing: -0.5px;
+      text-decoration: none;
+    }
+    .nav-logo span { color: var(--secondary-accent); }
+    .nav-links {
+      display: flex;
+      gap: 28px;
+      list-style: none;
+      align-items: center;
+    }
+    .nav-links a {
+      text-decoration: none;
+      color: rgba(255, 255, 255, 0.7);
+      font-size: 0.95rem;
+      font-weight: 500;
+      transition: color 0.3s ease;
+    }
+    .nav-links a:hover, .nav-links a.active {
+      color: var(--secondary-accent);
+    }
+    .nav-cta {
+      background: var(--primary-accent) !important;
+      color: #fff !important;
+      padding: 10px 18px;
+      border-radius: 10px;
+      font-weight: 600 !important;
+    }
+    .nav-cta:hover {
+      background: var(--primary-hover) !important;
+      color: #fff !important;
+    }
+
+    /* Hero */
+    .hero {
+      background-color: var(--bg-dark);
+      background-image:
+        radial-gradient(circle at 15% 30%, rgba(5, 150, 105, 0.22) 0%, transparent 45%),
+        radial-gradient(circle at 85% 70%, rgba(214, 197, 165, 0.12) 0%, transparent 45%);
+      color: var(--text-light);
+      padding: 160px 20px 80px 20px;
+      position: relative;
+      overflow: hidden;
+    }
+    .hero::after {
+      content: '';
+      position: absolute;
+      bottom: 0; left: 0; width: 100%; height: 40px;
+      background: linear-gradient(to top, var(--bg-light), transparent);
+    }
+    .hero .container {
+      display: grid;
+      grid-template-columns: 1.15fr 0.85fr;
+      gap: 48px;
+      align-items: center;
+    }
+    .badge-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(5, 150, 105, 0.15);
+      color: #34D399;
+      border: 1px solid rgba(5, 150, 105, 0.35);
+      padding: 6px 14px;
+      border-radius: 999px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      margin-bottom: 18px;
+    }
+    .hero-text h1 {
+      font-size: clamp(2.2rem, 4vw, 3.1rem);
+      font-weight: 800;
+      margin-bottom: 16px;
+      letter-spacing: -1px;
+      line-height: 1.15;
+    }
+    .hero-text h1 em {
+      font-style: normal;
+      color: var(--secondary-accent);
+    }
+    .hero-text > p {
+      font-size: 1.15rem;
+      color: #A3A8A6;
+      margin-bottom: 28px;
+      max-width: 540px;
+    }
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-bottom: 22px;
+    }
+    .btn-primary {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      background: var(--primary-accent);
+      color: #fff;
+      padding: 15px 26px;
+      font-weight: 700;
+      text-decoration: none;
+      border-radius: 12px;
+      box-shadow: 0 10px 20px rgba(5, 150, 105, 0.25);
+      transition: all 0.3s ease;
+      border: none;
+      font-size: 1rem;
+      cursor: pointer;
+    }
+    .btn-primary:hover {
+      background: var(--primary-hover);
+      transform: translateY(-2px);
+      box-shadow: 0 12px 25px rgba(5, 150, 105, 0.35);
+    }
+    .btn-ghost {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      background: transparent;
+      color: #fff;
+      padding: 15px 22px;
+      font-weight: 600;
+      text-decoration: none;
+      border-radius: 12px;
+      border: 1px solid rgba(255,255,255,0.25);
+      transition: all 0.3s ease;
+      font-size: 1rem;
+    }
+    .btn-ghost:hover {
+      border-color: var(--secondary-accent);
+      color: var(--secondary-accent);
+    }
+    .hero-trust {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 18px;
+      font-size: 0.88rem;
+      color: #9CA3AF;
+    }
+    .hero-trust span {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .hero-card {
+      background: var(--card-bg);
+      color: var(--text-main);
+      padding: 28px 26px;
+      border-radius: var(--radius);
+      box-shadow: var(--shadow-lg);
+      border: 1px solid #EBE8E0;
+    }
+    .hero-card .tag {
+      display: inline-block;
+      background: rgba(5, 150, 105, 0.12);
+      color: var(--primary-accent);
+      border: 1px solid rgba(5, 150, 105, 0.25);
+      padding: 5px 12px;
+      border-radius: 999px;
+      font-size: 0.8rem;
+      font-weight: 700;
+      margin-bottom: 14px;
+    }
+    .hero-card h3 {
+      font-size: 1.35rem;
+      font-weight: 800;
+      margin-bottom: 8px;
+      letter-spacing: -0.3px;
+    }
+    .hero-card .lead {
+      color: var(--text-muted);
+      font-size: 0.95rem;
+      margin-bottom: 18px;
+    }
+    .hero-card ul {
+      list-style: none;
+      margin-bottom: 20px;
+    }
+    .hero-card li {
+      position: relative;
+      padding-left: 26px;
+      margin-bottom: 10px;
+      color: var(--text-muted);
+      font-size: 0.95rem;
+    }
+    .hero-card li::before {
+      content: '✓';
+      position: absolute;
+      left: 0;
+      color: var(--primary-accent);
+      font-weight: 700;
+    }
+    .hero-card .price-line {
+      background: #F4F2EC;
+      border-radius: 12px;
+      padding: 14px 16px;
+      margin-bottom: 16px;
+      font-size: 0.92rem;
+    }
+    .hero-card .price-line strong {
+      color: var(--primary-accent);
+      font-size: 1.15rem;
+    }
+    .btn-comprar {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      width: 100%;
+      background: var(--primary-accent);
+      color: #fff;
+      padding: 15px 22px;
+      font-weight: 700;
+      text-decoration: none;
+      border-radius: 12px;
+      box-shadow: 0 10px 20px rgba(5, 150, 105, 0.25);
+      transition: all 0.3s ease;
+      font-size: 1rem;
+    }
+    .btn-comprar:hover {
+      background: var(--primary-hover);
+      transform: translateY(-2px);
+    }
+    .hero-card .hint {
+      margin-top: 12px;
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      text-align: center;
+    }
+
+    /* Como funciona */
+    .section {
+      padding: 70px 0;
+    }
+    .section-title {
+      text-align: center;
+      font-size: 2.2rem;
+      font-weight: 800;
+      letter-spacing: -0.5px;
+      margin-bottom: 10px;
+    }
+    .section-sub {
+      text-align: center;
+      color: var(--text-muted);
+      font-size: 1.08rem;
+      max-width: 640px;
+      margin: 0 auto 40px;
+    }
+    .steps {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+    }
+    .step-card {
+      background: var(--card-bg);
+      border: 1px solid #EBE8E0;
+      border-radius: var(--radius);
+      padding: 28px 24px;
+      box-shadow: var(--shadow-sm);
+      text-align: center;
+      transition: transform 0.3s ease, border-color 0.3s ease;
+    }
+    .step-card:hover {
+      transform: translateY(-4px);
+      border-color: var(--primary-accent);
+      box-shadow: var(--shadow-lg);
+    }
+    .step-num {
+      width: 42px;
+      height: 42px;
+      margin: 0 auto 14px;
+      border-radius: 12px;
+      background: var(--primary-light);
+      color: var(--primary-accent);
+      font-weight: 800;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.1rem;
+    }
+    .step-card h3 {
+      font-size: 1.15rem;
+      margin-bottom: 8px;
+      font-weight: 700;
+    }
+    .step-card p {
+      color: var(--text-muted);
+      font-size: 0.95rem;
+    }
+
+    /* Benefícios */
+    .beneficios {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 24px;
+    }
+    .beneficio-card {
+      background: var(--card-bg);
+      border-radius: var(--radius);
+      padding: 28px 24px;
+      box-shadow: var(--shadow-sm);
+      text-align: left;
+      border: 1px solid #EBE8E0;
+      transition: transform 0.3s ease, border-color 0.3s ease;
+    }
+    .beneficio-card:hover {
+      transform: translateY(-5px);
+      box-shadow: var(--shadow-lg);
+      border-color: var(--primary-accent);
+    }
+    .beneficio-card .ico {
+      font-size: 1.8rem;
+      margin-bottom: 12px;
+    }
+    .beneficio-card h3 {
+      font-weight: 700;
+      margin-bottom: 8px;
+    }
+    .beneficio-card p {
+      color: var(--text-muted);
+      font-size: 0.95rem;
+    }
+
+    /* Para quem */
+    .audience {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 20px;
+    }
+    .audience-item {
+      background: #F4F2EC;
+      border: 1px solid #EBE8E0;
+      border-radius: 16px;
+      padding: 22px 20px;
+      font-size: 0.98rem;
+      color: var(--text-main);
+    }
+    .audience-item strong {
+      display: block;
+      margin-bottom: 4px;
+      color: var(--primary-accent);
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      letter-spacing: 0.6px;
+    }
+
+    /* Planos */
+    .planos-grid {
+      display: grid;
+      grid-template-columns: 1fr 1.1fr;
+      gap: 28px;
+      align-items: stretch;
+    }
+    .plano-card {
+      background: var(--card-bg);
+      border-radius: var(--radius);
+      padding: 32px 28px;
+      border: 1px solid #EBE8E0;
+      box-shadow: var(--shadow-sm);
+      display: flex;
+      flex-direction: column;
+    }
+    .plano-card.destaque {
+      background: linear-gradient(160deg, #0A1411 0%, #11221B 100%);
+      color: var(--text-light);
+      border: 1px solid rgba(214, 197, 165, 0.25);
+      position: relative;
+      overflow: hidden;
+    }
+    .plano-card.destaque::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 4px;
+      background: linear-gradient(90deg, var(--primary-accent), var(--secondary-accent));
+    }
+    .plano-card .label {
+      font-size: 0.8rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: var(--primary-accent);
+      margin-bottom: 8px;
+    }
+    .plano-card.destaque .label {
+      color: var(--secondary-accent);
+    }
+    .plano-card h3 {
+      font-size: 1.5rem;
+      font-weight: 800;
+      margin-bottom: 6px;
+    }
+    .plano-card .preco {
+      font-size: 2rem;
+      font-weight: 800;
+      color: var(--primary-accent);
+      margin: 12px 0 6px;
+    }
+    .plano-card.destaque .preco {
+      color: #34D399;
+    }
+    .plano-card .preco small {
+      font-size: 0.95rem;
+      font-weight: 600;
+      color: var(--text-muted);
+    }
+    .plano-card.destaque .preco small {
+      color: #9CA3AF;
+    }
+    .plano-card .desc {
+      color: var(--text-muted);
+      font-size: 0.95rem;
+      margin-bottom: 18px;
+    }
+    .plano-card.destaque .desc {
+      color: #C2C7C4;
+    }
+    .plano-card ul {
+      list-style: none;
+      flex: 1;
+      margin-bottom: 22px;
+    }
+    .plano-card li {
+      position: relative;
+      padding-left: 24px;
+      margin-bottom: 11px;
+      font-size: 0.95rem;
+      color: var(--text-muted);
+    }
+    .plano-card.destaque li {
+      color: #C2C7C4;
+    }
+    .plano-card li::before {
+      content: '✓';
+      position: absolute;
+      left: 0;
+      color: var(--primary-accent);
+      font-weight: 700;
+    }
+    .plano-card.destaque li::before {
+      color: var(--secondary-accent);
+    }
+    .plano-card .btn-outline {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 100%;
+      padding: 14px 20px;
+      border-radius: 12px;
+      font-weight: 700;
+      text-decoration: none;
+      border: 1.5px solid var(--primary-accent);
+      color: var(--primary-accent);
+      transition: all 0.3s ease;
+    }
+    .plano-card .btn-outline:hover {
+      background: var(--primary-light);
+    }
+    .extras {
+      margin-top: 28px;
+      text-align: center;
+      color: var(--text-muted);
+      font-size: 0.95rem;
+    }
+    .extras strong {
+      color: var(--text-main);
+    }
+
+    /* FAQ */
+    .faq {
+      max-width: 760px;
+      margin: 0 auto;
+    }
+    .faq-item {
+      background: var(--card-bg);
+      border: 1px solid #EBE8E0;
+      border-radius: 14px;
+      padding: 20px 22px;
+      margin-bottom: 12px;
+    }
+    .faq-item h4 {
+      font-size: 1.05rem;
+      font-weight: 700;
+      margin-bottom: 6px;
+    }
+    .faq-item p {
+      color: var(--text-muted);
+      font-size: 0.95rem;
+    }
+
+    /* CTA final */
+    .cta-final {
+      background: var(--bg-dark);
+      background-image:
+        radial-gradient(circle at 15% 30%, rgba(5, 150, 105, 0.15) 0%, transparent 45%),
+        radial-gradient(circle at 85% 70%, rgba(214, 197, 165, 0.1) 0%, transparent 45%);
+      color: #fff;
+      padding: 64px 28px;
+      border-radius: var(--radius);
+      box-shadow: var(--shadow-lg);
+      text-align: center;
+      margin: 20px auto 70px;
+    }
+    .cta-final h2 {
+      margin-bottom: 12px;
+      font-size: 2rem;
+      font-weight: 800;
+    }
+    .cta-final p {
+      font-size: 1.08rem;
+      color: #A3A8A6;
+      margin-bottom: 28px;
+      max-width: 520px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    .cta-final .btn-comprar {
+      max-width: 420px;
+      margin: 0 auto;
+    }
+
+    footer {
+      text-align: center;
+      padding: 28px 16px 40px;
+      color: var(--text-muted);
+      font-size: 0.9rem;
+    }
+    footer a {
+      color: var(--primary-accent);
+      text-decoration: none;
+      font-weight: 600;
+    }
+
+    @media (max-width: 900px) {
+      .hero .container {
+        grid-template-columns: 1fr;
+        text-align: center;
+      }
+      .hero-text > p { margin-left: auto; margin-right: auto; }
+      .hero-actions { justify-content: center; }
+      .hero-trust { justify-content: center; }
+      .steps { grid-template-columns: 1fr; }
+      .planos-grid { grid-template-columns: 1fr; }
+    }
+    @media (max-width: 768px) {
+      .navbar { padding: 14px 5%; flex-wrap: wrap; gap: 12px; }
+      .nav-links { gap: 16px; flex-wrap: wrap; justify-content: center; }
+      .hero { padding: 140px 15px 50px; }
+      .section-title { font-size: 1.75rem; }
+    }
+  </style>
+</head>
+<body>
+  <nav class="navbar">
+    <a href="https://tech.luvics.com.br" class="nav-logo">TECH<span>LUVICS</span></a>
+    <ul class="nav-links">
+      <li><a href="https://tech.luvics.com.br">Home</a></li>
+      <li><a href="#como-funciona">Como funciona</a></li>
+      <li><a href="#planos">Planos</a></li>
+      <li><a class="nav-cta" href="https://tech.luvics.com.br/luvics_clima/static/" target="_blank" rel="noopener">Abrir app</a></li>
+    </ul>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="container">
+      <div class="hero-text">
+        <div class="badge-pill">🌤 Inteligência climática no ponto certo</div>
+        <h1>Clima no <em>seu talhão</em>, não na cidade mais próxima</h1>
+        <p>
+          Escolha o ponto no mapa (sede, pivô ou talhão), receba o relatório no e-mail e
+          tome decisões com temperatura, chuva, vento e histórico — onde a operação realmente acontece.
+        </p>
+        <div class="hero-actions">
+          <a class="btn-primary" href="https://tech.luvics.com.br/luvics_clima/static/" target="_blank" rel="noopener">
+            🗺 Experimentar grátis agora
+          </a>
+          <a class="btn-ghost" href="#planos">Ver planos</a>
+        </div>
+        <div class="hero-trust">
+          <span>✓ Relatório em PDF no e-mail</span>
+          <span>✓ Mapa interativo + satélite</span>
+          <span>✓ Sem instalação</span>
+        </div>
+      </div>
+
+      <div class="hero-card">
+        <span class="tag">Teste gratuito · sem cartão</span>
+        <h3>Relatório no ponto em menos de 1 minuto</h3>
+        <p class="lead">Clique no mapa, informe o e-mail e receba o PDF. Ideal para zona rural e operação de campo.</p>
+        <ul>
+          <li>Temperatura atual no coordenada escolhida</li>
+          <li>Mapa de referência com raio de 1 km</li>
+          <li>Envio automático para o seu e-mail</li>
+          <li>Busca por endereço ou município</li>
+        </ul>
+        <div class="price-line">
+          Plano completo a partir de <strong>R$ 9,90/mês</strong><br>
+          <span style="font-size:0.88rem;color:var(--text-muted)">1 ponto · previsão 7 dias · histórico · envio diário</span>
+        </div>
+        <a class="btn-comprar" href="https://tech.luvics.com.br/luvics_clima/static/" target="_blank" rel="noopener">
+          Abrir Luvics Clima no Ponto
+        </a>
+        <p class="hint">Funciona no celular e no computador · dados Open-Meteo</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- COMO FUNCIONA -->
+  <section class="section" id="como-funciona">
+    <div class="container">
+      <h2 class="section-title">Como funciona</h2>
+      <p class="section-sub">Três passos. Sem planilha, sem baixar software, sem adivinhar o clima da sede vizinha.</p>
+      <div class="steps">
+        <div class="step-card">
+          <div class="step-num">1</div>
+          <h3>Marque o ponto</h3>
+          <p>Busque o município ou clique direto no mapa. Ative o satélite para acertar o talhão ou a sede.</p>
+        </div>
+        <div class="step-card">
+          <div class="step-num">2</div>
+          <h3>Informe o e-mail</h3>
+          <p>O relatório em PDF é gerado na hora e enviado para você — e também pode ser baixado no navegador.</p>
+        </div>
+        <div class="step-card">
+          <div class="step-num">3</div>
+          <h3>Decida com dados</h3>
+          <p>Use temperatura, chuva, vento e histórico para planejamento de campo, irrigação e alertas de frio.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- BENEFÍCIOS -->
+  <section class="section" style="padding-top: 20px;">
+    <div class="container">
+      <h2 class="section-title">Por que no ponto, e não “na cidade”?</h2>
+      <p class="section-sub">Estações oficiais ficam longe. Modelos genéricos generalizam. Você precisa do microclima da operação.</p>
+      <div class="beneficios">
+        <div class="beneficio-card">
+          <div class="ico">📍</div>
+          <h3>Coordenada exata</h3>
+          <p>Lat/lon do talhão, não da sede do município. Ideal para propriedades extensas e zonas rurais.</p>
+        </div>
+        <div class="beneficio-card">
+          <div class="ico">📄</div>
+          <h3>PDF no e-mail</h3>
+          <p>Relatório claro para arquivar, encaminhar ao time ou anexar em decisões do dia.</p>
+        </div>
+        <div class="beneficio-card">
+          <div class="ico">📡</div>
+          <h3>Mapa + satélite</h3>
+          <p>Posicione o ponto visualmente. Controle de camadas no mapa para acertar o local certo.</p>
+        </div>
+        <div class="beneficio-card">
+          <div class="ico">🔔</div>
+          <h3>Rotina diária (plano pago)</h3>
+          <p>Previsão 7 dias, chuva, vento, umidade, histórico de 30 dias e envio automático todo dia.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PARA QUEM -->
+  <section class="section" style="padding-top: 10px;">
+    <div class="container">
+      <h2 class="section-title">Para quem é</h2>
+      <p class="section-sub">Feito para quem decide no campo e precisa de informação objetiva, no lugar certo.</p>
+      <div class="audience">
+        <div class="audience-item">
+          <strong>Produtor rural</strong>
+          Acompanhar temperatura e risco de frio no pivô ou no talhão específico.
+        </div>
+        <div class="audience-item">
+          <strong>Consultor / agrônomo</strong>
+          Apoiar visitas e relatórios com dado georreferenciado, sem depender só de app genérico.
+        </div>
+        <div class="audience-item">
+          <strong>Gestão de ativos</strong>
+          Padronizar monitoramento de um ou vários pontos da propriedade com histórico.
+        </div>
+        <div class="audience-item">
+          <strong>Operação diária</strong>
+          Receber o PDF no e-mail e alinhar equipe de campo com a mesma informação.
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PLANOS -->
+  <section class="section" id="planos">
+    <div class="container">
+      <h2 class="section-title">Comece grátis. Evolua quando fizer sentido</h2>
+      <p class="section-sub">O teste gratuito já entrega valor. O plano pago completa o ciclo operacional.</p>
+      <div class="planos-grid">
+        <div class="plano-card">
+          <div class="label">Grátis · experimente agora</div>
+          <h3>Relatório básico</h3>
+          <div class="preco">R$ 0 <small>/ sem cartão</small></div>
+          <p class="desc">Para conhecer o fluxo e validar o ponto da sua propriedade.</p>
+          <ul>
+            <li>Temperatura atual no ponto</li>
+            <li>Condição resumida do tempo</li>
+            <li>Mapa de referência (raio 1 km)</li>
+            <li>PDF enviado ao e-mail + download</li>
+            <li>Busca por endereço e clique no mapa</li>
+          </ul>
+          <a class="btn-outline" href="https://tech.luvics.com.br/luvics_clima/static/" target="_blank" rel="noopener">
+            Gerar meu relatório grátis
+          </a>
+        </div>
+        <div class="plano-card destaque">
+          <div class="label">Recomendado · operação diária</div>
+          <h3>Plano completo</h3>
+          <div class="preco">R$ 9,90 <small>/ mês · 1 ponto</small></div>
+          <p class="desc">Tudo o que o grátis mostra, mais previsão, histórico e rotina automática.</p>
+          <ul>
+            <li>Previsão de 7 dias (Tmin, Tmax, chuva, vento)</li>
+            <li>Umidade, precipitação e condição atual</li>
+            <li>Histórico de 30 dias no ponto</li>
+            <li>Noites com Tmin ≤ 5 °C (alerta de frio)</li>
+            <li>Envio diário automático no e-mail</li>
+            <li>Mapa e PDF profissional</li>
+          </ul>
+          <a class="btn-comprar" href="https://tech.luvics.com.br/luvics_clima/static/" target="_blank" rel="noopener">
+            Abrir app e simular relatório completo
+          </a>
+        </div>
+      </div>
+      <p class="extras">
+        <strong>Mais pontos:</strong> 5 pontos R$ 19,90 · 10 pontos R$ 29,90 · ponto extra +R$ 5.<br>
+        Ideal para quem monitora várias sedes ou talhões na mesma operação.
+      </p>
+    </div>
+  </section>
+
+  <!-- O QUE VEM NO PDF -->
+  <section class="section" style="padding-top: 0;">
+    <div class="container">
+      <h2 class="section-title">O que chega no seu e-mail</h2>
+      <p class="section-sub">Relatório em PDF, legível no celular, pronto para arquivar ou compartilhar.</p>
+      <div class="beneficios">
+        <div class="beneficio-card">
+          <div class="ico">🌡️</div>
+          <h3>Condição atual</h3>
+          <p>Temperatura, umidade, vento e precipitação no instante da consulta, na coordenada marcada.</p>
+        </div>
+        <div class="beneficio-card">
+          <div class="ico">📅</div>
+          <h3>Previsão 7 dias</h3>
+          <p>Máximas, mínimas, chuva acumulada, probabilidade e vento — no plano completo.</p>
+        </div>
+        <div class="beneficio-card">
+          <div class="ico">📊</div>
+          <h3>Histórico 30 dias</h3>
+          <p>Extremos de temperatura, chuva acumulada e contagem de noites frias para contexto operacional.</p>
+        </div>
+        <div class="beneficio-card">
+          <div class="ico">🗺</div>
+          <h3>Mapa do ponto</h3>
+          <p>Referência visual com raio de 1 km em torno da sede ou do talhão selecionado.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="section" style="padding-top: 10px;">
+    <div class="container">
+      <h2 class="section-title">Perguntas frequentes</h2>
+      <p class="section-sub">Transparência para você testar com segurança.</p>
+      <div class="faq">
+        <div class="faq-item">
+          <h4>Preciso instalar algo?</h4>
+          <p>Não. Funciona no navegador (celular ou computador). Basta abrir o app, marcar o ponto e informar o e-mail.</p>
+        </div>
+        <div class="faq-item">
+          <h4>Os dados são oficiais de estação meteorológica?</h4>
+          <p>Usamos modelos de superfície da Open-Meteo, georreferenciados no ponto que você escolhe. É apoio operacional — não substitui laudo agronômico, ART ou cobertura de seguro.</p>
+        </div>
+        <div class="faq-item">
+          <h4>O grátis realmente envia e-mail?</h4>
+          <p>Sim. O relatório gratuito (temperatura atual + mapa) é gerado e enviado para o e-mail informado. O plano pago amplia o conteúdo e a rotina diária.</p>
+        </div>
+        <div class="faq-item">
+          <h4>Posso usar em zona rural sem endereço formal?</h4>
+          <p>Sim. Ative a camada de satélite no mapa e clique no local do talhão ou da sede. As coordenadas são registradas no PDF.</p>
+        </div>
+        <div class="faq-item">
+          <h4>Como fica o plano com vários pontos?</h4>
+          <p>1 ponto a partir de R$ 9,90/mês; 5 pontos R$ 19,90; 10 pontos R$ 29,90; cada ponto extra +R$ 5. Fale conosco para montar o pacote da sua operação.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA FINAL -->
+  <section class="container">
+    <div class="cta-final">
+      <h2>Marque o ponto. Receba o clima.</h2>
+      <p>Teste agora em menos de um minuto. Sem cartão, sem instalação — só o e-mail e o mapa.</p>
+      <a class="btn-comprar" href="https://tech.luvics.com.br/luvics_clima/static/" target="_blank" rel="noopener">
+        🗺 Abrir Luvics Clima no Ponto
+      </a>
+    </div>
+  </section>
+
+  <footer>
+    <p>
+      <strong>Tech.luvics</strong> — Inteligência de Ativos &amp; IA<br>
+      <a href="https://tech.luvics.com.br">tech.luvics.com.br</a>
+      · Material orientativo · não substitui ART ou laudo oficial
+    </p>
+  </footer>
+</body>
+</html>
