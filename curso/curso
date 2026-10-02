@@ -1,0 +1,662 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="icon" type="image/png" href=" https://raw.github.com/LuanFaria/GEOCODELAB/eb78d51ee49d0fc7438657a5ef2514f3ce366861/IMG/ubXDA.jpg">
+  <link rel="apple-touch-icon" href=" https://raw.github.com/LuanFaria/GEOCODELAB/eb78d51ee49d0fc7438657a5ef2514f3ce366861/IMG/ubXDA.jpg">
+  <title>Curso Completo de QGIS | Tech Luvics</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
+
+    :root {
+      --bg-dark: #0A1411; 
+      --bg-light: #F9F8F4; 
+      --card-bg: #FFFFFF;
+      --primary-accent: #059669; 
+      --primary-hover: #047857;
+      --primary-light: #D1FAE5; 
+      --secondary-accent: #D6C5A5; 
+      --secondary-hover: #C2B08D;
+      --text-main: #1C1E1D; 
+      --text-muted: #5C615E; 
+      --text-light: #F3F4F1; 
+      --shadow-sm: 0 4px 6px -1px rgba(10, 20, 17, 0.05);
+      --shadow-lg: 0 20px 40px -15px rgba(10, 20, 17, 0.12);
+      --radius: 20px;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'Inter', system-ui, -apple-system, sans-serif;
+      background-color: var(--bg-light);
+      color: var(--text-main);
+      line-height: 1.7;
+      -webkit-font-smoothing: antialiased;
+      scroll-behavior: smooth;
+    }
+
+    .container {
+      width: min(1120px, 92vw);
+      margin-inline: auto;
+    }
+
+    /* NAVBAR UNIFICADA */
+    .navbar {
+      position: fixed;
+      top: 0; left: 0; width: 100%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 20px 8%;
+      background: rgba(10, 20, 17, 0.85);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border-bottom: 1px solid rgba(214, 197, 165, 0.15);
+      z-index: 1000;
+      transition: all 0.3s ease;
+    }
+
+    .nav-logo {
+      font-size: 1.25rem;
+      font-weight: 800;
+      color: #ffffff;
+      letter-spacing: -0.5px;
+      text-decoration: none;
+    }
+
+    .nav-logo span { color: var(--secondary-accent); }
+
+    .nav-links {
+      display: flex;
+      gap: 30px;
+      list-style: none;
+    }
+
+    .nav-links a {
+      text-decoration: none;
+      color: rgba(255, 255, 255, 0.7);
+      font-size: 0.95rem;
+      font-weight: 500;
+      transition: color 0.3s ease;
+    }
+
+    .nav-links a:hover, .nav-links a.active {
+      color: var(--secondary-accent);
+    }
+    
+
+    /* Hero */
+    .hero {
+      background-color: var(--bg-dark);
+      background-image: 
+        radial-gradient(circle at 15% 30%, rgba(5, 150, 105, 0.2) 0%, transparent 45%),
+        radial-gradient(circle at 85% 70%, rgba(214, 197, 165, 0.12) 0%, transparent 45%);
+      color: var(--text-light);
+      padding: 180px 20px 90px 20px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero::after {
+      content: '';
+      position: absolute;
+      bottom: 0; left: 0; width: 100%; height: 40px;
+      background: linear-gradient(to top, var(--bg-light), transparent);
+    }
+
+    .hero .container {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 40px;
+    }
+
+    .hero-text {
+      flex: 1;
+      min-width: 320px;
+    }
+
+    .hero-text h1 {
+      font-size: 3rem;
+      font-weight: 800;
+      margin-bottom: 15px;
+      letter-spacing: -1px;
+    }
+
+    .hero-text p {
+      font-size: 1.2rem;
+      color: #A3A8A6;
+      margin-bottom: 30px;
+    }
+
+    .hero-offer {
+      background: var(--card-bg);
+      color: var(--text-main);
+      padding: 25px;
+      border-radius: var(--radius);
+      box-shadow: var(--shadow-lg);
+      text-align: center;
+      max-width: 400px;
+      border: 1px solid #EBE8E0;
+    }
+
+    .hero-offer .desconto {
+      background: rgba(5, 150, 105, 0.15);
+      color: #34D399;
+      border: 1px solid rgba(5, 150, 105, 0.3);
+      padding: 6px 14px;
+      border-radius: 20px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      display: inline-block;
+      margin-bottom: 12px;
+    }
+
+    .hero-offer span {
+      display: block;
+      font-size: 1rem;
+      color: var(--text-muted);
+      text-decoration: line-through;
+    }
+
+    .hero-offer strong {
+      display: block;
+      font-size: 2.2rem;
+      color: var(--primary-accent);
+      margin: 5px 0 15px;
+      font-weight: 800;
+    }
+
+    .contador {
+      font-size: 0.95rem;
+      color: #dc2626;
+      font-weight: 600;
+      margin-top: 10px;
+    }
+
+    .bonus-card {
+      background: #F4F2EC;
+      padding: 15px;
+      border-radius: 12px;
+      margin-top: 15px;
+      font-size: 0.95rem;
+      color: var(--text-main);
+      border-left: 4px solid var(--primary-accent);
+      text-align: left;
+    }
+
+    .bonus-card span {
+      font-weight: bold;
+      color: var(--primary-accent);
+    }
+
+    .btn-comprar {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      width: 100%;
+      background: var(--primary-accent);
+      color: #fff;
+      padding: 16px 26px;
+      font-weight: 700;
+      text-decoration: none;
+      border-radius: 12px;
+      margin-top: 20px;
+      box-shadow: 0 10px 20px rgba(5, 150, 105, 0.25);
+      transition: all 0.3s ease;
+    }
+
+    .btn-comprar:hover {
+      background: var(--primary-hover);
+      transform: translateY(-2px);
+      box-shadow: 0 12px 25px rgba(5, 150, 105, 0.35);
+    }
+
+    .hero img {
+      flex: 1;
+      max-width: 480px;
+      border-radius: var(--radius);
+      box-shadow: var(--shadow-lg);
+      object-fit: cover;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    /* Benefícios */
+    .beneficios {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 24px;
+      margin-top: 60px;
+      margin-bottom: 60px;
+    }
+
+    .beneficio-card {
+      background: var(--card-bg);
+      border-radius: var(--radius);
+      padding: 30px 24px;
+      box-shadow: var(--shadow-sm);
+      text-align: center;
+      border: 1px solid #EBE8E0;
+      transition: transform 0.3s ease, border-color 0.3s ease;
+    }
+
+    .beneficio-card:hover {
+      transform: translateY(-5px);
+      box-shadow: var(--shadow-lg);
+      border-color: var(--primary-accent);
+    }
+
+    .beneficio-card h3 {
+      margin-top: 12px;
+      color: var(--text-main);
+      font-weight: 700;
+    }
+
+    .beneficio-card p {
+      color: var(--text-muted);
+      font-size: 0.95rem;
+      margin-top: 8px;
+    }
+
+    /* --- MÓDULOS TECNOLÓGICOS (NOVO DESIGN) --- */
+    .secao-modulos-wrapper {
+      margin: 80px auto;
+    }
+
+    .secao-titulo-central {
+      text-align: center;
+      font-size: 2.5rem;
+      font-weight: 800;
+      color: var(--text-main);
+      letter-spacing: -0.5px;
+      margin-bottom: 12px;
+    }
+
+    .secao-subtitulo-central {
+      text-align: center;
+      color: var(--text-muted);
+      font-size: 1.1rem;
+      margin-bottom: 40px;
+    }
+
+    .modulos-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 30px;
+    }
+
+    .modulo-card {
+      background: var(--card-bg);
+      border-radius: var(--radius);
+      padding: 35px 30px;
+      box-shadow: var(--shadow-sm);
+      border: 1px solid #EBE8E0;
+      position: relative;
+      transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .modulo-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; width: 100%; height: 4px;
+      background: linear-gradient(90deg, var(--primary-accent), var(--secondary-accent));
+      border-radius: var(--radius) var(--radius) 0 0;
+      opacity: 0.8;
+    }
+
+    .modulo-card:hover {
+      transform: translateY(-8px);
+      box-shadow: var(--shadow-lg);
+      border-color: var(--primary-accent);
+    }
+
+    .modulo-header {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+      margin-bottom: 20px;
+      padding-bottom: 15px;
+      border-bottom: 1px solid #F0ECE1;
+    }
+
+    .modulo-icone {
+      font-size: 2rem;
+      background: var(--primary-light);
+      width: 55px;
+      height: 55px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 14px;
+      flex-shrink: 0;
+    }
+
+    .modulo-info h3 {
+      font-size: 1.25rem;
+      color: var(--text-main);
+      font-weight: 700;
+      letter-spacing: -0.3px;
+    }
+
+    .modulo-info span {
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: var(--primary-accent);
+      font-weight: 700;
+    }
+
+    .modulo-card ul {
+      list-style: none;
+      padding-left: 0;
+      margin-bottom: 10px;
+    }
+
+    .modulo-card li {
+      position: relative;
+      padding-left: 24px;
+      margin-bottom: 12px;
+      color: var(--text-muted);
+      font-size: 0.95rem;
+    }
+
+    .modulo-card li::before {
+      content: '✓';
+      position: absolute;
+      left: 0;
+      top: 1px;
+      color: var(--primary-accent);
+      font-size: 0.85rem;
+      font-weight: bold;
+    }
+
+    .modulo-card.destaque-bonus {
+      background: linear-gradient(135deg, #0A1411 0%, #11221B 100%);
+      color: var(--text-light);
+      border: 1px solid rgba(214, 197, 165, 0.2);
+    }
+
+    .modulo-card.destaque-bonus::before {
+      background: linear-gradient(90deg, var(--secondary-accent), var(--primary-accent));
+    }
+
+    .modulo-card.destaque-bonus .modulo-header {
+      border-bottom-color: rgba(255, 255, 255, 0.1);
+    }
+
+    .modulo-card.destaque-bonus .modulo-icone {
+      background: rgba(214, 197, 165, 0.15);
+    }
+
+    .modulo-card.destaque-bonus .modulo-info h3 {
+      color: #ffffff;
+    }
+
+    .modulo-card.destaque-bonus .modulo-info span {
+      color: var(--secondary-accent);
+    }
+
+    .modulo-card.destaque-bonus li {
+      color: #C2C7C4;
+    }
+
+    .modulo-card.destaque-bonus li::before {
+      color: var(--secondary-accent);
+    }
+
+    /* Garantia */
+    .garantia {
+      background: #F4F2EC;
+      border: 1px solid #EBE8E0;
+      border-radius: var(--radius);
+      padding: 40px;
+      margin-top: 60px;
+      box-shadow: var(--shadow-sm);
+      text-align: center;
+    }
+
+    .garantia h2 {
+      color: var(--text-main);
+      margin-bottom: 10px;
+      font-weight: 700;
+    }
+
+    .garantia p {
+      color: var(--text-muted);
+      max-width: 700px;
+      margin: 0 auto;
+    }
+
+    /* CTA Final */
+    .cta-final {
+      background: var(--bg-dark);
+      background-image: 
+        radial-gradient(circle at 15% 30%, rgba(5, 150, 105, 0.15) 0%, transparent 45%),
+        radial-gradient(circle at 85% 70%, rgba(214, 197, 165, 0.1) 0%, transparent 45%);
+      color: #fff;
+      padding: 70px 20px;
+      border-radius: var(--radius);
+      box-shadow: var(--shadow-lg);
+      text-align: center;
+      margin: 60px auto;
+      max-width: 1120px;
+    }
+
+    .cta-final h2 {
+      margin-bottom: 15px;
+      font-size: 2.2rem;
+      font-weight: 800;
+    }
+
+    .cta-final p {
+      font-size: 1.1rem;
+      color: #A3A8A6;
+      margin-bottom: 30px;
+    }
+
+    .cta-final .btn-comprar {
+      max-width: 400px;
+      margin: 0 auto;
+    }
+
+    @media (max-width: 768px) {
+      .navbar { padding: 15px 5%; flex-direction: column; gap: 15px; }
+      .hero { padding: 160px 15px 60px 15px; }
+      .hero .container { flex-direction: column; text-align: center; }
+      .hero-text h1 { font-size: 2.2rem; }
+      .hero img { max-width: 100%; }
+      .modulos-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAVBAR -->
+  <nav class="navbar">
+    <a href="/" class="nav-logo">TECH<span>LUVICS</span></a>
+    <ul class="nav-links">
+      <li><a href="/">Home</a></li>
+      <li><a href="/curso" class="active">Curso</a></li>
+      <li><a href="/sobre">Sobre</a></li>
+    </ul>
+  </nav>
+
+  <!-- Hero -->
+  <section class="hero">
+    <div class="container">
+      <div class="hero-text">
+        <h1>Domine o QGIS</h1>
+        <p>Do zero à prática profissional — aprenda e aplique de forma simples e lucrativa.</p>
+        <div class="hero-offer">
+          <div class="desconto">🔥 Oferta Especial Pré-Lançamento</div>
+          <span>De R$ 350,00</span>
+          <strong>Por apenas R$ 97,00</strong>
+          
+          <div class="bonus-card">
+            🎁 <span>Bônus:</span> Precificação e captação de clientes incluídos.
+          </div>
+
+          <div class="contador">⏳ Promoção por tempo limitado</div>
+          <a class="btn-comprar" href="https://pay.kiwify.com.br/7QhAguk" target="_blank" rel="noopener">💳 Quero me inscrever agora</a>
+        </div>
+      </div>
+      <img src="https://github.com/LuanFaria/GEOCODELAB/blob/main/IMG/curso.png?raw=true" alt="Mapa e geotecnologia">
+    </div>
+  </section>
+
+  <!-- Benefícios -->
+  <section class="container beneficios">
+    <div class="beneficio-card">
+      <div style="font-size: 2rem; margin-bottom: 10px;">🚀</div>
+      <h3>Aprenda do Zero</h3>
+      <p>Mesmo sem experiência prévia, você vai dominar o QGIS passo a passo.</p>
+    </div>
+    <div class="beneficio-card">
+      <div style="font-size: 2rem; margin-bottom: 10px;">🎯</div>
+      <h3>Aplicações Reais</h3>
+      <p>Conteúdo prático para usar em geoprocessamento, agricultura e planejamento.</p>
+    </div>
+    <div class="beneficio-card">
+      <div style="font-size: 2rem; margin-bottom: 10px;">♾️</div>
+      <h3>Acesso Vitalício</h3>
+      <p>Estude no seu ritmo e tenha acesso às futuras atualizações do curso.</p>
+    </div>
+    <div class="beneficio-card">
+      <div style="font-size: 2rem; margin-bottom: 10px;">💼</div>
+      <h3>Bônus Exclusivo</h3>
+      <p>Aprenda a precificar serviços e conquistar seus primeiros clientes.</p>
+    </div>
+  </section>
+
+  <!-- Conteúdo em Módulos (Grid Tecnológico) -->
+  <section class="container secao-modulos-wrapper">
+    <h2 class="secao-titulo-central">O que você vai aprender</h2>
+    <p class="secao-subtitulo-central">Uma grade modular desenhada para transformar você em um especialista requisitado pelo mercado.</p>
+    
+    <div class="modulos-grid">
+      <!-- Módulo 1 -->
+      <div class="modulo-card">
+        <div>
+          <div class="modulo-header">
+            <div class="modulo-icone">🗺️</div>
+            <div class="modulo-info">
+              <span>Módulo 01</span>
+              <h3>Fundamentos</h3>
+            </div>
+          </div>
+          <ul>
+            <li>Introdução ao QGIS e Configuração Inicial</li>
+            <li>Dados Geográficos e Ferramentas Básicas</li>
+            <li>Edição de Dados Vetoriais</li>
+            <li>Simbologia e Estilização de Camadas</li>
+            <li>Trabalhando com Tabelas e Dados Atributos</li>
+            <li>Operações Espaciais Básicas</li>
+            <li>Layout e Impressão de Mapas</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Módulo 2 -->
+      <div class="modulo-card">
+        <div>
+          <div class="modulo-header">
+            <div class="modulo-icone">🛰️</div>
+            <div class="modulo-info">
+              <span>Módulo 02</span>
+              <h3>Análises Avançadas</h3>
+            </div>
+          </div>
+          <ul>
+            <li>Georreferenciamento de Imagens</li>
+            <li>Análises de Proximidade</li>
+            <li>Modelagem de Terreno com Dados Raster</li>
+            <li>Integração com Dados Externos (PostGIS e Web)</li>
+            <li>Expressões e Calculadora de Campos Avançada</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Módulo 3 -->
+      <div class="modulo-card">
+        <div>
+          <div class="modulo-header">
+            <div class="modulo-icone">⚡</div>
+            <div class="modulo-info">
+              <span>Módulo 03</span>
+              <h3>Automação & Web</h3>
+            </div>
+          </div>
+          <ul>
+            <li>Automação com Modelos no QGIS</li>
+            <li>Introdução ao QGIS com Python (PyQGIS)</li>
+            <li>Análise Avançada com Algoritmos do Processing</li>
+            <li>Publicação de Mapas Online (QGIS Server)</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Módulo 4 -->
+      <div class="modulo-card">
+        <div>
+          <div class="modulo-header">
+            <div class="modulo-icone">🌱</div>
+            <div class="modulo-info">
+              <span>Módulo 04</span>
+              <h3>Aplicações de Mercado</h3>
+            </div>
+          </div>
+          <ul>
+            <li>Processamento de Imagens de Satélite no QGIS</li>
+            <li>Análises Temporais no QGIS</li>
+            <li>Introdução a Personalização de Plugins no QGIS</li>
+            <li>QGIS para Planejamento Urbano e Ambiental</li>
+            <li>Encerramento e Discussão de Projetos</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Bônus (Cartão Destacado Especial) -->
+      <div class="modulo-card destaque-bonus" style="grid-column: 1 / -1; max-width: 600px; margin: 0 auto; width: 100%;">
+        <div>
+          <div class="modulo-header">
+            <div class="modulo-icone">🎁</div>
+            <div class="modulo-info">
+              <span>Módulo Bônus</span>
+              <h3>Monetização e Carreira</h3>
+            </div>
+          </div>
+          <ul>
+            <li>Como fazer precificação correta de projetos de geoprocessamento</li>
+            <li>Estratégias de prospecção e captação de clientes</li>
+            <li>Templates prontos para propostas comerciais</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Garantia -->
+  <section class="container">
+    <div class="garantia">
+      <h2>Garantia Incondicional de 7 Dias</h2>
+      <p>Se por qualquer motivo você não ficar satisfeito, solicite o reembolso em até 7 dias na plataforma e devolveremos 100% do seu investimento sem burocracia.</p>
+    </div>
+  </section>
+
+  <!-- CTA Final -->
+  <section class="container">
+    <div class="cta-final">
+      <h2>Garanta sua vaga agora!</h2>
+      <p>✅ Curso completo de QGIS | ✅ Acesso vitalício | ✅ Certificado | ✅ Bônus em Templates</p>
+      <a class="btn-comprar" href="https://pay.kiwify.com.br/7QhAguk" target="_blank" rel="noopener">💳 Quero começar agora por R$ 97</a>
+    </div>
+  </section>
+
+</body>
+</html>
