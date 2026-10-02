@@ -1,0 +1,44 @@
+LUVICS CLIMA — COMO PUBLICAR
+============================
+
+1) BACKEND (Render)
+-------------------
+- Crie repo no GitHub so com:
+    app.py
+    requirements.txt
+    (opcional) render.yaml
+
+- No Render.com:
+  New > Web Service > conecte o repo
+  Build:  pip install -r requirements.txt
+  Start:  gunicorn app:app
+  Plan: Free
+
+- Environment variables no Render:
+  EMAIL_HOST = smtp.gmail.com
+  EMAIL_PORT = 587
+  EMAIL_USER = seu@gmail.com
+  EMAIL_PASS = senha de app do Google
+  EMAIL_FROM = seu@gmail.com
+
+- Depois do deploy, copie a URL:
+  https://algo.onrender.com
+
+2) FRONT (GitHub Pages / tech.luvics)
+--------------------------------------
+- No index.html, altere a linha:
+
+  const API = "https://SEU-SERVICO.onrender.com";
+
+  (sem barra no final)
+
+- Faca commit/push no repositorio do site.
+
+3) TESTE
+--------
+- Abra a pagina do clima no tech.luvics
+- Badge deve dizer "API online"
+- Busque endereco, escolha ponto, informe e-mail, gere PDF
+
+Obs: no plano free do Render o servico "dorme" apos ~15 min
+sem uso. A primeira request pode demorar 30-60s para acordar.

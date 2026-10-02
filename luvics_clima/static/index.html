@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Luvics Clima no Ponto | Tech.luvics</title>
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+  <style>
+    :root {
+      --green: #0B4624;
+      --green2: #1E5631;
+      --mint: #A7F3D0;
+      --bg: #0f172a;
+      --card: #ffffff;
+      --muted: #64748b;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0; font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
+      background: #f1f5f9; color: #0f172a;
+    }
+    .top {
+      background: linear-gradient(135deg, var(--green) 0%, var(--green2) 55%, var(--bg) 100%);
+      color: #fff; padding: 20px 24px;
+    }
+    .top h1 { margin: 0; font-size: 1.35rem; }
+    .top p { margin: 6px 0 0; color: var(--mint); font-size: 0.95rem; }
+    .wrap {
+      display: grid; grid-template-columns: 340px 1fr; gap: 0;
+      min-height: calc(100vh - 88px);
+    }
+    @media (max-width: 900px) {
+      .wrap { grid-template-columns: 1fr; }
+      #map { height: 420px !important; }
+    }
+    .panel {
+      background: var(--card); padding: 18px 16px; border-right: 1px solid #e2e8f0;
+      overflow: auto;
+    }
+    label { display: block; font-size: 0.8rem; font-weight: 600; color: var(--muted); margin: 12px 0 6px; }
+    input[type=text], input[type=email] {
+      width: 100%; padding: 10px 12px; border: 1px solid #cbd5e1; border-radius: 8px;
+      font-size: 0.95rem;
+    }
+    button {
+      width: 100%; margin-top: 10px; padding: 11px 14px; border: 0; border-radius: 8px;
+      font-weight: 600; cursor: pointer; font-size: 0.95rem;
+    }
+    .btn-primary { background: var(--green); color: #fff; }
+    .btn-primary:hover { background: var(--green2); }
+    .btn-ghost { background: #e2e8f0; color: #0f172a; }
+    .btn-paid { background: #b45309; color: #fff; }
+    .coords {
+      background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 10px;
+      padding: 12px; font-size: 0.85rem; margin-top: 12px; line-height: 1.5;
+    }
+    .results { list-style: none; padding: 0; margin: 8px 0 0; max-height: 160px; overflow: auto; }
+    .results li {
+      padding: 8px 10px; border: 1px solid #e2e8f0; border-radius: 8px; margin-bottom: 6px;
+      cursor: pointer; font-size: 0.82rem;
+    }
+    .results li:hover { background: #ecfdf5; border-color: #6ee7b7; }
+    #map { width: 100%; height: 100%; min-height: 520px; }
+    .hint { font-size: 0.8rem; color: var(--muted); margin-top: 8px; line-height: 1.4; }
+    .badge {
+      display: inline-block; background: #ecfdf5; color: var(--green); font-size: 0.75rem;
+      font-weight: 700; padding: 3px 8px; border-radius: 999px; margin-bottom: 8px;
+    }
+    .upsell {
+      margin-top: 14px; padding: 12px; border-radius: 10px; background: #fff7ed;
+      border: 1px solid #fdba74; font-size: 0.85rem; line-height: 1.45;
+    }
+    .status { font-size: 0.85rem; margin-top: 10px; min-height: 1.2em; }
+    .status.err { color: #b91c1c; }
+    .status.ok { color: var(--green); }
+  </style>
+</head>
+<body>
+  <div class="top">
+    <h1>Luvics Clima no Ponto</h1>
+    <p>Escolha o ponto no mapa · teste grátis (temperatura + mapa 1 km) · completo a partir de R$ 9,90/mês</p>
+  </div>
+  <div class="wrap">
+    <aside class="panel">
+      <span class="badge" id="emailBadge">API: verificando...</span>
+
+      <label>Buscar endereço ou município</label>
+      <input id="q" type="text" placeholder="Ex: Ribeirão Preto SP" />
+      <button class="btn-ghost" type="button" id="btnSearch">Buscar</button>
+      <ul class="results" id="results"></ul>
+
+      <label>E-mail (obrigatório para receber o PDF)</label>
+      <input id="email" type="email" placeholder="seu@email.com" required />
+
+      <div class="coords" id="coords">
+        <b>Ponto:</b> clique no mapa ou busque um endereço<br/>
+        Lat: —<br/>Lon: —
+      </div>
+
+      <button class="btn-primary" type="button" id="btnFree">Receber relatório GRÁTIS no e-mail</button>
+      <button class="btn-paid" type="button" id="btnFull">Simular relatório COMPLETO no e-mail</button>
+
+      <div class="upsell">
+        <b>Grátis:</b> só temperatura atual + mapa 1 km.<br/>
+        <b>Pago (R$ 9,90/mês · 1 ponto):</b> previsão 7 dias, chuva, vento, histórico, envio diário automático.
+      </div>
+      <p class="hint">Zona rural: ative o satélite (controle no mapa) e clique no talhão/sede.</p>
+      <div class="status" id="status"></div>
+    </aside>
+    <div id="map"></div>
+  </div>
+
+  <script>
+    // =====================================================================
+    // CONFIGURE A URL DA API (Render)
+    // Local: ""  ou  "http://127.0.0.1:5050"
+    // Render: "https://SEU-SERVICO.onrender.com"  (sem barra no final)
+    // =====================================================================
+    const API = "https://SEU-SERVICO.onrender.com";
+    // =====================================================================
+
+    let lat = -21.1775, lon = -47.8103, zoom = 5;
+    let marker = null;
+
+    const map = L.map("map").setView([lat, lon], zoom);
+    const osm = L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png", {
+      maxZoom: 19,
+      attribution: "&copy; OpenStreetMap"
+    }).addTo(map);
+    const sat = L.tileLayer(
+      "https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}",
+      { maxZoom: 19, attribution: "Esri" }
+    );
+    L.control.layers({ "Mapa": osm, "Satélite": sat }).addTo(map);
+
+    function setPoint(a, b, label) {
+      lat = a; lon = b;
+      if (marker) map.removeLayer(marker);
+      marker = L.marker([lat, lon], { draggable: true }).addTo(map);
+      marker.on("dragend", (e) => {
+        const p = e.target.getLatLng();
+        setPoint(p.lat, p.lng, "Ponto ajustado no mapa");
+      });
+      document.getElementById("coords").innerHTML =
+        `<b>Ponto:</b> ${(label || "Selecionado").toString().slice(0, 80)}<br/>` +
+        `Lat: ${lat.toFixed(6)}<br/>Lon: ${lon.toFixed(6)}`;
+    }
+
+    map.on("click", (e) => setPoint(e.latlng.lat, e.latlng.lng, "Clique no mapa"));
+    setPoint(lat, lon, "Ajuste o ponto");
+    map.setView([lat, lon], 12);
+
+    document.getElementById("btnSearch").onclick = async () => {
+      const q = document.getElementById("q").value.trim();
+      const status = document.getElementById("status");
+      const ul = document.getElementById("results");
+      ul.innerHTML = "";
+      if (q.length < 3) { status.textContent = "Digite pelo menos 3 caracteres."; status.className = "status err"; return; }
+      status.textContent = "Buscando..."; status.className = "status";
+      try {
+        const r = await fetch(`${API}/api/geocode?q=${encodeURIComponent(q)}`);
+        const data = await r.json();
+        if (!data.results || !data.results.length) {
+          status.textContent = "Nenhum resultado."; status.className = "status err"; return;
+        }
+        data.results.forEach((item) => {
+          const li = document.createElement("li");
+          li.textContent = item.display;
+          li.onclick = () => {
+            setPoint(item.lat, item.lon, item.display);
+            map.setView([item.lat, item.lon], 14);
+            status.textContent = "Ponto posicionado. Gere o relatório.";
+            status.className = "status ok";
+          };
+          ul.appendChild(li);
+        });
+        status.textContent = `${data.results.length} resultado(s). Clique para posicionar.`;
+        status.className = "status ok";
+      } catch (e) {
+        status.textContent = "Erro na busca. Confira a URL da API no index.html (const API).";
+        status.className = "status err";
+      }
+    };
+
+    async function downloadReport(mode) {
+      const status = document.getElementById("status");
+      const email = document.getElementById("email").value.trim();
+      if (!email || email.indexOf("@") < 0) {
+        status.textContent = "Informe um e-mail valido para receber o relatorio.";
+        status.className = "status err";
+        document.getElementById("email").focus();
+        return;
+      }
+      status.textContent = mode === "free"
+        ? "Gerando e enviando relatorio gratis..."
+        : "Gerando e enviando relatorio completo...";
+      status.className = "status";
+      try {
+        const r = await fetch(`${API}/api/report`, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ lat, lon, email, mode })
+        });
+        if (!r.ok) {
+          const err = await r.json().catch(() => ({}));
+          throw new Error(err.error || ("HTTP " + r.status));
+        }
+        const emailed = r.headers.get("X-Luvics-Emailed") === "1";
+        const mailErr = r.headers.get("X-Luvics-Email-Error");
+        const blob = await r.blob();
+        const a = document.createElement("a");
+        a.href = URL.createObjectURL(blob);
+        a.download = mode === "free" ? "luvics_clima_GRATIS.pdf" : "luvics_clima_COMPLETO.pdf";
+        a.click();
+        URL.revokeObjectURL(a.href);
+        if (emailed) {
+          status.textContent = "PDF enviado para " + email + " e tambem baixado neste PC.";
+          status.className = "status ok";
+        } else if (mailErr) {
+          status.textContent = "PDF baixado. E-mail NAO enviado: " + mailErr;
+          status.className = "status err";
+        } else {
+          status.textContent = "PDF baixado. Configure EMAIL_USER/EMAIL_PASS no Render.";
+          status.className = "status err";
+        }
+      } catch (e) {
+        status.textContent = "Falha: " + e.message;
+        status.className = "status err";
+      }
+    }
+
+    document.getElementById("btnFree").onclick = () => downloadReport("free");
+    document.getElementById("btnFull").onclick = () => downloadReport("full");
+
+    (async () => {
+      const badge = document.getElementById("emailBadge");
+      try {
+        const r = await fetch(`${API}/api/health`);
+        const d = await r.json();
+        if (d.ok) {
+          badge.textContent = d.email
+            ? "API online · e-mail OK"
+            : "API online · e-mail NAO configurado no servidor";
+          badge.style.background = d.email ? "#ecfdf5" : "#fff7ed";
+          badge.style.color = d.email ? "#0B4624" : "#b45309";
+        }
+      } catch (e) {
+        badge.textContent = "API offline — confira const API no index.html";
+        badge.style.background = "#fef2f2";
+        badge.style.color = "#b91c1c";
+      }
+    })();
+  </script>
+</body>
+</html>

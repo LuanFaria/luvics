@@ -1,0 +1,7 @@
+flask
+flask-cors
+requests
+fpdf2
+staticmap
+pillow
+gunicorn
