@@ -23,4 +23,4 @@ O projeto foi desenvolvido focando em alta performance, design limpo e responsiv
 
 ## 📬 Contato
 Tem dúvidas ou propostas de parceria? Entre em contato conosco:
-* E-mail: **contato@techluvics.com.br**
+* E-mail: **techluvics@gmail.com**
